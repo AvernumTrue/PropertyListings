@@ -7,7 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuComponent implements OnInit {
 
+  unauthenticatedUser = true;
+  authenticatedUser = true;
+  administrator = true;
+
   constructor() { }
+
+
+  logOut(): void {
+    console.log("logOut clicked");
+  }
 
   ngOnInit(): void {
   }
