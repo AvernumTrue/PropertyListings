@@ -2,18 +2,16 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'pl-root',
-  template: `<div class="container">
+  template: `
+<div class="container">
   <div class="row justify-content-md-center">
     <div class="col-md">
-    <router-outlet></router-outlet>
+      <pl-main-menu></pl-main-menu>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
-<footer class="page-footer navbar-brand p-1 bg-primary text-light">
-  <div class="text-center">
-    <h5 class="text-uppercase">Footer</h5>
-  </div>
-</footer>
+<pl-footer></pl-footer>
   `,
   styleUrls: ['./app.component.css']
 })

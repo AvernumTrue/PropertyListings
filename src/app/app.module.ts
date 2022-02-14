@@ -7,10 +7,12 @@ import routes from './routes';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { MainMenuComponent } from './main-menu/main-menu.component';
+import { MainMenuComponent } from './shared/main-menu/main-menu.component';
 import { RegisterComponent } from './register/register.component';
 import { SaleListComponent } from './sale-list/sale-list.component';
-import { SubMenuComponent } from './sub-menu/sub-menu.component';
+import { SubMenuComponent } from './shared/sub-menu/sub-menu.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,11 @@ import { SubMenuComponent } from './sub-menu/sub-menu.component';
     MainMenuComponent,
     RegisterComponent,
     SaleListComponent,
-    SubMenuComponent
+    SubMenuComponent,
+    FooterComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     routes,
