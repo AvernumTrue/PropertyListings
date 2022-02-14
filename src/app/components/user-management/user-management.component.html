@@ -1,0 +1,27 @@
+<div class="container">
+  <h1 class="text-center">User List</h1>
+  <div class="container">
+  </div>
+  <div class='table-responsive'>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="text-primary" scope="col">forenames</th>
+          <th class="text-primary" scope="col">surname</th>
+          <th class="text-primary" scope="col">email</th>
+          <th class="text-primary" scope="col">password</th>
+          <th class="text-primary" scope="col">isAdmin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.forenames}}</td>
+          <td>{{user.surname}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.password}}</td>
+          <td>{{user.isAdmin}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
