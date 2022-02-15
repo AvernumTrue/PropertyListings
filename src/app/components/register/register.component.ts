@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   // users!: User[];
   user!: User;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private router: Router, private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -52,6 +52,12 @@ export class RegisterComponent implements OnInit {
 
   login() {
     console.log("login clicked");
+  }
+
+  onSaveComplete(): void {
+    // Reset the form to clear the flags
+    this.registerForm.reset();
+    this.router.navigate(['/products']);
   }
 }
 
