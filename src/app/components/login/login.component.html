@@ -1,1 +1,39 @@
-<p>login works!</p>
+<div class="container">
+  <form novalidate
+    (ngSubmit)="submit()"
+    [formGroup]="loginForm">
+
+    <!-- Email Address string: required: min 6 chars, max 100 chars: Check for @ sign. -->
+    <div class="col-4">
+      <div class="form-group">
+        <label class="text-primary" for="email">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Enter Email Address"
+          formControlName="email">
+      </div>
+    </div>
+
+    <!-- Password string: required: min 8 chars, max 100 chars -->
+    <div class="col-4">
+      <div class="form-group">
+        <label class="text-primary" for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Enter Password"
+          formControlName="password">
+      </div>
+    </div>
+
+    <button
+      (click)="submit()"
+      type="button"
+      class="btn btn-primary">
+      Login
+    </button>
+  </form>
+</div>

@@ -17,7 +17,7 @@ export class UserData implements InMemoryDbService {
         forenames: 'User 1',
         surname: 'Surname 1',
         email: '1@1.com',
-        password: '12345678',
+        password: 'password1',
         isAdmin: false,
       },
       {
@@ -26,7 +26,7 @@ export class UserData implements InMemoryDbService {
         forenames: 'User 2',
         surname: 'Surname 2',
         email: '2@2.com',
-        password: 'asdfasdf',
+        password: 'password2',
         isAdmin: false,
       },
       {
@@ -35,7 +35,7 @@ export class UserData implements InMemoryDbService {
         forenames: 'User 3',
         surname: 'Surname 3',
         email: '3@3.com',
-        password: 'qwerqwer',
+        password: 'password3',
         isAdmin: false,
       },
       {
@@ -44,7 +44,7 @@ export class UserData implements InMemoryDbService {
         forenames: 'User 4',
         surname: 'Surname 4',
         email: '4@4.com',
-        password: 'zxcvzxcv',
+        password: 'password4',
         isAdmin: false,
       },
     ]

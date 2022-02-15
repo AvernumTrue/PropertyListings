@@ -12,7 +12,13 @@
           class="form-control"
           id="forenames"
           placeholder="Enter Forenames"
-          formControlName="forenames">
+          formControlName="forenames"
+          [ngClass]="{'is-invalid': isInvalid(registerForm.get('forenames')!) }">
+        <span class="invalid-feedback">
+          <span>
+            {{getErrorMessage(registerForm.get('forenames')!)}}
+          </span>
+        </span>
       </div>
     </div>
 
@@ -25,10 +31,15 @@
           class="form-control"
           id="surname"
           placeholder="Enter Surname"
-          formControlName="surname">
+          formControlName="surname"
+          [ngClass]="{'is-invalid': isInvalid(registerForm.get('surname')!) }">
+        <span class="invalid-feedback">
+          <span>
+            {{getErrorMessage(registerForm.get('surname')!)}}
+          </span>
+        </span>
       </div>
     </div>
-
 
     <!-- Email Address string: required: min 6 chars, max 100 chars: Check for @ sign. -->
     <div class="col-4">
@@ -39,7 +50,13 @@
           class="form-control"
           id="email"
           placeholder="Enter Email Address"
-          formControlName="email">
+          formControlName="email"
+          [ngClass]="{'is-invalid': isInvalid(registerForm.get('email')!) }">
+        <span class="invalid-feedback">
+          <span>
+            {{getErrorMessage(registerForm.get('email')!)}}
+          </span>
+        </span>
       </div>
     </div>
 
@@ -52,7 +69,13 @@
           class="form-control"
           id="password"
           placeholder="Enter Password"
-          formControlName="password">
+          formControlName="password"
+          [ngClass]="{'is-invalid': isInvalid(registerForm.get('password')!) }">
+        <span class="invalid-feedback">
+          <span>
+            {{getErrorMessage(registerForm.get('password')!)}}
+          </span>
+        </span>
       </div>
     </div>
 
@@ -65,7 +88,13 @@
           class="form-control"
           id="confirmPassword"
           placeholder="Enter Confirm Password"
-          formControlName="confirmPassword">
+          formControlName="confirmPassword"
+          [ngClass]="{'is-invalid': isInvalid(registerForm.get('confirmPassword')!) }">
+        <span class="invalid-feedback">
+          <span>
+            {{getErrorMessage(registerForm.get('confirmPassword')!)}}
+          </span>
+        </span>
       </div>
     </div>
 
@@ -73,7 +102,8 @@
     <button
       (click)="submit()"
       type="button"
-      class="btn btn-primary">
+      class="btn btn-primary"
+      [disabled]="!registerForm.valid">
       Register
     </button>
 
@@ -87,6 +117,43 @@
     </button>
 
   </form>
+</div>
+
+<div
+  *ngIf="errorMessage"
+  class="alert alert-danger col-4"
+  role="alert">
+  {{errorMessage}}
+</div>
+<div
+  *ngIf="displayInvalidMessage"
+  class="alert alert-danger col-4"
+  role="alert">
+  Please ensure all fields are valid.
+</div>
+<div
+  *ngIf="saveSuccessMessage"
+  class="alert alert-primary col-4"
+  role="alert">
+  Saved, navigating to your adverts page.
+</div>
+<div
+  *ngIf="savingMessage"
+  class="alert alert-primary col-4"
+  role="alert">
+  Saving Salary...
+</div>
+<div
+  *ngIf="saveErrorMessage"
+  class="alert alert-danger col-4"
+  role="alert">
+  There was an error saving the salary.
+</div>
+<div
+  *ngIf="getUserErrorMessage"
+  class="alert alert-danger col-4"
+  role="alert">
+  There was an error getting the salary.
 </div>
 
 
