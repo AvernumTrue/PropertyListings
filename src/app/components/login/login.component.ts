@@ -8,12 +8,16 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'pl-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   user: User;
   users: [];
+
+  displayInvalidMessage = false;
+  incorrectDetailsMessage = false;
+  loginSuccessfulMessage = false;
 
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     email: {
@@ -38,33 +42,32 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('loggedInUser'))
+    this.userService.getUser(Number(localStorage.getItem('loggedInId'))).subscribe({
+      next: loggedInUser => {
+        loggedInUser = loggedInUser;
+        console.log(loggedInUser)
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
     this.createForm();
-    // this.tryLogin();
   }
 
   tryLogin() {
     this.userService.getUsers().subscribe({
       next: users => {
         users = users;
-        console.log('All Users', users);
         for (const user of users) {
           const enteredEmail = this.loginForm.get('email').value;
           const enteredPassword = this.loginForm.get('password').value;
-          if (user.email === enteredEmail) {
-            console.log(`Email Matches`);
-            if (user.password === enteredPassword) {
-              console.log(`User Matches`);
-              console.log(user)
-              localStorage.setItem('loggedInUser', JSON.stringify(user));
-              // TODO set user as authenticated
-            } else {
-              const correctPassword = false
-              // console.log(`Incorrect Password`)
-            }
+          if (user.email === enteredEmail && user.password === enteredPassword) {
+            this.incorrectDetailsMessage = false;
+            this.loginSuccessfulMessage = true;
+            // TODO find way to stop for loop if the correct user is found. Currently the else statment will always run and set this.incorrectDetailsMessage = true
+            localStorage.setItem('loggedInId', JSON.stringify(user.id));
           } else {
-            const correctEmail = false
-            // console.log(`Email not found`)
+            this.incorrectDetailsMessage = true;
           }
         }
       },
@@ -75,7 +78,6 @@ export class LoginComponent implements OnInit {
   }
 
   createForm(): void {
-
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern(/[@]/i)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100),]],
@@ -94,7 +96,12 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-
-    this.tryLogin();
+    if (this.loginForm.status === 'VALID') {
+      this.displayInvalidMessage = false;
+      this.tryLogin();
+    } else {
+      this.displayInvalidMessage = true;
+    }
+    this.loginForm.markAllAsTouched();
   }
 }

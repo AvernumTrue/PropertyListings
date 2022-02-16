@@ -15,10 +15,9 @@ export class MainMenuComponent implements OnInit {
 
 
   logOut(): void {
-    console.log("logOut clicked");
+    localStorage.removeItem('loggedInUser');
   }
 
   ngOnInit(): void {
   }
-
 }

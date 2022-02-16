@@ -9,6 +9,10 @@ export class SubMenuComponent implements OnInit {
 
   constructor() { }
 
+  logOut(): void {
+    localStorage.removeItem('loggedInUser');
+  }
+
   ngOnInit(): void {
   }
 

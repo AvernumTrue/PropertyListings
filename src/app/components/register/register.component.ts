@@ -110,7 +110,6 @@ export class RegisterComponent implements OnInit {
   }
 
   getErrorMessage(controlName: string, c: AbstractControl): string | void {
-    console.log(this.isInvalid(c))
     if (!this.isInvalid(c)) return undefined;
     const failedValidationTypes = Object.keys(c.errors ?? {});
     if (failedValidationTypes.length === 0) return undefined;

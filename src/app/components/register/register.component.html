@@ -102,8 +102,7 @@
     <button
       (click)="submit()"
       type="button"
-      class="btn btn-primary"
-      [disabled]="!registerForm.valid">
+      class="btn btn-primary">
       Register
     </button>
 
@@ -112,10 +111,10 @@
     <button
       (click)="login()"
       type="button"
-      class="btn btn-primary">
+      class="btn btn-primary"
+      [routerLink]="['/login']">
       Login
     </button>
-
   </form>
 </div>
 
