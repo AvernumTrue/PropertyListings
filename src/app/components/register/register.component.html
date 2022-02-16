@@ -16,7 +16,7 @@
           [ngClass]="{'is-invalid': isInvalid(registerForm.get('forenames')!) }">
         <span class="invalid-feedback">
           <span>
-            {{getErrorMessage(registerForm.get('forenames')!)}}
+            {{getErrorMessage('forenames',registerForm.get('forenames')!)}}
           </span>
         </span>
       </div>
@@ -35,7 +35,7 @@
           [ngClass]="{'is-invalid': isInvalid(registerForm.get('surname')!) }">
         <span class="invalid-feedback">
           <span>
-            {{getErrorMessage(registerForm.get('surname')!)}}
+            {{getErrorMessage('surname',registerForm.get('surname')!)}}
           </span>
         </span>
       </div>
@@ -54,7 +54,7 @@
           [ngClass]="{'is-invalid': isInvalid(registerForm.get('email')!) }">
         <span class="invalid-feedback">
           <span>
-            {{getErrorMessage(registerForm.get('email')!)}}
+            {{getErrorMessage('email',registerForm.get('email')!)}}
           </span>
         </span>
       </div>
@@ -73,7 +73,7 @@
           [ngClass]="{'is-invalid': isInvalid(registerForm.get('password')!) }">
         <span class="invalid-feedback">
           <span>
-            {{getErrorMessage(registerForm.get('password')!)}}
+            {{getErrorMessage('password',registerForm.get('password')!)}}
           </span>
         </span>
       </div>
@@ -92,7 +92,7 @@
           [ngClass]="{'is-invalid': isInvalid(registerForm.get('confirmPassword')!) }">
         <span class="invalid-feedback">
           <span>
-            {{getErrorMessage(registerForm.get('confirmPassword')!)}}
+            {{getErrorMessage('confirmPassword',registerForm.get('confirmPassword')!)}}
           </span>
         </span>
       </div>

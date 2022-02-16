@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs';
 import { User } from '../../models/user.model';
@@ -21,11 +21,35 @@ export class RegisterComponent implements OnInit {
   saveSuccessMessage = false;
   savingMessage = false;
 
-  // TODO make validation message for each validation error
-  private validationMessage: { [K in string]: string } = {
-    // required: 'Please fill in this field.'
-    pattern: 'Must contain @',
-
+  private validationMessage: { [K in string]: { [K in string]: string } } = {
+    forenames: {
+      required: 'Please enter a forename or forenames.',
+      maxlength: 'Forename cannot exceed 100 characters.',
+      pattern: 'Forename must include a letter.',
+    },
+    surname: {
+      required: 'Please enter a surname.',
+      minlength: 'Surname must be at least 3 characters.',
+      maxlength: 'Surname cannot exceed 100 characters.',
+      pattern: 'Surname must include a letter.',
+    },
+    email: {
+      required: 'Please enter an email address.',
+      minlength: 'Email address must be at least 6 characters.',
+      maxlength: 'Email address cannot exceed 100 characters.',
+      pattern: 'Email address must include an @ symbol.',
+    },
+    password: {
+      required: 'Please enter a password.',
+      minlength: 'Password must be at least 8 characters.',
+      maxlength: 'Password cannot exceed 100 characters.',
+    },
+    confirmPassword: {
+      required: 'Please reenter the password.',
+      minlength: 'Password must be at least 8 characters.',
+      maxlength: 'Password cannot exceed 100 characters.',
+      valueMatches: 'Passwords do not match',
+    },
   };
 
   userId: number;
@@ -39,7 +63,7 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private userService: UserService) {
     this.userId = Number(route.snapshot.paramMap.get('userIndex'));
-    console.log(this.userId)
+    console.log(this.userId);
   }
 
   ngOnInit(): void {
@@ -61,13 +85,22 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm(): void {
+    const valueMatches = (GetOtherValue: () => string): ValidatorFn => {
+      return (c) => {
+        if (c.value !== GetOtherValue()) return { valueMatches: true };
+        return null;
+      };
+    };
+
+    const getPassword = (): string => String(this.registerForm?.get('password')?.value);
+
     this.registerForm = this.fb.group({
       // TODO : registerForm : validation
-      forenames: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]],
-      surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]],
+      forenames: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]], //TODO remove leading and trailing spaces
+      surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]],//TODO remove leading and trailing spaces
       email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern(/[@]/i)]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],// TODO: esure passwords match
-      confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100), valueMatches(getPassword)]],
       id: 0
     });
   }
@@ -76,12 +109,12 @@ export class RegisterComponent implements OnInit {
     return (c.touched || c.dirty) && c.errors != null;
   }
 
-  getErrorMessage(c: AbstractControl): string | void {
+  getErrorMessage(controlName: string, c: AbstractControl): string | void {
+    console.log(this.isInvalid(c))
     if (!this.isInvalid(c)) return undefined;
-    return Object.keys(c.errors ?? {}).map(key => {
-      if (key in this.validationMessage) return this.validationMessage[key];
-      return `Validation ${key} failed`;
-    }).join(' ');
+    const failedValidationTypes = Object.keys(c.errors ?? {});
+    if (failedValidationTypes.length === 0) return undefined;
+    return this.validationMessage[controlName]?.[failedValidationTypes[0]] ?? `Validation ${failedValidationTypes[0]} failed`;
   }
 
   finaliseUser() {

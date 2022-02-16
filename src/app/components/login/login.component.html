@@ -12,7 +12,12 @@
           class="form-control"
           id="email"
           placeholder="Enter Email Address"
-          formControlName="email">
+          formControlName="email" [ngClass]="{'is-invalid': isInvalid(loginForm.get('email')!) }">
+        <span class="invalid-feedback">
+          <span>
+            {{getErrorMessage('email',loginForm.get('email')!)}}
+          </span>
+        </span>
       </div>
     </div>
 
@@ -25,7 +30,13 @@
           class="form-control"
           id="password"
           placeholder="Enter Password"
-          formControlName="password">
+          formControlName="password" formControlName="password"
+          [ngClass]="{'is-invalid': isInvalid(loginForm.get('password')!) }">
+        <span class="invalid-feedback">
+          <span>
+            {{getErrorMessage('password',loginForm.get('password')!)}}
+          </span>
+        </span>
       </div>
     </div>
 
