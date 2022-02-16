@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   user: User;
   users: [];
-  foo: string
 
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     email: {
@@ -39,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(localStorage.getItem('loggedInUser'))
     this.createForm();
     // this.tryLogin();
   }
@@ -48,20 +48,15 @@ export class LoginComponent implements OnInit {
       next: users => {
         users = users;
         console.log('All Users', users);
-
-        let correctUser = 0;
-        // while (correctUser === 0) {
         for (const user of users) {
-
           const enteredEmail = this.loginForm.get('email').value;
           const enteredPassword = this.loginForm.get('password').value;
-
           if (user.email === enteredEmail) {
             console.log(`Email Matches`);
             if (user.password === enteredPassword) {
               console.log(`User Matches`);
-              correctUser = 1;
-              // authenticate(user);
+              console.log(user)
+              localStorage.setItem('loggedInUser', JSON.stringify(user));
               // TODO set user as authenticated
             } else {
               const correctPassword = false
@@ -71,17 +66,13 @@ export class LoginComponent implements OnInit {
             const correctEmail = false
             // console.log(`Email not found`)
           }
-          console.log(user.email);
-          console.log(user.password);
         }
-        // }
       },
       error: err => {
         console.log(err);
       }
     });
   }
-
 
   createForm(): void {
 
@@ -105,15 +96,5 @@ export class LoginComponent implements OnInit {
   submit() {
 
     this.tryLogin();
-
-    // console.log(`Selected User Password: ${this.foo}`);
-    // console.log(`password ${this.loginForm.get('password')?.value}`);
-    // console.log(`email ${this.loginForm.get('email')?.value}`);
-
-    // if (this.foo === this.loginForm.get('password')?.value) {
-    //   console.log(`Passwords Match!`)
-    // } else {
-    //   console.log(`Passwords do not Match`)
-    // }
   }
 }
