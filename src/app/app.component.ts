@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'pl-root',
   template: `
+<pl-main-menu></pl-main-menu>
 <div class="container">
   <div class="row justify-content-md-center">
     <div class="col-md">
-      <pl-main-menu></pl-main-menu>
       <router-outlet></router-outlet>
     </div>
   </div>

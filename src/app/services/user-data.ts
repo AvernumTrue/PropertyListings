@@ -13,17 +13,15 @@ export class UserData implements InMemoryDbService {
     const users: User[] = [
       {
         id: 1,
-        userId: 1,
-        forenames: 'User 1',
+        forenames: 'Forename 1',
         surname: 'Surname 1',
         email: '1@1.com',
         password: 'password1',
-        isAdmin: false,
+        isAdmin: true,
       },
       {
         id: 2,
-        userId: 2,
-        forenames: 'User 2',
+        forenames: 'Forename 2',
         surname: 'Surname 2',
         email: '2@2.com',
         password: 'password2',
@@ -31,8 +29,7 @@ export class UserData implements InMemoryDbService {
       },
       {
         id: 3,
-        userId: 3,
-        forenames: 'User 3',
+        forenames: 'Forename 3',
         surname: 'Surname 3',
         email: '3@3.com',
         password: 'password3',
@@ -40,8 +37,7 @@ export class UserData implements InMemoryDbService {
       },
       {
         id: 4,
-        userId: 4,
-        forenames: 'User 4',
+        forenames: 'Forename 4',
         surname: 'Surname 4',
         email: '4@4.com',
         password: 'password4',

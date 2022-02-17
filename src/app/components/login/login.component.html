@@ -1,69 +1,90 @@
-<div class="container">
-  <form novalidate
-    (ngSubmit)="submit()"
-    [formGroup]="loginForm">
+<div class="card text-center">
+  <h1 class="card-header">
+    Login
+  </h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+      </div>
+      <div class="col-sm">
+        <div class="container">
+          <form novalidate
+            (ngSubmit)="submit()"
+            [formGroup]="loginForm">
 
-    <!-- Email Address string: required: min 6 chars, max 100 chars: Check for @ sign. -->
-    <div class="col-4">
-      <div class="form-group">
-        <label class="text-primary" for="email">Email Address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          placeholder="Enter Email Address"
-          formControlName="email" [ngClass]="{'is-invalid': isInvalid(loginForm.get('email')!) }">
-        <span class="invalid-feedback">
-          <span>
-            {{getErrorMessage('email',loginForm.get('email')!)}}
-          </span>
-        </span>
+            <!-- Email Address string: required: min 6 chars, max 100 chars: Check for @ sign. -->
+            <div>
+              <div class="form-group">
+                <label class="text-primary" for="email">Email Address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Enter Email Address"
+                  formControlName="email" [ngClass]="{'is-invalid': isInvalid(loginForm.get('email')!) }">
+                <span class="invalid-feedback">
+                  <span>
+                    {{getErrorMessage('email',loginForm.get('email')!)}}
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Password string: required: min 8 chars, max 100 chars -->
+            <div>
+              <div class="form-group">
+                <label class="text-primary" for="password">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Enter Password"
+                  formControlName="password" formControlName="password"
+                  [ngClass]="{'is-invalid': isInvalid(loginForm.get('password')!) }">
+
+                <span class="invalid-feedback">
+                  <span>
+                    {{getErrorMessage('password',loginForm.get('password')!)}}
+                  </span>
+                </span>
+              </div>
+
+              <button
+                (click)="submit()"
+                type="button"
+                class="btn btn-primary"
+                [disabled]="disableLogin">
+                Login
+              </button>
+
+              <div
+                *ngIf="primaryMessage"
+                class="alert alert-primary"
+                role="alert">
+                {{primaryMessage}}
+              </div>
+              <div
+                *ngIf="dangerMessage"
+                class="alert alert-danger"
+                role="alert">
+                {{dangerMessage}}
+              </div>
+              <div
+                *ngIf="successMessage"
+                class="alert alert-success"
+                role="alert">
+                {{successMessage}}
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+
+
+      </div>
+      <div class="col-sm">
       </div>
     </div>
-
-    <!-- Password string: required: min 8 chars, max 100 chars -->
-    <div class="col-4">
-      <div class="form-group">
-        <label class="text-primary" for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          placeholder="Enter Password"
-          formControlName="password" formControlName="password"
-          [ngClass]="{'is-invalid': isInvalid(loginForm.get('password')!) }">
-
-        <span class="invalid-feedback">
-          <span>
-            {{getErrorMessage('password',loginForm.get('password')!)}}
-          </span>
-        </span>
-      </div>
-    </div>
-
-    <button
-      (click)="submit()"
-      type="button"
-      class="btn btn-primary">
-      Login
-    </button>
-    <div
-      *ngIf="incorrectDetailsMessage"
-      class="alert alert-danger col-4"
-      role="alert">
-      Incorrect Password or Email
-    </div>
-    <div
-      *ngIf="displayInvalidMessage"
-      class="alert alert-danger col-4"
-      role="alert">
-      Please ensure all fields are valid.
-    </div>
-    <div
-      *ngIf="loginSuccessfulMessage"
-      class="alert alert-success col-4"
-      role="alert">
-      Login Successful
-    </div>
-  </form>
+  </div>
 </div>

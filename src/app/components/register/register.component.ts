@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { delay } from 'rxjs';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
@@ -9,17 +9,17 @@ import { UserService } from '../../services/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   user!: User;
   errorMessage: string;
 
-  isLoading = true;
-  displayInvalidMessage = false;
-  getUserErrorMessage = false;
-  saveErrorMessage = false;
-  saveSuccessMessage = false;
-  savingMessage = false;
+  displayMessage: string;
+  primaryMessage: string;
+  dangerMessage: string;
+  successMessage: string;
+  disableRegister = false;
 
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     forenames: {
@@ -53,34 +53,45 @@ export class RegisterComponent implements OnInit {
   };
 
   userId: number;
-  get isEditing() {
-    return this.userId != 0;
-  }
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private userService: UserService) {
-    this.userId = Number(route.snapshot.paramMap.get('userIndex'));
-    console.log(this.userId);
   }
 
   ngOnInit(): void {
-    if (this.userId !== 0) {
-      this.userService.getUser(this.userId).pipe(delay(2000)).subscribe({
-        next: user => {
-          this.isLoading = false
-          this.user = user;
-          this.createForm();
-        }, error: err => {
-          this.getUserErrorMessage = true;
-          this.isLoading = false;
-          console.log(err);
-        }
-      });
-    } else {
-      this.createForm();
+    if (localStorage.getItem('loggedInId')) {
+      this.router.navigate(['/my-adverts']);
+    }
+    this.createForm();
+  }
+
+  selectMessage(message: string) {
+    switch (message) {
+      case "invalidMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "Please ensure all fields are valid.";
+        this.successMessage = "";
+        break;
+      case "saveErrorMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "There was an error saving the details.";
+        this.successMessage = "";
+        break;
+      case "saveSuccessMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "";
+        this.successMessage = "Successfully registered, navigating to My Averts page...";
+        break;
+      case "savingMessage":
+        this.primaryMessage = "Registering...";
+        this.dangerMessage = "";
+        this.successMessage = "";
+        break;
+      default:
+        console.log("No Message");
+        break;
     }
   }
 
@@ -95,9 +106,8 @@ export class RegisterComponent implements OnInit {
     const getPassword = (): string => String(this.registerForm?.get('password')?.value);
 
     this.registerForm = this.fb.group({
-      // TODO : registerForm : validation
-      forenames: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]], //TODO remove leading and trailing spaces
-      surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]],//TODO remove leading and trailing spaces
+      forenames: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]],
+      surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]],
       email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern(/[@]/i)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100), valueMatches(getPassword)]],
@@ -117,79 +127,46 @@ export class RegisterComponent implements OnInit {
   }
 
   finaliseUser() {
-    this.displayInvalidMessage = false;
     const user = new User();
     user.id = this.userId;
-    user.forenames = this.registerForm.get('forenames')?.value;
-    user.surname = this.registerForm.get('surname')?.value;
-    user.email = this.registerForm.get('email')?.value;
+    user.forenames = (this.registerForm.get('forenames')?.value);
+    user.surname = (this.registerForm.get('surname')?.value);
+    user.email = (this.registerForm.get('email')?.value);
     user.password = this.registerForm.get('password')?.value;
     user.isAdmin = false;
-
-    if (this.userId != null) {
-      this.userId = this.userId;
-    } else {
-      this.userId = 0;
-    }
     this.user = user;
   }
 
   submit() {
-    this.isLoading = true;
+    this.disableRegister = true;
     if (this.registerForm.status === 'VALID') {
-      this.savingMessage = true;
-      if (this.isEditing) {
-        this.saveEdit();
-      }
-      if (!this.isEditing) {
-        this.addUser();
-      }
+      this.selectMessage("savingMessage");
+      this.addUser();
     } else {
-      this.displayInvalidMessage = true;
+      this.disableRegister = false;
+      this.selectMessage("invalidMessage");
     }
     this.registerForm.markAllAsTouched();
-  }
-
-  saveEdit() {
-    this.finaliseUser();
-    this.userService.editUser(this.user).pipe(delay(2000)).subscribe({
-      next: () => {
-        this.onSaveComplete();
-      },
-      error: err => {
-        this.isLoading = false;
-        this.saveErrorMessage = true;
-        this.savingMessage = false;
-        console.log(err);
-        this.errorMessage = (`There was an error saving your changes.`);
-      }
-    });
   }
 
   addUser() {
     this.finaliseUser();
     this.userService.addUser(this.user).pipe(delay(2000)).subscribe({
-      next: () => {
+      next: user => {
+        user.id = user.id
+        localStorage.setItem('loggedInId', JSON.stringify(user.id));
         this.onSaveComplete();
       },
-      error: err => {
-        this.isLoading = false;
-        this.saveErrorMessage = true;
-        this.savingMessage = false;
-        console.log(`There was an error registering your details`);
+      error: () => {
+        this.disableRegister = false;
+        this.selectMessage("saveErrorMessage");
       }
     });
   }
 
-  login() {
-    console.log("login clicked");
-  }
-
   async onSaveComplete(): Promise<void> {
-    this.savingMessage = false;
-    this.saveSuccessMessage = true;
+    this.selectMessage("saveSuccessMessage");
     await new Promise(resolve => setTimeout(resolve, 3000));
-    this.isLoading = false;
     this.registerForm.reset();
     this.router.navigate(['/my-adverts']);
   }

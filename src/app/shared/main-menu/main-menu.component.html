@@ -1,5 +1,6 @@
+<!-- TODO : make the menus not look like trash -->
 <!-- Unauthenticated Users -->
-<nav *ngIf="unauthenticatedUser" class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="navbar-brand p-1 bg-primary text-white">MENU</div>
   <ul class="navbar-nav">
 
@@ -20,7 +21,7 @@
     <li class="nav-item">
       <a class="nav-link"
         [routerLink]="['/register']">
-        Sell a house
+        Sell a House
       </a>
     </li>
 
@@ -62,7 +63,6 @@
       </a>
     </li>
 
-    <!-- TODO make my-adverts component -->
     <li class="nav-item">
       <a class="nav-link"
         [routerLink]="['/my-adverts']">
@@ -70,7 +70,6 @@
       </a>
     </li>
 
-    <!-- TODO make seller-profile component -->
     <li class="nav-item">
       <a class="nav-link"
         [routerLink]="['/seller-profile']">
@@ -85,7 +84,6 @@
       </a>
     </li>
 
-    <!-- TODO make edit-advert component -->
     <li class="nav-item">
       <a class="nav-link"
         [routerLink]="['/edit-advert']">
@@ -100,7 +98,6 @@
       </a>
     </li>
 
-    <!-- TODO make seller-profile component -->
     <li class="nav-item">
       <a class="nav-link"
         [routerLink]="['/seller-profile']">
@@ -129,7 +126,7 @@
 
 
 <!-- Site Administrator -->
-<nav *ngIf="authenticatedUser" class="navbar navbar-expand-lg navbar-light bg-light">
+<nav *ngIf="administrator" class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="navbar-brand p-1 bg-primary text-white">MENU</div>
   <ul class="navbar-nav">
 
@@ -140,7 +137,6 @@
       </a>
     </li>
 
-    <!-- TODO make user-management component -->
     <li class="nav-item">
       <a class="nav-link"
         [routerLink]="['/user-management']">
@@ -148,7 +144,6 @@
       </a>
     </li>
 
-    <!-- TODO make advert-management component -->
     <li class="nav-item">
       <a class="nav-link"
         [routerLink]="['/advert-management']">

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs';
-import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,12 +11,12 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  user: User;
-  users: [];
 
-  displayInvalidMessage = false;
-  incorrectDetailsMessage = false;
-  loginSuccessfulMessage = false;
+  displayMessage: string;
+  primaryMessage: string;
+  dangerMessage: string;
+  successMessage: string;
+  disableLogin = false;
 
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     email: {
@@ -42,40 +41,59 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUser(Number(localStorage.getItem('loggedInId'))).subscribe({
-      next: loggedInUser => {
-        loggedInUser = loggedInUser;
-        console.log(loggedInUser)
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
     this.createForm();
   }
 
-  tryLogin() {
-    this.userService.getUsers().subscribe({
-      next: users => {
-        users = users;
-        for (const user of users) {
-          const enteredEmail = this.loginForm.get('email').value;
-          const enteredPassword = this.loginForm.get('password').value;
-          if (user.email === enteredEmail && user.password === enteredPassword) {
-            this.incorrectDetailsMessage = false;
-            this.loginSuccessfulMessage = true;
-            // TODO find way to stop for loop if the correct user is found. Currently the else statment will always run and set this.incorrectDetailsMessage = true
-            localStorage.setItem('loggedInId', JSON.stringify(user.id));
-          } else {
-            this.incorrectDetailsMessage = true;
-          }
-        }
+  selectMessage(message: string) {
+    switch (message) {
+      case "loggingInMessage":
+        this.primaryMessage = "Logging in...";
+        this.dangerMessage = "";
+        this.successMessage = "";
+        break;
+      case "invalidMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "Please ensure all fields are valid.";
+        this.successMessage = "";
+        break;
+      case "incorrectDetailsMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "Incorrect Password or Email";
+        this.successMessage = "";
+        break;
+      case "LoginErrorMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "There was an error logging in.";
+        this.successMessage = "";
+        break;
+      case "loginSuccessfulMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "";
+        this.successMessage = "Login Successful. Navigating to My Adverts Page";
+        break;
+      default:
+        console.log("Error no message found");
+        break;
+    }
+  }
+
+  //TODO move email and password checking to services
+  async tryLogin() {
+    this.selectMessage("loggingInMessage");
+
+    this.userService.login(this.loginForm.get('email').value, this.loginForm.get('password').value).pipe(delay(2000)).subscribe({
+      next: async user => {
+        this.selectMessage("loginSuccessfulMessage");
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        this.router.navigate(['/my-adverts']);
       },
       error: err => {
-        console.log(err);
-      }
+        this.disableLogin = false;
+        this.selectMessage("incorrectDetailsMessage");
+      },
     });
   }
+
 
   createForm(): void {
     this.loginForm = this.fb.group({
@@ -96,11 +114,12 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
+    this.disableLogin = true;
     if (this.loginForm.status === 'VALID') {
-      this.displayInvalidMessage = false;
       this.tryLogin();
     } else {
-      this.displayInvalidMessage = true;
+      this.disableLogin = false;
+      this.selectMessage("invalidMessage");
     }
     this.loginForm.markAllAsTouched();
   }
