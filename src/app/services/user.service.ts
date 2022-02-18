@@ -7,12 +7,12 @@ import { User } from '../models/user.model';
 })
 
 export class UserService {
+  [x: string]: any;
   loggedInUserObservable: Observable<User | undefined>
   loggedInUserObserver: Subscriber<User | undefined>
 
   private userUrl: string = 'api/users';
-  // used for testing
-  // private userUrl: string = 'api/brokenAPI';
+  // private userUrl: string = 'api/brokenAPI';  // used for testing broken API 
   constructor(private http: HttpClient) {
     this.loggedInUserObservable = new Observable((observer) => {
       this.loggedInUserObserver = observer;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
@@ -77,7 +77,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  //TODO move email and password checking to services
   async tryLogin() {
     this.selectMessage("loggingInMessage");
 

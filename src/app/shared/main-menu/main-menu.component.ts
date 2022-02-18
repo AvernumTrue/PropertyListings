@@ -10,7 +10,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent implements OnInit {
-  // TODO : add something to show that menu is loading
   spinnerStyle = Spinkit;
   authenticatedUser = false;
   administrator = false;
@@ -22,7 +21,6 @@ export class MainMenuComponent implements OnInit {
   logOut(): void {
     this.loading = true;
     this.userService.logout();
-    this.loading = false;
   }
 
   checkUser(user: User | undefined) {
@@ -32,7 +30,6 @@ export class MainMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.userService.loggedInUserObservable.pipe(delay(2000)).subscribe({
       next: user => this.checkUser(user),
     });

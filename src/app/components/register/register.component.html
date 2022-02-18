@@ -13,7 +13,6 @@
               (ngSubmit)="submit()"
               [formGroup]="registerForm">
 
-              <!-- Forenames string: required: min 1 chars, max 100 chars: Forenames of the user. -->
               <div>
                 <div class="form-group">
                   <label class="text-primary" for="Forenames">Fornames</label>
@@ -32,7 +31,6 @@
                 </div>
               </div>
 
-              <!-- Surname string: required: min 3 chars, max 100 chars: Surname of the user. -->
               <div>
                 <div class="form-group">
                   <label class="text-primary" for="surname">Surname</label>
@@ -51,7 +49,6 @@
                 </div>
               </div>
 
-              <!-- Email Address string: required: min 6 chars, max 100 chars: Check for @ sign. -->
               <div>
                 <div class="form-group">
                   <label class="text-primary" for="email">Email Address</label>
@@ -70,7 +67,6 @@
                 </div>
               </div>
 
-              <!-- Password string: required: min 8 chars, max 100 chars: No special characters needed -->
               <div>
                 <div class="form-group">
                   <label class="text-primary" for="password">Password</label>
@@ -89,7 +85,6 @@
                 </div>
               </div>
 
-              <!-- Password Confirm: string: should match the first password. -->
               <div>
                 <div class="form-group">
                   <label class="text-primary" for="confirmPassword">Confirm Password</label>
@@ -108,7 +103,6 @@
                 </div>
               </div>
 
-              <!-- Register: Validate the fields and submit the form object to the API. -->
               <button
                 (click)="submit()"
                 type="button"
@@ -117,8 +111,6 @@
                 Register
               </button>
 
-              <!-- Login: A link to the login page should also be available 
-      On success, redirect ‘My Adverts Page’. -->
               <button
                 type="button"
                 class="btn btn-primary"
@@ -154,14 +146,3 @@
     </div>
   </div>
 </div>
-
-<!-- Information to capture:
-- Forenames string: required: min 1 chars, max 100 chars: Forenames of the user.
-- Surname string: required: min 3 chars, max 100 chars: Surname of the user.
-- Email Address string: required: min 6 chars, max 100 chars: Check for @ sign.
-- Password string: required: min 8 chars, max 100 chars: No special characters needed
-- Password Confirm: string: should match the first password.
-Actions:
-- Register: Validate the fields and submit the form object to the API.
-- Login: A link to the login page should also be available
-On success, redirect ‘My Adverts Page’. -->

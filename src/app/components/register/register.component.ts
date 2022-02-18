@@ -171,15 +171,3 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/my-adverts']);
   }
 }
-
-// Information to capture:
-// - Forenames string: required: min 1 chars, max 100 chars: Forenames of the user.
-// - Surname string: required: min 3 chars, max 100 chars: Surname of the user.
-// - Email Address string: required: min 6 chars, max 100 chars: Check for @ sign.
-// - Password string: required: min 8 chars, max 100 chars: No special characters needed
-// - Password Confirm: string: should match the first password.
-// Actions:
-// - Register: Validate the fields and submit the form object to the API.
-// - Login: A link to the login page should also be available
-// On success, redirect ‘My Adverts Page’.
-

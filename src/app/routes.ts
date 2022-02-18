@@ -10,7 +10,6 @@ export default RouterModule.forRoot([
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // { path: 'register/:userIndex', component: RegisterComponent },
   { path: 'sale-list', component: SaleListComponent },
   { path: 'my-adverts', component: MyAdvertsComponent },
   { path: 'user-management', component: UserManagementComponent },
