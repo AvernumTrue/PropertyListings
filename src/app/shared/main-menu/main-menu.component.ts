@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent implements OnInit {
-  // TODO change menu display based on localStorage
+  // TODO : add something to show that menu is loading
   authenticatedUser = false;
   administrator = false;
   loading = true;
