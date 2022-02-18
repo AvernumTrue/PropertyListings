@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Spinkit } from 'ng-http-loader';
 import { delay } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -10,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MainMenuComponent implements OnInit {
   // TODO : add something to show that menu is loading
+  spinnerStyle = Spinkit;
   authenticatedUser = false;
   administrator = false;
   loading = true;
@@ -18,7 +20,9 @@ export class MainMenuComponent implements OnInit {
   }
 
   logOut(): void {
+    this.loading = true;
     this.userService.logout();
+    this.loading = false;
   }
 
   checkUser(user: User | undefined) {
@@ -28,6 +32,7 @@ export class MainMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.userService.loggedInUserObservable.pipe(delay(2000)).subscribe({
       next: user => this.checkUser(user),
     });

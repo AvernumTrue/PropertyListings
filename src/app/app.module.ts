@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserData } from './services/user-data';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { MyAdvertsComponent } from './components/my-adverts/my-adverts.component';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MyAdvertsComponent } from './components/my-adverts/my-adverts.component
     AppRoutingModule,
     HttpClientModule,
     routes,
-    InMemoryWebApiModule.forRoot(UserData)
+    InMemoryWebApiModule.forRoot(UserData),
+    NgHttpLoaderModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
