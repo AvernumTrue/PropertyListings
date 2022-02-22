@@ -107,14 +107,15 @@
                 (click)="submit()"
                 type="button"
                 class="btn btn-primary"
-                [disabled]="disableRegister">
+                [disabled]="disableButtons">
                 Register
               </button>
 
               <button
                 type="button"
                 class="btn btn-primary"
-                [routerLink]="['/login']">
+                [routerLink]="['/login']"
+                [disabled]="disableButtons">
                 Login
               </button>
 

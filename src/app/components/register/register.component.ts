@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   primaryMessage: string;
   dangerMessage: string;
   successMessage: string;
-  disableRegister = false;
+  disableButtons = false;
 
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     forenames: {
@@ -138,12 +138,12 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    this.disableRegister = true;
+    this.disableButtons = true;
     if (this.registerForm.status === 'VALID') {
       this.selectMessage("savingMessage");
       this.addUser();
     } else {
-      this.disableRegister = false;
+      this.disableButtons = false;
       this.selectMessage("invalidMessage");
     }
     this.registerForm.markAllAsTouched();
@@ -164,7 +164,7 @@ export class RegisterComponent implements OnInit {
         this.onSaveComplete();
       },
       error: () => {
-        this.disableRegister = false;
+        this.disableButtons = false;
         this.selectMessage("saveErrorMessage");
       }
     });
