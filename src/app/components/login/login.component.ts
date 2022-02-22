@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private userService: UserService) {
   }
@@ -51,14 +50,9 @@ export class LoginComponent implements OnInit {
         this.dangerMessage = "";
         this.successMessage = "";
         break;
-      case "invalidMessage":
-        this.primaryMessage = "";
-        this.dangerMessage = "Please ensure all fields are valid.";
-        this.successMessage = "";
-        break;
       case "incorrectDetailsMessage":
         this.primaryMessage = "";
-        this.dangerMessage = "Incorrect Password or Email";
+        this.dangerMessage = "Incorrect Password or Email Address";
         this.successMessage = "";
         break;
       case "LoginErrorMessage":
@@ -93,11 +87,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
   createForm(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern(/[@]/i)]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100),]],
+      email: [''],
+      password: [''],
     });
   }
 
