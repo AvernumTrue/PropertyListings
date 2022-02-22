@@ -17,8 +17,8 @@
   </div>
 </nav>
 
-<!-- Submenu -->
-<nav *ngIf="authenticatedUser" class="navbar navbar-expand-lg navbar-dark bg-primary">
+<!-- Submenu for authenticatedUser -->
+<nav *ngIf="authenticatedUser && !administrator" class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand">MENU</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,8 +33,21 @@
       <a class="nav-item nav-link" [routerLink]="['/manage-account']">Manage my Account</a>
       <a class="nav-item nav-link" [routerLink]="['/seller-profile']">My Seller Profile</a>
       <a class="nav-item nav-link" [routerLink]="['/favourites']">Favourite Houses</a>
-      <a *ngIf="administrator" class="nav-item nav-link" [routerLink]="['/user-management']">User Management</a>
-      <a *ngIf="administrator" class="nav-item nav-link" [routerLink]="['/advert-management']">Advert Management</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Submenu for administrator -->
+<nav *ngIf="administrator && authenticatedUser" class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand">MENU</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]="['/user-management']">User Management</a>
+      <a class="nav-item nav-link" [routerLink]="['/advert-management']">Advert Management</a>
     </div>
   </div>
 </nav>
