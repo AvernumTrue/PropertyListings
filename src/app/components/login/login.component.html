@@ -50,8 +50,16 @@
                 (click)="submit()"
                 type="button"
                 class="btn btn-primary"
-                [disabled]="disableLogin">
+                [disabled]="disableButtons">
                 Login
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-primary"
+                [disabled]="disableButtons"
+                [routerLink]="['/register']">
+                Register Here
               </button>
 
               <div

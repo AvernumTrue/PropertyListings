@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   primaryMessage: string;
   dangerMessage: string;
   successMessage: string;
-  disableLogin = false;
+  disableButtons = false;
 
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     email: {
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/my-adverts']);
       },
       error: () => {
-        this.disableLogin = false;
+        this.disableButtons = false;
         this.selectMessage("incorrectDetailsMessage");
       },
     });
@@ -113,11 +113,11 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    this.disableLogin = true;
+    this.disableButtons = true;
     if (this.loginForm.status === 'VALID') {
       this.tryLogin();
     } else {
-      this.disableLogin = false;
+      this.disableButtons = false;
       this.selectMessage("invalidMessage");
     }
     this.loginForm.markAllAsTouched();
