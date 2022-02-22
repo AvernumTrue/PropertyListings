@@ -154,7 +154,13 @@ export class RegisterComponent implements OnInit {
     this.userService.addUser(this.user).pipe(delay(2000)).subscribe({
       next: user => {
         user.id = user.id
-        localStorage.setItem('loggedInId', JSON.stringify(user.id));
+        localStorage.setItem('loggedInId', String(user.id));
+
+        this.userService.login(this.registerForm.get('email').value, this.registerForm.get('password').value).pipe(delay(2000)).subscribe({
+          next: () => {
+          }
+        });
+
         this.onSaveComplete();
       },
       error: () => {

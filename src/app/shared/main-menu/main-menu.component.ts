@@ -21,11 +21,18 @@ export class MainMenuComponent implements OnInit {
   logOut(): void {
     this.loading = true;
     this.userService.logout();
+    this.authenticatedUser = false;
   }
 
   checkUser(user: User | undefined) {
-    this.authenticatedUser = user != null;
-    this.administrator = user?.isAdmin ?? false;
+    if (localStorage.getItem('loggedInId')) {
+      this.authenticatedUser = true;
+      if (!user?.isAdmin) {
+        this.administrator = false;
+      } else {
+        this.administrator = true;
+      }
+    }
     this.loading = false;
   }
 
@@ -38,4 +45,5 @@ export class MainMenuComponent implements OnInit {
       error: () => this.checkUser(undefined),
     });
   }
+
 }

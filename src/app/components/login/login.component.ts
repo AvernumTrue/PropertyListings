@@ -81,12 +81,12 @@ export class LoginComponent implements OnInit {
     this.selectMessage("loggingInMessage");
 
     this.userService.login(this.loginForm.get('email').value, this.loginForm.get('password').value).pipe(delay(2000)).subscribe({
-      next: async user => {
+      next: async () => {
         this.selectMessage("loginSuccessfulMessage");
         await new Promise(resolve => setTimeout(resolve, 3000));
         this.router.navigate(['/my-adverts']);
       },
-      error: err => {
+      error: () => {
         this.disableLogin = false;
         this.selectMessage("incorrectDetailsMessage");
       },
