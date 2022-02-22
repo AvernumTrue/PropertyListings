@@ -15,11 +15,11 @@ export class MainMenuComponent implements OnInit {
   administrator = false;
   loading = true;
 
+
   constructor(public userService: UserService) {
   }
 
   logOut(): void {
-    this.loading = true;
     this.userService.logout();
     this.authenticatedUser = false;
   }
@@ -37,13 +37,13 @@ export class MainMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.userService.loggedInUserObservable.pipe(delay(2000)).subscribe({
-      next: user => this.checkUser(user),
+      next: user => this.checkUser(user)
     });
     this.userService.getLoggedInUser().pipe(delay(2000)).subscribe({
       next: user => this.checkUser(user),
       error: () => this.checkUser(undefined),
     });
   }
-
 }
