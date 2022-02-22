@@ -1,3 +1,13 @@
+.form-spacing {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.form-lable-spacing {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 button {
   margin-top: 10px;
   margin-bottom: 10px;

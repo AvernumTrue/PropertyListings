@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
       maxlength: 'Password cannot exceed 100 characters.',
     },
     confirmPassword: {
-      required: 'Please reenter the password.',
+      required: 'Please re-enter the password.',
       pattern: 'Password cannot contain spaces.',
       minlength: 'Password must be at least 8 characters.',
       maxlength: 'Password cannot exceed 100 characters.',

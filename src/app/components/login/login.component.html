@@ -1,81 +1,88 @@
-<div class="card text-center">
-  <h1 class="card-header">
-    Login
-  </h1>
+<div class="form-spacing">
+
   <div class="container">
     <div class="row">
       <div class="col-sm">
       </div>
       <div class="col-sm">
-        <div class="container">
-          <form novalidate
-            (ngSubmit)="submit()"
-            [formGroup]="loginForm">
+        <div class="card text-center">
+          <h1 class="card-header">
+            Login
+          </h1>
 
-            <div>
-              <div class="form-group">
-                <label class="text-primary" for="email">Email Address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder="Enter Email Address"
-                  formControlName="email">
-              </div>
-            </div>
+          <div class="container">
+            <form novalidate
+              (ngSubmit)="submit()"
+              [formGroup]="loginForm">
 
-            <div>
-              <div class="form-group">
-                <label class="text-primary" for="password">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  placeholder="Enter Password"
-                  formControlName="password">
+              <div>
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="email">Email Address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Enter Email Address"
+                    formControlName="email">
+                </div>
               </div>
 
-              <button
-                (click)="submit()"
-                type="button"
-                class="btn btn-primary"
-                [disabled]="disableButtons">
-                Login
-              </button>
+              <div>
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="password">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="Enter Password"
+                    formControlName="password">
+                </div>
 
-              <button
-                type="button"
-                class="btn btn-primary"
-                [disabled]="disableButtons"
-                [routerLink]="['/register']">
-                Register Here
-              </button>
+                <button
+                  (click)="submit()"
+                  type="button"
+                  class="btn btn-primary"
+                  [disabled]="disableButtons">
+                  Login
+                </button>
 
-              <div
-                *ngIf="primaryMessage"
-                class="alert alert-primary"
-                role="alert">
-                {{primaryMessage}}
-              </div>
-              <div
-                *ngIf="dangerMessage"
-                class="alert alert-danger"
-                role="alert">
-                {{dangerMessage}}
-              </div>
-              <div
-                *ngIf="successMessage"
-                class="alert alert-success"
-                role="alert">
-                {{successMessage}}
-              </div>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  [disabled]="disableButtons"
+                  [routerLink]="['/register']">
+                  Register Here
+                </button>
 
-            </div>
-          </form>
+                <div
+                  *ngIf="primaryMessage"
+                  class="alert alert-primary"
+                  role="alert">
+                  {{primaryMessage}}
+                </div>
+                <div
+                  *ngIf="dangerMessage"
+                  class="alert alert-danger"
+                  role="alert">
+                  {{dangerMessage}}
+                </div>
+                <div
+                  *ngIf="successMessage"
+                  class="alert alert-success"
+                  role="alert">
+                  {{successMessage}}
+                </div>
+
+              </div>
+            </form>
+          </div>
+
         </div>
       </div>
       <div class="col-sm">
       </div>
     </div>
+
   </div>
+
 </div>
