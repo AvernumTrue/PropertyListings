@@ -41,14 +41,16 @@ export class RegisterComponent implements OnInit {
     },
     password: {
       required: 'Please enter a password.',
+      pattern: 'Password cannot contain spaces.',
       minlength: 'Password must be at least 8 characters.',
       maxlength: 'Password cannot exceed 100 characters.',
     },
     confirmPassword: {
       required: 'Please reenter the password.',
+      pattern: 'Password cannot contain spaces.',
       minlength: 'Password must be at least 8 characters.',
       maxlength: 'Password cannot exceed 100 characters.',
-      valueMatches: 'Passwords do not match',
+      valueMatches: 'Passwords do not match.',
     },
   };
 
@@ -109,8 +111,8 @@ export class RegisterComponent implements OnInit {
       forenames: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]],
       surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]],
       email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern(/[@]/i)]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100), valueMatches(getPassword)]],
+      password: ['', [Validators.required, Validators.pattern(/^\S*$/i), Validators.minLength(8), Validators.maxLength(100)]],
+      confirmPassword: ['', [Validators.required, Validators.pattern(/^\S*$/i), Validators.minLength(8), Validators.maxLength(100), Validators.pattern(/^\S*$/i), valueMatches(getPassword)]],
       id: 0
     });
   }
@@ -129,10 +131,10 @@ export class RegisterComponent implements OnInit {
   finaliseUser() {
     const user = new User();
     user.id = this.userId;
-    user.forenames = (this.registerForm.get('forenames')?.value);
-    user.surname = (this.registerForm.get('surname')?.value);
-    user.email = (this.registerForm.get('email')?.value);
-    user.password = this.registerForm.get('password')?.value;
+    user.forenames = this.registerForm.get('forenames')?.value;
+    user.surname = this.registerForm.get('surname')?.value;
+    user.email = this.registerForm.get('email')?.value;
+    user.password = this.registerForm.get('password')?.value.trim();
     user.isAdmin = false;
     this.user = user;
   }
