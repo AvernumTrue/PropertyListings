@@ -78,16 +78,11 @@ export class UserService {
     return this.http.delete<User>(`${this.userUrl}/${id}`);
   }
 
-  // private initialiseUser(): User {
+  getLocalStorage() {
+    return localStorage.getItem('loggedInId')
+  }
 
-  //   return {
-  //     id: 0,
-  //     userId: 0,
-  //     forenames: '',
-  //     surname: '',
-  //     email: '',
-  //     password: '',
-  //     isAdmin: false,
-  //   };
-  // }
+  setLocalStorage(user: User) {
+    return localStorage.setItem('loggedInId', String(user.id))
+  }
 }

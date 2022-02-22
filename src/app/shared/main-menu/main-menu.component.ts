@@ -10,11 +10,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent implements OnInit {
+
   spinnerStyle = Spinkit;
   authenticatedUser = false;
   administrator = false;
   loading = true;
-
 
   constructor(public userService: UserService) {
   }
@@ -25,7 +25,7 @@ export class MainMenuComponent implements OnInit {
   }
 
   checkUser(user: User | undefined) {
-    if (localStorage.getItem('loggedInId')) {
+    if (this.userService.getLocalStorage()) {
       this.authenticatedUser = true;
       if (!user?.isAdmin) {
         this.administrator = false;

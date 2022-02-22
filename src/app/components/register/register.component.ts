@@ -11,15 +11,16 @@ import { UserService } from '../../services/user.service';
 })
 
 export class RegisterComponent implements OnInit {
+
   registerForm!: FormGroup;
   user!: User;
   errorMessage: string;
-
   displayMessage: string;
   primaryMessage: string;
   dangerMessage: string;
   successMessage: string;
   disableButtons = false;
+  userId: number;
 
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     forenames: {
@@ -54,8 +55,6 @@ export class RegisterComponent implements OnInit {
     },
   };
 
-  userId: number;
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -63,7 +62,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('loggedInId')) {
+    if (this.userService.getLocalStorage()) {
       this.router.navigate(['/my-adverts']);
     }
     this.createForm();
@@ -155,14 +154,11 @@ export class RegisterComponent implements OnInit {
     this.finaliseUser();
     this.userService.addUser(this.user).pipe(delay(2000)).subscribe({
       next: user => {
-        user.id = user.id
-        localStorage.setItem('loggedInId', String(user.id));
-
+        this.userService.setLocalStorage(user);
         this.userService.login(this.registerForm.get('email').value, this.registerForm.get('password').value).pipe(delay(2000)).subscribe({
           next: () => {
           }
         });
-
         this.onSaveComplete();
       },
       error: () => {
