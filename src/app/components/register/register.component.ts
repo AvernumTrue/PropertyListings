@@ -32,13 +32,13 @@ export class RegisterComponent implements OnInit {
       required: 'Please enter a surname.',
       minlength: 'Surname must be at least 3 characters.',
       maxlength: 'Surname cannot exceed 100 characters.',
-      pattern: 'Surname must include a letter.',
+      pattern: 'Surname must be at least 3 letters.',
     },
     email: {
       required: 'Please enter an email address.',
       minlength: 'Email address must be at least 6 characters.',
       maxlength: 'Email address cannot exceed 100 characters.',
-      pattern: 'Email address must include an @ symbol.',
+      pattern: 'Please enter a valid email address',
     },
     password: {
       required: 'Please enter a password.',
@@ -107,9 +107,9 @@ export class RegisterComponent implements OnInit {
     const getPassword = (): string => String(this.registerForm?.get('password')?.value);
 
     this.registerForm = this.fb.group({
-      forenames: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]],
-      surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[A-Z]/i)]],
-      email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern(/[@]/i)]],
+      forenames: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/(^[\s\S]*[A-Za-z]{1,100}[\s\S]*$)/)]],
+      surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/(^[\s\S]*[A-Za-z]{3,100}[\s\S]*$)/)]],
+      email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern(/^(?!.*@.*@.*$)(?!.*@.*\-\-.*\..*$)(?!.*@.*\-\..*$)(?!.*@.*\-$)(.*@.+(\..{1,11})?)$/)]],//checks for email pattern(found online)
       password: ['', [Validators.required, Validators.pattern(/^\S*$/i), Validators.minLength(8), Validators.maxLength(100)]],
       confirmPassword: ['', [Validators.required, Validators.pattern(/^\S*$/i), Validators.minLength(8), Validators.maxLength(100), Validators.pattern(/^\S*$/i), valueMatches(getPassword)]],
       id: 0
