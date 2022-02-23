@@ -19,6 +19,7 @@ import { UserData } from './services/user-data';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { MyAdvertsComponent } from './components/my-adverts/my-adverts.component';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import { CreateAdvertComponent } from './components/create-advert/create-advert.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     SubMenuComponent,
     FooterComponent,
     UserManagementComponent,
-    MyAdvertsComponent
+    MyAdvertsComponent,
+    CreateAdvertComponent
   ],
   imports: [
     ReactiveFormsModule,

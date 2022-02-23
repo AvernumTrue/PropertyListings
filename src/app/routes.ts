@@ -1,4 +1,5 @@
 import { RouterModule } from "@angular/router";
+import { CreateAdvertComponent } from "./components/create-advert/create-advert.component";
 import { HomeComponent } from "./components/home/home.component";
 import { LoginComponent } from "./components/login/login.component";
 import { MyAdvertsComponent } from "./components/my-adverts/my-adverts.component";
@@ -13,6 +14,7 @@ export default RouterModule.forRoot([
   { path: 'sale-list', component: SaleListComponent },
   { path: 'my-adverts', component: MyAdvertsComponent },
   { path: 'user-management', component: UserManagementComponent },
+  { path: 'create-advert', component: CreateAdvertComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ])
