@@ -3,3 +3,11 @@ button {
   margin-bottom: 10px;
   margin-right: 10px;
 }
+
+.test {
+  background-color: rgb(27, 134, 170);
+}
+
+/* .card {
+  margin: 1em;
+} */

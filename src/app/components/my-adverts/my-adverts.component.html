@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <h1 class="text-center">My Adverts</h1>
   <div class="container">
   </div>
@@ -26,36 +26,66 @@
       </tbody>
     </table>
   </div>
+</div> -->
+
+<div class="container">
+  <h1 class="text-center">My Adverts</h1>
 </div>
 
-<button
-  type="button"
-  class="btn btn-primary"
-  [routerLink]="['/my-adverts']"
-  [disabled]="disableButtons">
-  Edit Advert
-</button>
-<button
-  type="button"
-  class="btn btn-primary"
-  [routerLink]="['/my-adverts']"
-  [disabled]="disableButtons">
-  Hide Advert
-</button>
-<button
-  type="button"
-  class="btn btn-primary"
-  [routerLink]="['/my-adverts']"
-  [disabled]="disableButtons">
-  Show Advert
-</button>
-<button
-  type="button"
-  class="btn btn-danger"
-  [routerLink]="['/my-adverts']"
-  [disabled]="disableButtons">
-  Delete Advert
-</button>
+<div class="row">
+  <div *ngFor="let advert of adverts" class="col-3">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h4 class="card-title">{{advert.advertStatus}}</h4>
+        <h5 class="card-title">{{advert.headline}}</h5>
+        <p class="card-text">{{advert.details}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{advert.province}}</li>
+        <li class="list-group-item">{{advert.city}}</li>
+        <li class="list-group-item">{{advert.price}}</li>
+      </ul>
+      <div class="card-body">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/my-adverts']"
+          [disabled]="disableButtons">
+          Edit Advert
+        </button>
+        <button
+          *ngIf="advert.advertStatus === 'LIVE'"
+          (click)="hideAdvert(advert.id)"
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/my-adverts']"
+          [disabled]="disableButtons">
+          Hide Advert
+        </button>
+        <button
+          *ngIf="advert.advertStatus === 'HIDDEN'"
+          (click)="showAdvert(advert.id)"
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/my-adverts']"
+          [disabled]="disableButtons">
+          Show Advert
+        </button>
+        <button
+          (click)="deleteAdvert(advert.id)"
+          type="button"
+          class="btn btn-danger"
+          [routerLink]="['/my-adverts']"
+          [disabled]="disableButtons">
+          Delete Advert
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 <!-- Create/Edit Advert Page (2)
 

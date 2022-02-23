@@ -120,7 +120,6 @@ export class CreateAdvertComponent implements OnInit {
     advert.price = this.advertForm.get('price')?.value;
     advert.advertStatus = AdvertStatus.Live;
     this.advert = advert;
-    console.log(this.advertForm.get('province')?.value);
   }
 
   submit() {
