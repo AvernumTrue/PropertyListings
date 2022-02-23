@@ -9,6 +9,8 @@ import { AdvertService } from 'src/app/services/advert.service';
 export class MyAdvertsComponent implements OnInit {
 
   adverts: Advert[] = [];
+  disableButtons = false;
+
   constructor(private advertService: AdvertService) { };
 
   ngOnInit(): void {

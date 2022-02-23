@@ -27,6 +27,10 @@ export class CreateAdvertComponent implements OnInit {
 
   provinces = provinces;
 
+  get isEditing() {
+    return this.advertId != 0;
+  }
+
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     headline: {
       required: 'Please enter a headline.',
