@@ -1,5 +1,32 @@
-<p>my-adverts works!</p>
-
+<div class="container">
+  <h1 class="text-center">My Adverts</h1>
+  <div class="container">
+  </div>
+  <div class='table-responsive'>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="text-primary" scope="col">headline</th>
+          <th class="text-primary" scope="col">province</th>
+          <th class="text-primary" scope="col">city</th>
+          <th class="text-primary" scope="col">details</th>
+          <th class="text-primary" scope="col">price</th>
+          <th class="text-primary" scope="col">status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let advert of adverts">
+          <td>{{advert.headline}}</td>
+          <td>{{advert.province}}</td>
+          <td>{{advert.city}}</td>
+          <td>{{advert.details}}</td>
+          <td>{{advert.price}}</td>
+          <td>{{advert.advertStatus}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <!-- Create/Edit Advert Page (2)
 

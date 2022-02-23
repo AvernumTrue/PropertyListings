@@ -13,7 +13,7 @@ import { UserService } from '../../services/user.service';
 export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
-  user!: User;
+  user: User;
   errorMessage: string;
   displayMessage: string;
   primaryMessage: string;
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
       case "saveSuccessMessage":
         this.primaryMessage = "";
         this.dangerMessage = "";
-        this.successMessage = "Successfully registered, navigating to My Averts page...";
+        this.successMessage = "Successfully registered, navigating to My Adverts page...";
         break;
       case "savingMessage":
         this.primaryMessage = "Registering...";

@@ -15,11 +15,11 @@ import { SubMenuComponent } from './shared/sub-menu/sub-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UserData } from './services/user-data';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { MyAdvertsComponent } from './components/my-adverts/my-adverts.component';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { CreateAdvertComponent } from './components/create-advert/create-advert.component';
+import { InMemoryDataService } from './services/data';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { CreateAdvertComponent } from './components/create-advert/create-advert.
     AppRoutingModule,
     HttpClientModule,
     routes,
-    InMemoryWebApiModule.forRoot(UserData),
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
     NgHttpLoaderModule.forRoot()
   ],
   providers: [],

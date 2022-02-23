@@ -7,7 +7,6 @@ import { User } from '../models/user.model';
 })
 
 export class UserService {
-  [x: string]: any;
   loggedInUserObservable: Observable<User | undefined>
   loggedInUserObserver: Subscriber<User | undefined>
 
@@ -85,4 +84,4 @@ export class UserService {
   setLocalStorage(user: User) {
     return localStorage.setItem('loggedInId', String(user.id))
   }
-}
+} 
