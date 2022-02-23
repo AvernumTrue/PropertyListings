@@ -1,0 +1,155 @@
+<div class="form-spacing">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+      </div>
+      <div class="col-sm">
+
+        <div class="card text-center">
+          <div class="card-body">
+            <h1 class="card-header">
+              Register
+            </h1>
+
+            <div class="container">
+              <form novalidate
+                (ngSubmit)="submit()"
+                [formGroup]="registerForm">
+
+                <div>
+                  <div class="form-group form-lable-spacing">
+                    <label class="text-primary" for="forenames">Forenames</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="forenames"
+                      placeholder="Enter Forenames"
+                      formControlName="forenames"
+                      [ngClass]="{'is-invalid': isInvalid(registerForm.get('forenames')!) }">
+                    <span class="invalid-feedback">
+                      <span>
+                        {{getErrorMessage('forenames',registerForm.get('forenames')!)}}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-group form-lable-spacing">
+                    <label class="text-primary" for="surname">Surname</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="surname"
+                      placeholder="Enter Surname"
+                      formControlName="surname"
+                      [ngClass]="{'is-invalid': isInvalid(registerForm.get('surname')!) }">
+                    <span class="invalid-feedback">
+                      <span>
+                        {{getErrorMessage('surname',registerForm.get('surname')!)}}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-group form-lable-spacing">
+                    <label class="text-primary" for="email">Email Address</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="Enter Email Address"
+                      formControlName="email"
+                      [ngClass]="{'is-invalid': isInvalid(registerForm.get('email')!) }">
+                    <span class="invalid-feedback">
+                      <span>
+                        {{getErrorMessage('email',registerForm.get('email')!)}}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-group form-lable-spacing">
+                    <label class="text-primary" for="password">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      placeholder="Enter Password"
+                      formControlName="password"
+                      [ngClass]="{'is-invalid': isInvalid(registerForm.get('password')!) }">
+                    <span class="invalid-feedback">
+                      <span>
+                        {{getErrorMessage('password',registerForm.get('password')!)}}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-group form-lable-spacing">
+                    <label class="text-primary" for="confirmPassword">Confirm Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="confirmPassword"
+                      placeholder="Enter Confirm Password"
+                      formControlName="confirmPassword"
+                      [ngClass]="{'is-invalid': isInvalid(registerForm.get('confirmPassword')!) }">
+                    <span class="invalid-feedback">
+                      <span>
+                        {{getErrorMessage('confirmPassword',registerForm.get('confirmPassword')!)}}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  (click)="submit()"
+                  type="button"
+                  class="btn btn-primary"
+                  [disabled]="disableButtons">
+                  Register
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  [routerLink]="['/login']"
+                  [disabled]="disableButtons">
+                  Login
+                </button>
+
+                <div
+                  *ngIf="primaryMessage"
+                  class="alert alert-primary"
+                  role="alert">
+                  {{primaryMessage}}
+                </div>
+                <div
+                  *ngIf="dangerMessage"
+                  class="alert alert-danger"
+                  role="alert">
+                  {{dangerMessage}}
+                </div>
+                <div
+                  *ngIf="successMessage"
+                  class="alert alert-success"
+                  role="alert">
+                  {{successMessage}}
+                </div>
+              </form>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+      </div>
+    </div>
+  </div>
+</div>

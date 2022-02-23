@@ -1,0 +1,64 @@
+<!-- Main Menu -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand">MENU</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]="['/Home']">Home</a>
+      <a class="nav-item nav-link" [routerLink]="['/sale-list']">Homes for Sale</a>
+      <a class="nav-item nav-link" [routerLink]="['/register']">Sell a House</a>
+      <a *ngIf="!authenticatedUser" class="nav-item nav-link" [routerLink]="['/login']">Login</a>
+      <a *ngIf="!authenticatedUser" class="nav-item nav-link" [routerLink]="['/register']">Register</a>
+      <a *ngIf="authenticatedUser" class="nav-item nav-link" (click)="logOut()" [routerLink]="['/home']">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Submenu for authenticatedUser -->
+<nav *ngIf="authenticatedUser && !administrator" class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand">MENU</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]="['/my-adverts']">My Adverts</a>
+      <a class="nav-item nav-link" [routerLink]="['/seller-profile']">My Profile</a>
+      <a class="nav-item nav-link" [routerLink]="['/sale-list']">Buy a House</a>
+      <a class="nav-item nav-link" [routerLink]="['/edit-advert']">Sell a house</a>
+      <a class="nav-item nav-link" [routerLink]="['/manage-account']">Manage my Account</a>
+      <a class="nav-item nav-link" [routerLink]="['/seller-profile']">My Seller Profile</a>
+      <a class="nav-item nav-link" [routerLink]="['/favourites']">Favourite Houses</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Submenu for administrator -->
+<nav *ngIf="administrator && authenticatedUser" class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand">MENU</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]="['/user-management']">User Management</a>
+      <a class="nav-item nav-link" [routerLink]="['/advert-management']">Advert Management</a>
+    </div>
+  </div>
+</nav>
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>
