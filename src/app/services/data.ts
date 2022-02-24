@@ -14,6 +14,7 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const adverts: Advert[] = [
       {
+        userId: 1,
         advertStatus: AdvertStatus.Live,
         id: 1,
         headline: 'Advert 1 Headline',
@@ -23,6 +24,7 @@ export class InMemoryDataService implements InMemoryDbService {
         price: 10000
       },
       {
+        userId: 1,
         advertStatus: AdvertStatus.Live,
         id: 2,
         headline: 'Advert 2 Headline',
@@ -32,6 +34,7 @@ export class InMemoryDataService implements InMemoryDbService {
         price: 20000
       },
       {
+        userId: 1,
         advertStatus: AdvertStatus.Live,
         id: 3,
         headline: 'Advert 3 Headline',
@@ -41,6 +44,7 @@ export class InMemoryDataService implements InMemoryDbService {
         price: 30000
       },
       {
+        userId: 1,
         advertStatus: AdvertStatus.Hidden,
         id: 4,
         headline: 'Advert 4 Headline',
@@ -50,6 +54,7 @@ export class InMemoryDataService implements InMemoryDbService {
         price: 40000
       },
       {
+        userId: 1,
         advertStatus: AdvertStatus.Deleted,
         id: 5,
         headline: 'Advert 5 Headline',
