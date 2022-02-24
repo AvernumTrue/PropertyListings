@@ -28,19 +28,9 @@ export class MyAdvertsComponent implements OnInit {
     this.getUserAdverts()
   }
 
-  // ngOnInit(): void {
-  //   this.advertService.getAdverts().subscribe({
-  //     next: adverts => {
-  //       this.adverts = adverts;
-  //     }
-  //   });
-  // }
-
   getUserAdverts() {
     this.advertService.getAdverts().subscribe({
       next: adverts => {
-        console.log(adverts)
-        // only shows adverts owned by logged in user
         this.adverts = adverts.filter(adverts => {
           return adverts.userId === Number(localStorage.getItem('loggedInId'));
         });

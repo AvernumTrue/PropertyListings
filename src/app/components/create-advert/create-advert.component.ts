@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import provinces from 'src/app/models/province-data';
 import { Advert } from 'src/app/models/advert.model';
 import { AdvertService } from 'src/app/services/advert.service';
 import { delay } from 'rxjs';
 import { AdvertStatus } from 'src/app/models/advert.status.enum';
-import { User } from 'src/app/models/user.model';
+import { Spinkit } from 'ng-http-loader';
+import { Province } from 'src/app/models/province.model';
 
 @Component({
   selector: 'pl-create-advert',
@@ -15,6 +16,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class CreateAdvertComponent implements OnInit {
 
+  spinnerStyle = Spinkit;
   advertForm: FormGroup;
   errorMessage: string;
   displayMessage: string;
@@ -22,6 +24,8 @@ export class CreateAdvertComponent implements OnInit {
   dangerMessage: string;
   successMessage: string;
   disableButtons = false;
+
+  selectedProvince: Province;
 
   advert: Advert;
   advertId: number;
@@ -52,11 +56,24 @@ export class CreateAdvertComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router,
     private advertService: AdvertService) {
+    this.advertId = Number(route.snapshot.paramMap.get('advertIndex'));
   }
 
   ngOnInit(): void {
+    if (this.advertId !== 0) {
+      this.advertService.getAdvert(this.advertId).pipe(delay(2000)).subscribe({
+        next: advert => {
+          this.advert = advert;
+          this.onProvinceChanged(this.advert.province);
+          this.createForm();
+        }, error: err => {
+          console.log(err);
+        }
+      });
+    }
     this.createForm();
   }
 
@@ -91,13 +108,17 @@ export class CreateAdvertComponent implements OnInit {
   createForm(): void {
 
     this.advertForm = this.fb.group({
-      headline: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
-      province: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      details: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
-      price: ['', [Validators.required, Validators.min(10000), Validators.max(100000000)]],
-      id: 0
+      headline: [this.advert?.headline ?? '', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+      province: [this.advert?.province ?? '', [Validators.required]],
+      city: [this.advert?.city ?? '', [Validators.required]],
+      details: [this.advert?.details ?? '', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
+      price: [this.advert?.price ?? '', [Validators.required, Validators.min(10000), Validators.max(100000000)]],
+      id: this.advert?.id ?? 0
     });
+
+    this.advertForm.get('province')?.valueChanges.subscribe(
+      (value: string) => this.onProvinceChanged(value)
+    );
   }
 
   isInvalid(c: AbstractControl): boolean {
@@ -111,6 +132,13 @@ export class CreateAdvertComponent implements OnInit {
     return this.validationMessage[controlName]?.[failedValidationTypes[0]] ?? `Validation ${failedValidationTypes[0]} failed`;
   }
 
+  onProvinceChanged(selectedProvince: string) {
+    const result = this.provinces.find((province) => {
+      return province.province === selectedProvince;
+    });
+    this.selectedProvince = result;
+  }
+
   finaliseAdvert() {
     const advert = new Advert();
     advert.id = this.advertId;
@@ -121,7 +149,6 @@ export class CreateAdvertComponent implements OnInit {
     advert.price = this.advertForm.get('price')?.value;
     advert.advertStatus = AdvertStatus.Live;
     advert.userId = Number(localStorage.getItem('loggedInId'));
-    console.log(advert.userId)
     this.advert = advert;
   }
 
@@ -129,12 +156,29 @@ export class CreateAdvertComponent implements OnInit {
     this.disableButtons = true;
     if (this.advertForm.status === 'VALID') {
       this.selectMessage("savingMessage");
-      this.addAdvert();
+      if (this.isEditing) {
+        this.editAdvert();
+      }
+      if (!this.isEditing) {
+        this.addAdvert();
+      }
     } else {
       this.disableButtons = false;
       this.selectMessage("invalidMessage");
     }
     this.advertForm.markAllAsTouched();
+  }
+
+  editAdvert() {
+    this.finaliseAdvert();
+    this.advertService.editAdvert(this.advert).pipe(delay(2000)).subscribe({
+      next: () => {
+        this.onSaveComplete();
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   addAdvert() {

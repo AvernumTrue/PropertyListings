@@ -19,7 +19,7 @@ import { UserManagementComponent } from './components/user-management/user-manag
 import { MyAdvertsComponent } from './components/my-adverts/my-adverts.component';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { CreateAdvertComponent } from './components/create-advert/create-advert.component';
-import { InMemoryDataService } from './services/data';
+import { InMemoryDataService } from './services/advert-user-data';
 
 @NgModule({
   declarations: [

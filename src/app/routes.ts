@@ -15,7 +15,7 @@ export default RouterModule.forRoot([
   { path: 'sale-list', component: SaleListComponent },
   { path: 'my-adverts', component: MyAdvertsComponent },
   { path: 'user-management', component: UserManagementComponent },
-  { path: 'create-advert', component: CreateAdvertComponent, canDeactivate: [CreateAdvertGuard] },
+  { path: 'create-advert/:advertIndex', component: CreateAdvertComponent, canDeactivate: [CreateAdvertGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ])

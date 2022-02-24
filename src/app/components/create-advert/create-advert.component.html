@@ -43,18 +43,16 @@
                 <div class="form-group form-lable-spacing">
                   <label class="text-primary" for="province">Province</label>
                   <select
-                    type="select"
+                    type="option"
                     class="form-control"
                     id="province"
-                    placeholder="Select Province"
                     formControlName="province"
                     [ngClass]="{'is-invalid': isInvalid(advertForm.get('province')!) }">
-
                     <option value="" disabled>Please choose a province</option>
-
-                    <option *ngFor="let province of provinces" [value]="province.province">{{province.province}}
+                    <option
+                      *ngFor="let province of provinces"
+                      [value]="province.province">{{province.province}}
                     </option>
-
                   </select>
                 </div>
 
@@ -64,15 +62,16 @@
                 <div class="form-group form-lable-spacing">
                   <label class="text-primary" for="city">City</label>
                   <select
-                    type="select"
+                    type="option"
                     class="form-control"
                     id="city"
-                    placeholder="Select City"
                     formControlName="city"
                     [ngClass]="{'is-invalid': isInvalid(advertForm.get('city')!) }">
 
                     <option value="" disabled>Please choose a city</option>
-                    <option *ngFor="let city of provinces[1].cities" [value]="city">{{city}}</option>
+                    <option
+                      *ngFor="let city of (selectedProvince?.cities ?? [])"
+                      [value]="city">{{city}}</option>
 
                   </select>
                 </div>
