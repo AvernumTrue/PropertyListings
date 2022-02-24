@@ -6,6 +6,7 @@ import { Advert } from 'src/app/models/advert.model';
 import { AdvertService } from 'src/app/services/advert.service';
 import { delay } from 'rxjs';
 import { AdvertStatus } from 'src/app/models/advert.status.enum';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'pl-create-advert',
@@ -119,6 +120,8 @@ export class CreateAdvertComponent implements OnInit {
     advert.details = this.advertForm.get('details')?.value;
     advert.price = this.advertForm.get('price')?.value;
     advert.advertStatus = AdvertStatus.Live;
+    advert.userId = Number(localStorage.getItem('loggedInId'));
+    console.log(advert.userId)
     this.advert = advert;
   }
 

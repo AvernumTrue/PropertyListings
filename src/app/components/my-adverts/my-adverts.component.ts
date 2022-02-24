@@ -18,16 +18,28 @@ export class MyAdvertsComponent implements OnInit {
   ngOnInit(): void {
     this.advertService.getAdverts().subscribe({
       next: adverts => {
+        console.log(adverts)
+        this.adverts = adverts.filter(adverts => {
+          return adverts.userId === Number(localStorage.getItem('loggedInId'));
+        });
 
         // shows all adverts, DELETED included
         // this.adverts = adverts;
-        this.adverts = adverts.filter(adverts => {
+
+        this.adverts = this.adverts.filter(adverts => {
           return adverts.advertStatus !== "DELETED";
         });
-
       }
     });
   }
+
+  // ngOnInit(): void {
+  //   this.advertService.getAdverts().subscribe({
+  //     next: adverts => {
+  //       this.adverts = adverts;
+  //     }
+  //   });
+  // }
 
   hideAdvert(id: number) {
     this.advertService.getAdvert(id).subscribe({

@@ -63,6 +63,58 @@ export class InMemoryDataService implements InMemoryDbService {
         details: 'advert details 5',
         price: 50000
       },
+
+      {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 6,
+        headline: 'Advert 6 Headline',
+        province: 'test Province 6',
+        city: 'test city 6',
+        details: 'advert details 6',
+        price: 10000
+      },
+      {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 7,
+        headline: 'Advert 7 Headline',
+        province: 'test Province 7',
+        city: 'test city 7',
+        details: 'advert details 7',
+        price: 20000
+      },
+      {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 8,
+        headline: 'Advert 8 Headline',
+        province: 'test Province 8',
+        city: 'test city 8',
+        details: 'advert details 8',
+        price: 30000
+      },
+      {
+        userId: 2,
+        advertStatus: AdvertStatus.Hidden,
+        id: 9,
+        headline: 'Advert 9 Headline',
+        province: 'test Province 9',
+        city: 'test city 9',
+        details: 'advert details 9',
+        price: 40000
+      },
+      {
+        userId: 2,
+        advertStatus: AdvertStatus.Deleted,
+        id: 10,
+        headline: 'Advert 10 Headline',
+        province: 'test Province 10',
+        city: 'test city 10',
+        details: 'advert details 10',
+        price: 50000
+      },
+
     ];
     {
       const users: User[] = [
@@ -72,7 +124,7 @@ export class InMemoryDataService implements InMemoryDbService {
           surname: 'Surname 1',
           email: '1@1.com',
           password: 'password1',
-          isAdmin: true,
+          isAdmin: false,
         },
         {
           id: 2,
@@ -97,6 +149,14 @@ export class InMemoryDataService implements InMemoryDbService {
           email: '4@4.com',
           password: 'password4',
           isAdmin: false,
+        },
+        {
+          id: 5,
+          forenames: 'admin',
+          surname: 'admin',
+          email: 'admin@admin',
+          password: 'asdfasdf',
+          isAdmin: true,
         },
       ]
       return { adverts, users };
