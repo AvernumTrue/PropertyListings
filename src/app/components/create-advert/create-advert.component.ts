@@ -17,6 +17,7 @@ import { ProvinceService } from 'src/app/services/province.service';
 export class CreateAdvertComponent implements OnInit {
 
   spinnerStyle = Spinkit;
+  loading = true;
   advertForm: FormGroup;
   errorMessage: string;
   displayMessage: string;
@@ -69,9 +70,8 @@ export class CreateAdvertComponent implements OnInit {
 
     this.provinceService.getProvinces().pipe(delay(2000)).subscribe({
       next: provinces => {
-        console.log(provinces)
         this.provinces = provinces;
-        console.log(provinces)
+        this.loading = false;
       }, error: (err: any) => {
         console.log(err);
       }
@@ -83,6 +83,7 @@ export class CreateAdvertComponent implements OnInit {
           this.advert = advert;
           this.onProvinceChanged(this.advert.province);
           this.createForm();
+          this.loading = false;
         }, error: err => {
           console.log(err);
         }

@@ -5,113 +5,107 @@
 <div *ngFor="let advert of adverts">
   <div class="card container jumbotron">
 
-    <div>
-
-      <div class="row">
-        <div class="col">
-
-          <div
+    <div class="row">
+      <div class="col">
+        <div
+          role="alert">
+          <div *ngIf="advert.advertStatus === 'LIVE'"
+            class="alert alert-success">
+            <h4 class="text-center">Status: {{advert.advertStatus}}</h4>
+          </div>
+          <div *ngIf="advert.advertStatus === 'HIDDEN'"
+            class="alert alert-danger"
             role="alert">
-            <div *ngIf="advert.advertStatus === 'LIVE'"
-              class="alert alert-success">
-              <h4 class="text-center">Status: {{advert.advertStatus}}</h4>
+            <h4 class="text-center">Status: {{advert.advertStatus}}</h4>
+          </div>
+        </div>
+
+      </div>
+      <div class="col col-lg-8">
+      </div>
+
+      <div class="col col-lg-2 d-flex flex-row-reverse">
+        <div class="justify-content-right">
+          <button
+            *ngIf="advert.id === selectedAdvert"
+            type="button"
+            class="btn btn-primary"
+            (click)="showActions(0)"
+            [disabled]="disableAction">
+            Cancel
+          </button>
+
+          <button
+            *ngIf="advert.id !== selectedAdvert"
+            type="button"
+            class="btn btn-primary"
+            (click)="showActions(advert.id)"
+            [disabled]="disableAction">
+            Actions
+          </button>
+
+          <div *ngIf="advert.id === selectedAdvert">
+
+            <div *ngIf="!busyDeleting">
+              <button
+                type="button"
+                class="btn btn-primary"
+                [routerLink]="['/create-advert', advert.id]"
+                [disabled]="disableButtons">
+                Edit Advert
+              </button>
+              <button
+                *ngIf="advert.advertStatus === 'LIVE'"
+                (click)="changeAdvertStatus(advert,'hide')"
+                type="button"
+                class="btn btn-primary"
+                [disabled]="disableButtons">
+                Hide Advert
+              </button>
+              <button
+                *ngIf="advert.advertStatus === 'HIDDEN'"
+                (click)="changeAdvertStatus(advert,'show')"
+                type="button"
+                class="btn btn-primary"
+                [disabled]="disableButtons">
+                Show Advert
+              </button>
             </div>
-            <div *ngIf="advert.advertStatus === 'HIDDEN'"
+
+            <button
+              *ngIf="!busyDeleting"
+              (click)="deleteAdvert()"
+              type="button"
+              class="btn btn-danger"
+              [disabled]="disableButtons">
+              Delete Advert
+            </button>
+
+            <div *ngIf="busyDeleting"
               class="alert alert-danger"
               role="alert">
-              <h4 class="text-center">Status: {{advert.advertStatus}}</h4>
-            </div>
-          </div>
-
-        </div>
-        <div class="col col-lg-8">
-        </div>
-
-        <div class="col col-lg-2 d-flex flex-row-reverse">
-          <div class="justify-content-right">
-            <button
-              *ngIf="advert.id === selectedAdvert"
-              type="button"
-              class="btn btn-primary"
-              (click)="showActions(0)"
-              [disabled]="disableAction">
-              Cancel
-            </button>
-
-            <button
-              *ngIf="advert.id !== selectedAdvert"
-              type="button"
-              class="btn btn-primary"
-              (click)="showActions(advert.id)"
-              [disabled]="disableAction">
-              Actions
-            </button>
-
-            <div *ngIf="displayActions && advert.id === selectedAdvert">
-
-              <div *ngIf="!busyDeleting">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  [routerLink]="['/create-advert', advert.id]"
-                  [disabled]="disableButtons">
-                  Edit Advert
-                </button>
-                <button
-                  *ngIf="advert.advertStatus === 'LIVE'"
-                  (click)="hideAdvert(advert.id)"
-                  type="button"
-                  class="btn btn-primary"
-                  [disabled]="disableButtons">
-                  Hide Advert
-                </button>
-                <button
-                  *ngIf="advert.advertStatus === 'HIDDEN'"
-                  (click)="showAdvert(advert.id)"
-                  type="button"
-                  class="btn btn-primary"
-                  [disabled]="disableButtons">
-                  Show Advert
-                </button>
-              </div>
-
+              {{dangerMessage}}
               <button
-                *ngIf="!busyDeleting"
-                (click)="deleteAdvert()"
+                (click)="deleteConfirmed(advert.id)"
                 type="button"
                 class="btn btn-danger"
                 [disabled]="disableButtons">
-                Delete Advert
+                Yes, delete it
               </button>
-
-              <div *ngIf="busyDeleting"
-                class="alert alert-danger"
-                role="alert">
-                {{dangerMessage}}
-                <button
-                  (click)="deleteConfirmed(advert.id)"
-                  type="button"
-                  class="btn btn-danger"
-                  [disabled]="disableButtons">
-                  Yes, delete it
-                </button>
-                <button
-                  (click)="cancel()"
-                  type="button"
-                  class="btn btn-success"
-                  [disabled]="disableButtons">
-                  Cancel
-                </button>
-              </div>
+              <button
+                (click)="cancel()"
+                type="button"
+                class="btn btn-success"
+                [disabled]="disableButtons">
+                Cancel
+              </button>
             </div>
           </div>
         </div>
-
-        <div class="col col-lg-2">
-        </div>
       </div>
 
-
+      <div class="col col-lg-2">
+      </div>
     </div>
 
     <h1 class="display-4">{{advert.headline}}</h1>
@@ -122,10 +116,19 @@
       <li class="list-group-item">City: {{advert.city}}</li>
       <li class="list-group-item">Price: R{{advert.price}}</li>
     </ul>
-
-
   </div>
 </div>
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>
 
 <!-- <div class="row">
   <div *ngFor="let advert of adverts" class="col-3">

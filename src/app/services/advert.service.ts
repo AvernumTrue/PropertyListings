@@ -22,11 +22,6 @@ export class AdvertService {
     return this.http.get<Advert[]>(this.advertUrl);
   }
 
-  // TODO : implement this
-  // getMyAdverts(): Observable<Advert[]> {
-  //   return this.http.get<Advert[]>(this.advertUrl);
-  // }
-
   editAdvert(advert: Advert): Observable<Advert> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put<Advert>(`${this.advertUrl}`, advert, { headers });

@@ -149,6 +149,16 @@
   </div>
 </div>
 
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>
 
 <!-- Create/Edit Advert Page (2)
 
@@ -182,7 +192,7 @@ APPENDIX A: ADVERT STATES
 delete’ data. You don’t really delete it (for a lot of reasons), but from the system’s point of
 view the data is deleted. Tricky thing to get right.
 
-TODO : APPENDIX B: PROVINCE AND CITY DATA
+APPENDIX B: PROVINCE AND CITY DATA
 These values should be returned by the API, NOT hard coded in the front end. That way you can easily
 update the data without changing the front-end. In the beginning you’ll hard code it until your API is
 up and running, but then I want it in the API -->
