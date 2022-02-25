@@ -3,21 +3,26 @@ import { Router } from '@angular/router';
 import { Advert } from 'src/app/models/advert.model';
 import { AdvertStatus } from 'src/app/models/advert.status.enum';
 import { AdvertService } from 'src/app/services/advert.service';
+import { Spinkit } from 'ng-http-loader';
+import { delay } from 'rxjs';
+
 @Component({
   selector: 'pl-my-adverts',
   templateUrl: './my-adverts.component.html',
   styleUrls: ['./my-adverts.component.css']
 })
+
 export class MyAdvertsComponent implements OnInit {
 
+  spinnerStyle = Spinkit;
   adverts: Advert[] = [];
   advert: Advert;
   disableButtons = false;
   disableAction = false;
-  displayActions = false;
   selectedAdvert: number;
   dangerMessage = "Are you sure you want to delete this Advert?";
   busyDeleting = false;
+  loading = true;
 
   constructor(
     private advertService: AdvertService,
@@ -25,21 +30,18 @@ export class MyAdvertsComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.getUserAdverts()
-  }
-
-  onChange(deviceValue: any) {
-    console.log(deviceValue);
+    this.loading = true;
+    this.getUserAdverts();
   }
 
   getUserAdverts() {
-    this.advertService.getAdverts().subscribe({
+    this.advertService.getAdverts().pipe(delay(2000)).subscribe({
       next: adverts => {
         this.adverts = adverts.filter(adverts => {
           return adverts.userId === Number(localStorage.getItem('loggedInId'));
         });
-
         this.adverts = this.adverts.filter(adverts => {
+          this.loading = false;
           return adverts.advertStatus !== "DELETED";
         });
       }
@@ -49,49 +51,39 @@ export class MyAdvertsComponent implements OnInit {
   }
 
   showActions(advertId: number) {
-    console.log('worked')
-    this.selectedAdvert = advertId
-    this.displayActions = true
+    this.selectedAdvert = advertId;
   };
 
-  hideAdvert(id: number) {
-    this.advertService.getAdvert(id).subscribe({
-      next: advert => {
-        this.advert = advert;
-        this.advert.advertStatus = AdvertStatus.Hidden;
-        this.advertService.editAdvert(this.advert).subscribe();
-        this.getUserAdverts()
-      }
-    });
-  }
-
-  showAdvert(id: number) {
-    this.advertService.getAdvert(id).subscribe({
-      next: advert => {
-        this.advert = advert;
-        this.advert.advertStatus = AdvertStatus.Live;
-        this.advertService.editAdvert(this.advert).subscribe();
-        this.getUserAdverts()
-      }
-    });
+  changeAdvertStatus(advert: Advert, change: string) {
+    this.loading = true;
+    this.advert = advert;
+    if (change === 'hide') {
+      this.advert.advertStatus = AdvertStatus.Hidden;
+    } else {
+      this.advert.advertStatus = AdvertStatus.Live;
+    }
+    this.advertService.editAdvert(this.advert).pipe(delay(2000)).subscribe();
+    this.getUserAdverts();
   }
 
   deleteAdvert() {
     this.busyDeleting = true;
     this.disableAction = true;
   }
-
   cancel() {
     this.busyDeleting = false;
     this.disableAction = false;
   }
 
   deleteConfirmed(id: number) {
-    this.advertService.getAdvert(id).subscribe({
+    this.loading = true;
+    this.advertService.getAdvert(id).pipe(delay(2000)).subscribe({
       next: advert => {
+        this.loading = false;
         this.advert = advert;
         this.advert.advertStatus = AdvertStatus.Deleted;
-        this.advertService.editAdvert(this.advert).subscribe();
+        this.advertService.editAdvert(this.advert).pipe(delay(2000)).subscribe();
+        this.loading = false;
         this.getUserAdverts()
       }
     });
