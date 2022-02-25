@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { InMemoryDbService } from "angular-in-memory-web-api";
 import { Advert } from "../models/advert.model";
 import { AdvertStatus } from "../models/advert.status.enum";
+import { Province } from "../models/province.model";
 import { User } from "../models/user.model";
 
 @Injectable({
@@ -114,7 +115,6 @@ export class InMemoryDataService implements InMemoryDbService {
         details: 'advert details 10',
         price: 50000
       },
-
     ];
     {
       const users: User[] = [
@@ -158,8 +158,26 @@ export class InMemoryDataService implements InMemoryDbService {
           password: 'asdfasdf',
           isAdmin: true,
         },
-      ]
-      return { adverts, users };
+      ];
+      const provinces: Province[] = [
+        {
+          province: 'Province 1',
+          cities: ['City 11', 'City 12', 'City 13', 'City 14']
+        },
+        {
+          province: 'Province 2',
+          cities: ['City 21', 'City 22', 'City 23', 'City 24']
+        },
+        {
+          province: 'Province 3',
+          cities: ['City 31', 'City 32', 'City 33', 'City 34']
+        },
+        {
+          province: 'Province 4',
+          cities: ['City 41', 'City 42', 'City 43', 'City 44']
+        },
+      ];
+      return { adverts, users, provinces };
     }
   }
 }

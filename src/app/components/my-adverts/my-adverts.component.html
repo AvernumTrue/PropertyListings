@@ -18,22 +18,71 @@
 
       <div class="card-body">
 
-        <button
-          *ngIf="advert.id === selectedAdvert"
-          type="button"
-          class="btn btn-primary"
-          (click)="showActions(0)"
-          [disabled]="disableAction">
-          Cancel
-        </button>
-        <button
-          *ngIf="advert.id !== selectedAdvert"
-          type="button"
-          class="btn btn-primary"
-          (click)="showActions(advert.id)"
-          [disabled]="disableAction">
-          Actions
-        </button>
+        <!-- <div class="form-group form-lable-spacing">
+          <select
+            (change)="onChange($event)"
+            type="option"
+            class="form-control">
+
+            <option
+              selected
+              disabled>
+              Actions
+            </option>
+
+            <option
+              [routerLink]="['/create-advert', advert.id]"
+              *ngIf="!busyDeleting">
+              Edit Advert
+            </option>
+
+            <option
+              *ngIf="advert.advertStatus === 'LIVE'">
+              Hide Advert
+            </option>
+
+            <option
+              *ngIf="advert.advertStatus === 'HIDDEN'">
+              Show Advert
+            </option>
+
+            <option
+              *ngIf="!busyDeleting">
+              Delete Advert
+            </option>
+
+            <div *ngIf="busyDeleting">
+              <option>
+                Yes, delete it
+              </option>
+
+              <option>
+                Cancel
+              </option>
+            </div>
+
+          </select>
+        </div> -->
+
+        <div>
+          <button
+            *ngIf="advert.id === selectedAdvert"
+            type="button"
+            class="btn btn-primary"
+            (click)="showActions(0)"
+            [disabled]="disableAction">
+            Cancel
+          </button>
+
+          <button
+            *ngIf="advert.id !== selectedAdvert"
+            type="button"
+            class="btn btn-primary"
+            (click)="showActions(advert.id)"
+            [disabled]="disableAction">
+            Actions
+          </button>
+        </div>
 
         <div *ngIf="displayActions && advert.id === selectedAdvert">
 

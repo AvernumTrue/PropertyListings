@@ -28,6 +28,10 @@ export class MyAdvertsComponent implements OnInit {
     this.getUserAdverts()
   }
 
+  onChange(deviceValue: any) {
+    console.log(deviceValue);
+  }
+
   getUserAdverts() {
     this.advertService.getAdverts().subscribe({
       next: adverts => {
@@ -45,6 +49,7 @@ export class MyAdvertsComponent implements OnInit {
   }
 
   showActions(advertId: number) {
+    console.log('worked')
     this.selectedAdvert = advertId
     this.displayActions = true
   };

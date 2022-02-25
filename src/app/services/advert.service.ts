@@ -22,6 +22,7 @@ export class AdvertService {
     return this.http.get<Advert[]>(this.advertUrl);
   }
 
+  // TODO : implement this
   // getMyAdverts(): Observable<Advert[]> {
   //   return this.http.get<Advert[]>(this.advertUrl);
   // }
@@ -36,10 +37,5 @@ export class AdvertService {
     advert.id = null as any;
     return this.http.post<Advert>(`${this.advertUrl}`, advert, { headers });
   }
-
-  // Unused
-  // deleteAdvert(id: number): Observable<Advert> {
-  //   return this.http.delete<Advert>(`${this.advertUrl}/${id}`);
-  // }
 
 } 

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import provinces from 'src/app/models/province-data';
 import { Advert } from 'src/app/models/advert.model';
 import { AdvertService } from 'src/app/services/advert.service';
 import { delay } from 'rxjs';
 import { AdvertStatus } from 'src/app/models/advert.status.enum';
 import { Spinkit } from 'ng-http-loader';
 import { Province } from 'src/app/models/province.model';
+import { ProvinceService } from 'src/app/services/province.service';
 
 @Component({
   selector: 'pl-create-advert',
@@ -24,13 +24,15 @@ export class CreateAdvertComponent implements OnInit {
   dangerMessage: string;
   successMessage: string;
   disableButtons = false;
-
+  provinces: Province[];
   selectedProvince: Province;
 
   advert: Advert;
   advertId: number;
 
-  provinces = provinces;
+  user: any;
+  filteredSalaries: any;
+  getSalariesErrorMessage: boolean;
 
   get isEditing() {
     return this.advertId != 0;
@@ -58,11 +60,23 @@ export class CreateAdvertComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private provinceService: ProvinceService,
     private advertService: AdvertService) {
     this.advertId = Number(route.snapshot.paramMap.get('advertIndex'));
   }
 
   ngOnInit(): void {
+
+    this.provinceService.getProvinces().pipe(delay(2000)).subscribe({
+      next: provinces => {
+        console.log(provinces)
+        this.provinces = provinces;
+        console.log(provinces)
+      }, error: (err: any) => {
+        console.log(err);
+      }
+    });
+
     if (this.advertId !== 0) {
       this.advertService.getAdvert(this.advertId).pipe(delay(2000)).subscribe({
         next: advert => {
@@ -86,16 +100,16 @@ export class CreateAdvertComponent implements OnInit {
         break;
       case "saveErrorMessage":
         this.primaryMessage = "";
-        this.dangerMessage = "There was an error publishing the advert.";
+        this.dangerMessage = "There was an error saving the advert.";
         this.successMessage = "";
         break;
       case "saveSuccessMessage":
         this.primaryMessage = "";
         this.dangerMessage = "";
-        this.successMessage = "Successfully published, navigating to My Adverts page...";
+        this.successMessage = "Advert saved, navigating to My Adverts page...";
         break;
       case "savingMessage":
-        this.primaryMessage = "Publishing...";
+        this.primaryMessage = "Saving...";
         this.dangerMessage = "";
         this.successMessage = "";
         break;
