@@ -1,11 +1,22 @@
 button {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  margin: 10px;
 }
 
 .test {
   background-color: rgb(27, 134, 170);
+}
+
+.alert{
+  margin-top: 10px;
+  padding: 1px;
+}
+
+.jumbotron{
+  margin-bottom: 20px;
+}
+
+h1{
+  margin: 15px;
 }
 
 /* .card {

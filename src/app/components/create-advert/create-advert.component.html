@@ -1,160 +1,154 @@
 <div class="form-spacing">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm">
-      </div>
-      <div class="col-sm">
+      <div class="card text-center">
+        <h1 class="card-header">
+          {{isEditing ? 'Edit Advert' : 'Create Advert'}}
+        </h1>
+        <div class="container">
+          <form novalidate
+            (ngSubmit)="submit()"
+            [formGroup]="advertForm">
 
-        <div class="card text-center">
-          <div class="card-body">
-            <h1 class="card-header">
-              {{isEditing ? 'Edit Advert' : 'Create Advert'}}
-            </h1>
-
-            <div class="container">
-              <form novalidate
-                (ngSubmit)="submit()"
-                [formGroup]="advertForm">
-
-                <!-- Advert Headline Text -->
-                <div>
-                  <div class="form-group form-lable-spacing">
-                    <label class="text-primary" for="headline">Advert Headline</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="headline"
-                      placeholder="Enter Headline"
-                      formControlName="headline"
-                      [ngClass]="{'is-invalid': isInvalid(advertForm.get('headline')!) }">
-                    <span class="invalid-feedback">
-                      <span>
-                        {{getErrorMessage('headline',advertForm.get('headline')!)}}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-
-                <!-- Province -->
-                <div class="form-group form-lable-spacing">
-                  <label class="text-primary" for="province">Province</label>
-                  <select
-                    type="option"
-                    class="form-control"
-                    id="province"
-                    formControlName="province"
-                    [ngClass]="{'is-invalid': isInvalid(advertForm.get('province')!) }">
-                    <option value="" disabled>Please choose a province</option>
-                    <option
-                      *ngFor="let province of provinces"
-                      [value]="province.province">{{province.province}}
-                    </option>
-                  </select>
-                </div>
-
-                <!-- City: -->
-                <div class="form-group form-lable-spacing">
-                  <label class="text-primary" for="city">City</label>
-                  <select
-                    type="option"
-                    class="form-control"
-                    id="city"
-                    formControlName="city"
-                    [ngClass]="{'is-invalid': isInvalid(advertForm.get('city')!) }">
-
-                    <option value="" disabled>Please choose a city</option>
-                    <option
-                      *ngFor="let city of (selectedProvince?.cities ?? [])"
-                      [value]="city">{{city}}</option>
-
-                  </select>
-                </div>
-
-                <!-- Advert Details:  -->
-                <div>
-                  <div class="form-group form-lable-spacing">
-                    <label class="text-primary" for="details">Advert Details</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="details"
-                      placeholder="Enter Details"
-                      formControlName="details"
-                      [ngClass]="{'is-invalid': isInvalid(advertForm.get('details')!) }">
-                    <span class="invalid-feedback">
-                      <span>
-                        {{getErrorMessage('details',advertForm.get('details')!)}}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-
-                <!-- Price: -->
-                <div>
-                  <div class="form-group form-lable-spacing">
-                    <label class="text-primary" for="price">Price</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="price"
-                      placeholder="Enter Price"
-                      formControlName="price"
-                      [ngClass]="{'is-invalid': isInvalid(advertForm.get('price')!) }">
-                    <span class="invalid-feedback">
-                      <span>
-                        {{getErrorMessage('price',advertForm.get('price')!)}}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-
-                <button
-                  (click)="submit()"
-                  type="button"
-                  class="btn btn-primary"
-                  [disabled]="disableButtons">
-                  Save Advert
-                </button>
-
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  [routerLink]="['/my-adverts']"
-                  [disabled]="disableButtons">
-                  Cancel
-                </button>
-
-                <div
-                  *ngIf="primaryMessage"
-                  class="alert alert-primary"
-                  role="alert">
-                  {{primaryMessage}}
-                </div>
-                <div
-                  *ngIf="dangerMessage"
-                  class="alert alert-danger"
-                  role="alert">
-                  {{dangerMessage}}
-                </div>
-                <div
-                  *ngIf="successMessage"
-                  class="alert alert-success"
-                  role="alert">
-                  {{successMessage}}
-                </div>
-
-              </form>
+            <!-- Advert Headline Text -->
+            <div>
+              <div class="form-group form-lable-spacing">
+                <label class="text-primary" for="headline">Advert Headline</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="headline"
+                  placeholder="Enter Headline"
+                  formControlName="headline"
+                  [ngClass]="{'is-invalid': isInvalid(advertForm.get('headline')!) }">
+                <span class="invalid-feedback">
+                  <span>
+                    {{getErrorMessage('headline',advertForm.get('headline')!)}}
+                  </span>
+                </span>
+              </div>
             </div>
 
-          </div>
+            <!-- Province -->
+            <div class="form-group form-lable-spacing">
+              <label class="text-primary" for="province">Province</label>
+              <select
+                type="option"
+                class="form-control"
+                id="province"
+                formControlName="province"
+                [ngClass]="{'is-invalid': isInvalid(advertForm.get('province')!) }">
+                <option value="" disabled>Please choose a province</option>
+                <option
+                  *ngFor="let province of provinces"
+                  [value]="province.province">{{province.province}}
+                </option>
+              </select>
+            </div>
+
+            <!-- City: -->
+            <div class="form-group form-lable-spacing">
+              <label class="text-primary" for="city">City</label>
+              <select
+                type="option"
+                class="form-control"
+                id="city"
+                formControlName="city"
+                [ngClass]="{'is-invalid': isInvalid(advertForm.get('city')!) }">
+
+                <option value="" disabled>Please choose a city</option>
+                <option
+                  *ngFor="let city of (selectedProvince?.cities ?? [])"
+                  [value]="city">{{city}}</option>
+
+              </select>
+            </div>
+
+            <!-- Advert Details:  -->
+            <div>
+              <div class="form-group form-lable-spacing">
+                <label class="text-primary" for="details">Advert Details</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="details"
+                  placeholder="Enter Details"
+                  formControlName="details"
+                  [ngClass]="{'is-invalid': isInvalid(advertForm.get('details')!) }">
+                <span class="invalid-feedback">
+                  <span>
+                    {{getErrorMessage('details',advertForm.get('details')!)}}
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Price: -->
+            <div>
+              <div class="form-group form-lable-spacing">
+                <label class="text-primary" for="price">Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="price"
+                  placeholder="Enter Price"
+                  formControlName="price"
+                  [ngClass]="{'is-invalid': isInvalid(advertForm.get('price')!) }">
+                <span class="invalid-feedback">
+                  <span>
+                    {{getErrorMessage('price',advertForm.get('price')!)}}
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <button
+              (click)="submit()"
+              type="button"
+              class="btn btn-primary"
+              [disabled]="disableButtons">
+              Save Advert
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              [routerLink]="['/my-adverts']"
+              [disabled]="disableButtons">
+              Cancel
+            </button>
+
+            <div
+              *ngIf="primaryMessage"
+              class="alert alert-primary"
+              role="alert">
+              {{primaryMessage}}
+            </div>
+            <div
+              *ngIf="dangerMessage"
+              class="alert alert-danger"
+              role="alert">
+              {{dangerMessage}}
+            </div>
+            <div
+              *ngIf="successMessage"
+              class="alert alert-success"
+              role="alert">
+              {{successMessage}}
+            </div>
+
+          </form>
         </div>
       </div>
-      <div class="col-sm">
-      </div>
+    </div>
+    <div class="col-sm">
     </div>
   </div>
 </div>
+
 
 <!-- Create/Edit Advert Page (2)
 
