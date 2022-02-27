@@ -50,7 +50,7 @@ export class MyAdvertsComponent implements OnInit {
     this.busyDeleting = false;
   }
 
-  showActions(advertId: number) {
+  advertActions(advertId: number) {
     this.selectedAdvert = advertId;
   };
 
