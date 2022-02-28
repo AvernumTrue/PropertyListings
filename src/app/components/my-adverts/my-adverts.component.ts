@@ -25,6 +25,7 @@ export class MyAdvertsComponent implements OnInit {
   loading: boolean;
   noticicationMessage: string;
   selectedAdvertHeadline: string;
+  userHasAdverts: boolean;
 
   constructor(
     private advertService: AdvertService,
@@ -40,13 +41,16 @@ export class MyAdvertsComponent implements OnInit {
     this.advertService.getAdverts().pipe(delay(2000)).subscribe({
       next: adverts => {
         this.adverts = adverts.filter(adverts => {
-
           return adverts.userId === Number(localStorage.getItem('loggedInId'));
         });
         this.adverts = this.adverts.filter(adverts => {
           this.loading = false;
           return adverts.advertStatus !== "DELETED";
         });
+        if (!this.adverts[0]) {
+          this.loading = false;
+          this.userHasAdverts = false;
+        }
       }
     });
     this.disableAction = false;

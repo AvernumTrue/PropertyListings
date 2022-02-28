@@ -1,5 +1,18 @@
-<div class="container">
-  <h1 class="text-center">My Adverts</h1>
+<h1 class="text-center">My Adverts</h1>
+<div *ngIf="!adverts[0] && !loading">
+  <h2 class="text-center">You currently have no adverts</h2>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <button
+          class="btn btn-outline-primary col-12"
+          [routerLink]="['/create-advert', 0]">
+          Click here to create an advert
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="container">
@@ -37,9 +50,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 <div *ngFor="let advert of adverts">
   <div class="card container jumbotron">
