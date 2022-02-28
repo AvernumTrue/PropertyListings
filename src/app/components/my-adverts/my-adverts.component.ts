@@ -38,23 +38,15 @@ export class MyAdvertsComponent implements OnInit {
   }
 
   getUserAdverts() {
-    this.advertService.getAdverts().pipe(delay(2000)).subscribe({
+    this.advertService.getAdvertsByUserId(Number(localStorage.getItem('loggedInId'))).subscribe({
       next: adverts => {
-        this.adverts = adverts.filter(adverts => {
-          return adverts.userId === Number(localStorage.getItem('loggedInId'));
-        });
-        this.adverts = this.adverts.filter(adverts => {
-          this.loading = false;
-          return adverts.advertStatus !== "DELETED";
-        });
+        this.adverts = adverts;
+        this.loading = false;
         if (!this.adverts[0]) {
-          this.loading = false;
           this.userHasAdverts = false;
         }
       }
     });
-    this.disableAction = false;
-    this.busyDeleting = false;
   }
 
   advertActions(advertId: number) {
@@ -73,7 +65,7 @@ export class MyAdvertsComponent implements OnInit {
       this.selectedAdvertHeadline = advert.headline;
     }
     this.loading = true;
-    this.advertService.editAdvert(this.advert).pipe(delay(2000)).subscribe();
+    this.advertService.editAdvert(this.advert).subscribe();
     this.getUserAdverts();
   }
 
@@ -88,11 +80,13 @@ export class MyAdvertsComponent implements OnInit {
 
   deleteConfirmed(advert: Advert) {
     this.loading = true;
-    this.advertService.getAdvert(advert.id).pipe(delay(2000)).subscribe({
+    this.advertService.getAdvert(advert.id).subscribe({
       next: advert => {
+        this.disableAction = false;
+        this.busyDeleting = false;
         this.advert = advert;
         this.advert.advertStatus = AdvertStatus.Deleted;
-        this.advertService.editAdvert(this.advert).pipe(delay(2000)).subscribe();
+        this.advertService.editAdvert(this.advert).subscribe();
         this.noticicationMessage = "DELETED"
         this.selectedAdvertHeadline = advert.headline;
         this.getUserAdverts()

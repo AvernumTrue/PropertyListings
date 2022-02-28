@@ -109,7 +109,7 @@
 
                   <div *ngIf="advert.id === selectedAdvert">
 
-                    <div *ngIf="!busyDeleting">
+                    <div>
                       <li>
                         <button
                           class="dropdown-item"
@@ -139,7 +139,6 @@
 
                     <li><button
                         class="dropdown-item"
-                        *ngIf="!busyDeleting"
                         (click)="deleteAdvert()">
                         Delete Advert
                       </button></li>

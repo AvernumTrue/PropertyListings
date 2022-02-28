@@ -82,9 +82,9 @@ export class LoginComponent implements OnInit {
   tryLogin() {
     this.selectMessage("loggingInMessage");
 
-    this.userService.login(this.loginForm.get('email').value, this.loginForm.get('password').value).pipe(delay(2000)).subscribe({
+    this.userService.login(this.loginForm.get('email').value, this.loginForm.get('password').value).subscribe({
       next: () => {
-        this.userService.getUser(Number(localStorage.getItem('loggedInId'))).pipe(delay(2000)).subscribe({
+        this.userService.getUser(Number(localStorage.getItem('loggedInId'))).subscribe({
           next: async user => {
             this.user = user;
             if (this.user.isAdmin === false) {

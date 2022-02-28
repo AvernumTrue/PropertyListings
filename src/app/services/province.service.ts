@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { delay, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Province } from '../models/province.model';
 
@@ -15,6 +15,6 @@ export class ProvinceService {
   };
 
   getProvinces(): Observable<Province[]> {
-    return this.http.get<Province[]>(this.provinceUrl);
+    return this.http.get<Province[]>(this.provinceUrl).pipe(delay(2000));
   }
 } 

@@ -70,7 +70,7 @@ export class CreateAdvertComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.provinceService.getProvinces().pipe(delay(2000)).subscribe({
+    this.provinceService.getProvinces().subscribe({
       next: provinces => {
         this.provinces = provinces;
         this.loading = false;
@@ -80,7 +80,7 @@ export class CreateAdvertComponent implements OnInit {
     });
 
     if (this.advertId !== 0) {
-      this.advertService.getAdvert(this.advertId).pipe(delay(2000)).subscribe({
+      this.advertService.getAdvert(this.advertId).subscribe({
         next: advert => {
           this.advert = advert;
           this.onProvinceChanged(this.advert.province);
@@ -190,7 +190,7 @@ export class CreateAdvertComponent implements OnInit {
 
   editAdvert() {
     this.finaliseAdvert();
-    this.advertService.editAdvert(this.advert).pipe(delay(2000)).subscribe({
+    this.advertService.editAdvert(this.advert).subscribe({
       next: () => {
         this.onSaveComplete();
       },
@@ -202,7 +202,7 @@ export class CreateAdvertComponent implements OnInit {
 
   addAdvert() {
     this.finaliseAdvert();
-    this.advertService.addAdvert(this.advert).pipe(delay(2000)).subscribe({
+    this.advertService.addAdvert(this.advert).subscribe({
       next: () => {
         this.onSaveComplete();
       },
