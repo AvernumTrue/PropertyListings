@@ -41,11 +41,13 @@ export class CreateAdvertComponent implements OnInit {
 
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     headline: {
+      pattern: 'Headline must be at least 10 non-whitespace characters long.',
       required: 'Please enter a headline.',
       minlength: 'Headline must be at least 10 characters long.',
       maxlength: 'Headline cannot be longer than 100 characters.',
     },
     details: {
+      pattern: 'Details must be at least 10 non-whitespace characters long.',
       required: 'Please enter details.',
       minlength: 'Details must be at least 10 characters long.',
       maxlength: 'Details cannot be longer than 1000 characters.',
@@ -123,10 +125,10 @@ export class CreateAdvertComponent implements OnInit {
   createForm(): void {
 
     this.advertForm = this.fb.group({
-      headline: [this.advert?.headline ?? '', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+      headline: [this.advert?.headline ?? '', [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern(/(\s*(?:\S\s*){10,100}$)/)]],
       province: [this.advert?.province ?? '', [Validators.required]],
       city: [this.advert?.city ?? '', [Validators.required]],
-      details: [this.advert?.details ?? '', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
+      details: [this.advert?.details ?? '', [Validators.required, Validators.minLength(10), Validators.maxLength(1000), Validators.pattern(/(\s*(?:\S\s*){10,1000}$)/)]],
       price: [this.advert?.price ?? '', [Validators.required, Validators.min(10000), Validators.max(100000000)]],
       id: this.advert?.id ?? 0
     });
