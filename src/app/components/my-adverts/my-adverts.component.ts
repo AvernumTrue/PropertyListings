@@ -22,7 +22,7 @@ export class MyAdvertsComponent implements OnInit {
   selectedAdvert: number;
   dangerMessage = "Are you sure you want to delete this Advert?";
   busyDeleting = false;
-  loading = true;
+  loading: boolean;
 
   constructor(
     private advertService: AdvertService,
@@ -30,15 +30,15 @@ export class MyAdvertsComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.loading = true;
     this.getUserAdverts();
   }
 
   getUserAdverts() {
-    this.loading = true;
     this.advertService.getAdverts().pipe(delay(2000)).subscribe({
       next: adverts => {
         this.adverts = adverts.filter(adverts => {
-          this.loading = false;
+
           return adverts.userId === Number(localStorage.getItem('loggedInId'));
         });
         this.adverts = this.adverts.filter(adverts => {
@@ -56,13 +56,13 @@ export class MyAdvertsComponent implements OnInit {
   };
 
   changeAdvertStatus(advert: Advert, change: string) {
-    this.loading = true;
     this.advert = advert;
     if (change === 'hide') {
       this.advert.advertStatus = AdvertStatus.Hidden;
     } else {
       this.advert.advertStatus = AdvertStatus.Live;
     }
+    this.loading = true;
     this.advertService.editAdvert(this.advert).pipe(delay(2000)).subscribe();
     this.getUserAdverts();
   }
@@ -80,11 +80,9 @@ export class MyAdvertsComponent implements OnInit {
     this.loading = true;
     this.advertService.getAdvert(id).pipe(delay(2000)).subscribe({
       next: advert => {
-        this.loading = false;
         this.advert = advert;
         this.advert.advertStatus = AdvertStatus.Deleted;
         this.advertService.editAdvert(this.advert).pipe(delay(2000)).subscribe();
-        this.loading = false;
         this.getUserAdverts()
       }
     });

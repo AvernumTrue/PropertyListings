@@ -116,51 +116,15 @@
       </ul>
     </div>
   </div>
+</div>
 
-  <ng-http-loader
-    *ngIf="loading"
-    [backdrop]="true"
-    [backgroundColor]="'#0275d8'"
-    [debounceDelay]="100"
-    [extraDuration]="10000"
-    [minDuration]="300"
-    [opacity]="'0.6'"
-    [spinner]="spinnerStyle.skCubeGrid">
-  </ng-http-loader>
-
-  <!-- Create/Edit Advert Page (2)
-
-Description
-The user will be able to create a new advert or edit an existing advert on this page, IF authenticated.
-Page Details
-
-If an existing advert is getting updated, populate all the relevant controls with the current advert
-details.
-
-To be able to create a new advert the following information should be captured and submitted to
-the API:
-- Advert Headline Text: string: required: min 10 chars, max 100 chars.
-- Province: select: required: linked to Provinces. Select control is not editable.
-- City: select: required: linked to Cities for the selected province. Select
-control is not editable.
-- Advert Details: string: required: min 10 chars, max 1000 characters.
-- Price: number: minimum 10000, max 100000000.
-
-Actions:
-- Publish Advert: Change the advert status (see the appendix for more info about statuses) to
-LIVE and post/put the advert to the API. On success, redirect to My Adverts List Page. On
-failure, display message to user and stay on page.
-- Cancel: Redirect to My Adverts List Page.
-
-APPENDICES
-APPENDIX A: ADVERT STATES
-- HIDE The advert is hidden, only the advert owner can see the advert.
-- LIVE The advert is live and can be seen by potential buyers.
-- DELETED The owner marked the advert as DELETED. A lot of times you’ll ‘shadow
-delete’ data. You don’t really delete it (for a lot of reasons), but from the system’s point of
-view the data is deleted. Tricky thing to get right.
-
-APPENDIX B: PROVINCE AND CITY DATA
-These values should be returned by the API, NOT hard coded in the front end. That way you can easily
-update the data without changing the front-end. In the beginning you’ll hard code it until your API is
-up and running, but then I want it in the API -->
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>
