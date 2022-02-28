@@ -130,7 +130,6 @@ export class CreateAdvertComponent implements OnInit {
       city: [this.advert?.city ?? '', [Validators.required]],
       details: [this.advert?.details ?? '', [Validators.required, Validators.minLength(10), Validators.maxLength(1000), Validators.pattern(/(\s*(?:\S\s*){10,1000}$)/)]],
       price: [this.advert?.price ?? '', [Validators.required, Validators.min(10000), Validators.max(100000000)]],
-      id: this.advert?.id ?? 0
     });
 
     this.advertForm.get('province')?.valueChanges.subscribe(
