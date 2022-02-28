@@ -19,6 +19,10 @@ h1{
   margin: 15px;
 }
 
+.dropdown-item{
+  margin: 0px;
+}
+
 /* .card {
   margin: 1em;
 } */
