@@ -23,6 +23,8 @@ export class MyAdvertsComponent implements OnInit {
   dangerMessage = "Are you sure you want to delete this Advert?";
   busyDeleting = false;
   loading: boolean;
+  noticicationMessage: string;
+  selectedAdvertHeadline: string;
 
   constructor(
     private advertService: AdvertService,
@@ -59,8 +61,12 @@ export class MyAdvertsComponent implements OnInit {
     this.advert = advert;
     if (change === 'hide') {
       this.advert.advertStatus = AdvertStatus.Hidden;
+      this.noticicationMessage = "HIDDEN"
+      this.selectedAdvertHeadline = advert.headline;
     } else {
       this.advert.advertStatus = AdvertStatus.Live;
+      this.noticicationMessage = "LIVE"
+      this.selectedAdvertHeadline = advert.headline;
     }
     this.loading = true;
     this.advertService.editAdvert(this.advert).pipe(delay(2000)).subscribe();
@@ -76,13 +82,15 @@ export class MyAdvertsComponent implements OnInit {
     this.disableAction = false;
   }
 
-  deleteConfirmed(id: number) {
+  deleteConfirmed(advert: Advert) {
     this.loading = true;
-    this.advertService.getAdvert(id).pipe(delay(2000)).subscribe({
+    this.advertService.getAdvert(advert.id).pipe(delay(2000)).subscribe({
       next: advert => {
         this.advert = advert;
         this.advert.advertStatus = AdvertStatus.Deleted;
         this.advertService.editAdvert(this.advert).pipe(delay(2000)).subscribe();
+        this.noticicationMessage = "DELETED"
+        this.selectedAdvertHeadline = advert.headline;
         this.getUserAdverts()
       }
     });

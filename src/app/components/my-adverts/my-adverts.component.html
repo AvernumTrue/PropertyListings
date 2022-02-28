@@ -2,6 +2,45 @@
   <h1 class="text-center">My Adverts</h1>
 </div>
 
+<div class="container">
+  <div class="row">
+    <div class="col align-self-start">
+
+    </div>
+    <div class="col align-self-center">
+      <div
+        *ngIf="noticicationMessage === 'HIDDEN'"
+        class="alert alert-danger">
+        <h2>
+          {{selectedAdvertHeadline}} is now hidden.
+        </h2>
+      </div>
+
+      <div
+        *ngIf="noticicationMessage === 'LIVE'"
+        class="alert alert-success">
+        <h2>
+          {{selectedAdvertHeadline}} is now live.
+        </h2>
+      </div>
+
+      <div
+        *ngIf="noticicationMessage === 'DELETED'"
+        class="alert alert-danger">
+        <h2>
+          {{selectedAdvertHeadline}} has been deleted.
+        </h2>
+      </div>
+    </div>
+    <div class="col align-self-end">
+
+    </div>
+  </div>
+</div>
+
+
+
+
 <div *ngFor="let advert of adverts">
   <div class="card container jumbotron">
 
@@ -27,7 +66,7 @@
           role="alert">
           {{dangerMessage}}
           <button
-            (click)="deleteConfirmed(advert.id)"
+            (click)="deleteConfirmed(advert)"
             type="button"
             class="btn btn-danger">
             Yes, delete it
