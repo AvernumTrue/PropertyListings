@@ -150,6 +150,9 @@ export class CreateAdvertComponent implements OnInit {
 
   onProvinceChanged(selectedProvince: string) {
     const result = this.provinces.find((province) => {
+      this.advertForm.patchValue({
+        city: ''
+      })
       return province.province === selectedProvince;
     });
     this.selectedProvince = result;
