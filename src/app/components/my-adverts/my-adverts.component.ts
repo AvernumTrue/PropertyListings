@@ -30,14 +30,15 @@ export class MyAdvertsComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.loading = true;
     this.getUserAdverts();
   }
 
   getUserAdverts() {
+    this.loading = true;
     this.advertService.getAdverts().pipe(delay(2000)).subscribe({
       next: adverts => {
         this.adverts = adverts.filter(adverts => {
+          this.loading = false;
           return adverts.userId === Number(localStorage.getItem('loggedInId'));
         });
         this.adverts = this.adverts.filter(adverts => {
