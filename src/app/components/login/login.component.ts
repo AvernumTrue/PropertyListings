@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { delay } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   dangerMessage: string;
   successMessage: string;
   disableButtons = false;
+  user: User;
 
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     email: {
@@ -66,20 +68,37 @@ export class LoginComponent implements OnInit {
         this.dangerMessage = "";
         this.successMessage = "Login Successful. Navigating to My Adverts Page";
         break;
+      case "AdminLoginSuccessfulMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "";
+        this.successMessage = "Login Successful. Navigating to User Managment Page";
+        break;
       default:
         console.log("Error no message found");
         break;
     }
   }
 
-  async tryLogin() {
+  tryLogin() {
     this.selectMessage("loggingInMessage");
 
     this.userService.login(this.loginForm.get('email').value, this.loginForm.get('password').value).pipe(delay(2000)).subscribe({
-      next: async () => {
-        this.selectMessage("loginSuccessfulMessage");
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        this.router.navigate(['/my-adverts']);
+      next: () => {
+        this.userService.getUser(Number(localStorage.getItem('loggedInId'))).pipe(delay(2000)).subscribe({
+          next: async user => {
+            this.user = user;
+            if (this.user.isAdmin === false) {
+              this.selectMessage("loginSuccessfulMessage");
+              await new Promise(resolve => setTimeout(resolve, 3000));
+              this.router.navigate(['/my-adverts']);
+            } else {
+              this.selectMessage("AdminLoginSuccessfulMessage");
+              await new Promise(resolve => setTimeout(resolve, 3000));
+              this.router.navigate(['/user-management']);
+            }
+          }
+        })
+
       },
       error: () => {
         this.disableButtons = false;
