@@ -1,4 +1,5 @@
 import { RouterModule } from "@angular/router";
+import { AdvertDetailsComponent } from "./advert-details/advert-details.component";
 import { CreateAdvertComponent } from "./components/create-advert/create-advert.component";
 import { CreateAdvertGuard } from "./components/create-advert/create-advert.guard";
 import { HomeComponent } from "./components/home/home.component";
@@ -15,6 +16,7 @@ export default RouterModule.forRoot([
   { path: 'sale-list', component: SaleListComponent },
   { path: 'my-adverts', component: MyAdvertsComponent },
   { path: 'user-management', component: UserManagementComponent },
+  { path: 'advert-details/:advertIndex', component: AdvertDetailsComponent },
   { path: 'create-advert/:advertIndex', component: CreateAdvertComponent, canDeactivate: [CreateAdvertGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }

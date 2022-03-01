@@ -3,7 +3,6 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { ActivatedRoute, Router } from '@angular/router';
 import { Advert } from 'src/app/models/advert.model';
 import { AdvertService } from 'src/app/services/advert.service';
-import { delay } from 'rxjs';
 import { AdvertStatus } from 'src/app/models/advert.status.enum';
 import { Spinkit } from 'ng-http-loader';
 import { Province } from 'src/app/models/province.model';
@@ -30,10 +29,6 @@ export class CreateAdvertComponent implements OnInit {
 
   advert: Advert;
   advertId: number;
-
-  user: any;
-  filteredSalaries: any;
-  getSalariesErrorMessage: boolean;
 
   get isEditing() {
     return this.advertId != 0;

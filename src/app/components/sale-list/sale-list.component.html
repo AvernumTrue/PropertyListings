@@ -10,7 +10,11 @@
             <img class="advert-image" src="assets\images\default-house.png" alt="house image">
           </div>
           <div class="col-sm">
-            <h2 class="display-4">{{advert.headline}}</h2>
+            <h2
+              class="display-4"
+              [routerLink]="['/advert-details', advert.id]">
+              {{advert.headline}}
+            </h2>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <h3>
@@ -18,8 +22,8 @@
                 </h3>
               </li>
               <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
+              <!-- <li class="list-group-item">{{advert.details}}</li> -->
             </ul>
-            <!-- <p class="card-text">{{advert.details}}</p> -->
           </div>
         </div>
       </div>
