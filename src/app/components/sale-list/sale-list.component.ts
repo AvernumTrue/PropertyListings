@@ -34,4 +34,16 @@ export class SaleListComponent implements OnInit {
     });
   }
 
+  lowToHigh() {
+    function comparator(a: any, b: any) {
+      return parseInt(a.price) - parseInt(b.price);
+    }
+    this.adverts.sort(comparator);
+  }
+  highToLow() {
+    function comparator(a: any, b: any) {
+      return parseInt(b.price) - parseInt(a.price);
+    }
+    this.adverts.sort(comparator);
+  }
 }
