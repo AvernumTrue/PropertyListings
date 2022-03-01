@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Spinkit } from 'ng-http-loader';
-import { Advert } from '../models/advert.model';
-import { User } from '../models/user.model';
-import { AdvertService } from '../services/advert.service';
+import { Advert } from '../../models/advert.model';
+import { User } from '../../models/user.model';
+import { AdvertService } from '../../services/advert.service';
 
 @Component({
   selector: 'pl-advert-details',
@@ -26,6 +26,10 @@ export class AdvertDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.getAdvert();
+  }
+
+  getAdvert() {
     this.advertService.getAdvert(this.advertId).subscribe({
       next: advert => {
         this.advert = advert;
@@ -35,7 +39,4 @@ export class AdvertDetailsComponent implements OnInit {
       }
     });
   }
-
-
-
 }

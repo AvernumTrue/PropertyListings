@@ -1,6 +1,7 @@
 <h1 class="text-center">Advert Details</h1>
-
-<div class="card container jumbotron">
+<div
+  *ngIf="!loading"
+  class="card container jumbotron">
   <div class="container">
     <div class="row">
       <div class="col-sm">
@@ -15,13 +16,12 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <h3>
-              Price: R{{advert.price}}
+              Price: R{{advert.price | currency:' '}}
             </h3>
           </li>
           <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
           <li class="list-group-item">{{advert.details}}</li>
         </ul>
-
         <div class="container">
           <div class="row">
             <div class="col-sm">
@@ -40,13 +40,9 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
-
-
-
 </div>
 
 <ng-http-loader

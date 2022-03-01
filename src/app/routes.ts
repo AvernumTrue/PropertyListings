@@ -1,5 +1,5 @@
 import { RouterModule } from "@angular/router";
-import { AdvertDetailsComponent } from "./advert-details/advert-details.component";
+import { AdvertDetailsComponent } from "./components/advert-details/advert-details.component";
 import { CreateAdvertComponent } from "./components/create-advert/create-advert.component";
 import { CreateAdvertGuard } from "./components/create-advert/create-advert.guard";
 import { HomeComponent } from "./components/home/home.component";
@@ -8,7 +8,7 @@ import { MyAdvertsComponent } from "./components/my-adverts/my-adverts.component
 import { RegisterComponent } from "./components/register/register.component";
 import { SaleListComponent } from "./components/sale-list/sale-list.component";
 import { UserManagementComponent } from "./components/user-management/user-management.component";
-import { SellerDetailsComponent } from "./seller-details/seller-details.component";
+import { SellerDetailsComponent } from "./components/seller-details/seller-details.component";
 
 export default RouterModule.forRoot([
   { path: 'home', component: HomeComponent },
