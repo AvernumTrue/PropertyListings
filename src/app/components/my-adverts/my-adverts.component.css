@@ -1,0 +1,28 @@
+button {
+  margin: 10px;
+}
+
+.test {
+  background-color: rgb(27, 134, 170);
+}
+
+.alert{
+  margin-top: 10px;
+  padding: 1px;
+}
+
+.jumbotron{
+  margin-bottom: 20px;
+}
+
+h1{
+  margin: 15px;
+}
+
+.dropdown-item{
+  margin: 0px;
+}
+
+/* .card {
+  margin: 1em;
+} */

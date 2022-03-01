@@ -1,1 +1,178 @@
-<p>my-adverts works!</p>
+<h1 class="text-center">My Adverts</h1>
+<div *ngIf="!adverts[0] && !loading">
+  <h2 class="text-center">You currently have no adverts</h2>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <button
+          class="btn btn-outline-primary col-12"
+          [routerLink]="['/create-advert', 0]">
+          Click here to create an advert
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col align-self-start">
+
+    </div>
+    <div class="col align-self-center">
+      <div
+        *ngIf="noticicationMessage === 'HIDDEN'"
+        class="alert alert-danger">
+        <h2>
+          {{selectedAdvertHeadline}} is now hidden.
+        </h2>
+      </div>
+
+      <div
+        *ngIf="noticicationMessage === 'LIVE'"
+        class="alert alert-success">
+        <h2>
+          {{selectedAdvertHeadline}} is now live.
+        </h2>
+      </div>
+
+      <div
+        *ngIf="noticicationMessage === 'DELETED'"
+        class="alert alert-danger">
+        <h2>
+          {{selectedAdvertHeadline}} has been deleted.
+        </h2>
+      </div>
+    </div>
+    <div class="col align-self-end">
+
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let advert of adverts">
+  <div class="card container jumbotron">
+
+    <div class="row">
+      <div class="col">
+        <div
+          role="alert">
+          <div *ngIf="advert.advertStatus === 'LIVE'"
+            class="alert alert-success">
+            <h4 class="text-center">Status: {{advert.advertStatus}}</h4>
+          </div>
+          <div *ngIf="advert.advertStatus === 'HIDDEN'"
+            class="alert alert-danger"
+            role="alert">
+            <h4 class="text-center">Status: {{advert.advertStatus}}</h4>
+          </div>
+        </div>
+
+      </div>
+      <div class="col col-lg-8">
+        <div *ngIf="busyDeleting && selectedAdvert === advert.id"
+          class="alert alert-danger"
+          role="alert">
+          {{dangerMessage}}
+          <button
+            (click)="deleteConfirmed(advert)"
+            type="button"
+            class="btn btn-danger">
+            Yes, delete it
+          </button>
+          <button
+            (click)="cancel()"
+            type="button"
+            class="btn btn-success">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <div class="col col-lg-2 d-flex flex-row-reverse">
+        <div class="justify-content-right">
+
+          <div class="row">
+            <div class="col">
+              <div class="dropdown">
+                <button
+                  class="btn btn-outline-primary dropdown-toggle"
+                  type="button"
+                  id="dropdownBasic1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  (click)="advertActions(advert.id)"
+                  [disabled]="disableAction">Actions
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+                  <div *ngIf="advert.id === selectedAdvert">
+
+                    <div>
+                      <li>
+                        <button
+                          class="dropdown-item"
+                          [routerLink]="['/create-advert', advert.id]">
+                          Edit Advert
+                        </button>
+                      </li>
+
+                      <li>
+                        <button
+                          class="dropdown-item"
+                          *ngIf="advert.advertStatus === 'LIVE'"
+                          (click)="changeAdvertStatus(advert,'hide')">
+                          Hide Advert
+                        </button>
+                      </li>
+
+                      <li>
+                        <button
+                          class="dropdown-item"
+                          *ngIf="advert.advertStatus === 'HIDDEN'"
+                          (click)="changeAdvertStatus(advert,'show')">
+                          Show Advert
+                        </button>
+                      </li>
+                    </div>
+
+                    <li><button
+                        class="dropdown-item"
+                        (click)="deleteAdvert()">
+                        Delete Advert
+                      </button></li>
+
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col-lg-2">
+        </div>
+      </div>
+
+      <h1 class="display-4">{{advert.headline}}</h1>
+      <p class="card-text">{{advert.details}}</p>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Province: {{advert.province}}</li>
+        <li class="list-group-item">City: {{advert.city}}</li>
+        <li class="list-group-item">Price: R{{advert.price}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>

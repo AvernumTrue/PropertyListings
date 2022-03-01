@@ -13,7 +13,7 @@ import { UserService } from '../../services/user.service';
 export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
-  user!: User;
+  user: User;
   errorMessage: string;
   displayMessage: string;
   primaryMessage: string;
@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
       required: 'Please enter an email address.',
       minlength: 'Email address must be at least 6 characters.',
       maxlength: 'Email address cannot exceed 100 characters.',
-      pattern: 'Please enter a valid email address',
+      email: 'Please enter a valid email address',
     },
     password: {
       required: 'Please enter a password.',
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
       case "saveSuccessMessage":
         this.primaryMessage = "";
         this.dangerMessage = "";
-        this.successMessage = "Successfully registered, navigating to My Averts page...";
+        this.successMessage = "Successfully registered, navigating to My Adverts page...";
         break;
       case "savingMessage":
         this.primaryMessage = "Registering...";
@@ -109,7 +109,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       forenames: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/(^[\s\S]*[A-Za-z]{1,100}[\s\S]*$)/)]],
       surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/(^[\s\S]*[A-Za-z]{3,100}[\s\S]*$)/)]],
-      email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern(/^(?!.*@.*@.*$)(?!.*@.*\-\-.*\..*$)(?!.*@.*\-\..*$)(?!.*@.*\-$)(.*@.+(\..{1,11})?)$/)]],//checks for email pattern(found online)
+      email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/^\S*$/i), Validators.minLength(8), Validators.maxLength(100)]],
       confirmPassword: ['', [Validators.required, Validators.pattern(/^\S*$/i), Validators.minLength(8), Validators.maxLength(100), Validators.pattern(/^\S*$/i), valueMatches(getPassword)]],
       id: 0
