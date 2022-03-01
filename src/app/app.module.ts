@@ -21,6 +21,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
 import { CreateAdvertComponent } from './components/create-advert/create-advert.component';
 import { InMemoryDataService } from './services/advert-user-province-data';
 import { AdvertDetailsComponent } from './advert-details/advert-details.component';
+import { SellerDetailsComponent } from './seller-details/seller-details.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AdvertDetailsComponent } from './advert-details/advert-details.componen
     UserManagementComponent,
     MyAdvertsComponent,
     CreateAdvertComponent,
-    AdvertDetailsComponent
+    AdvertDetailsComponent,
+    SellerDetailsComponent
   ],
   imports: [
     ReactiveFormsModule,
