@@ -9,3 +9,9 @@ h1{
 .dropdown{
   margin-bottom: 20px;
 }
+
+.foo{
+  padding-bottom: 6px;
+  padding-top: 6px;
+}
+

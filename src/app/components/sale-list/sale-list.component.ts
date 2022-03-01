@@ -14,6 +14,7 @@ export class SaleListComponent implements OnInit {
   spinnerStyle = Spinkit;
   adverts: Advert[] = [];
   loading: boolean;
+  orderMessage: string;
 
   constructor(
     private advertService: AdvertService,
@@ -39,11 +40,13 @@ export class SaleListComponent implements OnInit {
       return parseInt(a.price) - parseInt(b.price);
     }
     this.adverts.sort(comparator);
+    this.orderMessage = 'Adverts ordered from low to high.'
   }
   highToLow() {
     function comparator(a: any, b: any) {
       return parseInt(b.price) - parseInt(a.price);
     }
     this.adverts.sort(comparator);
+    this.orderMessage = 'Adverts ordered from high to low.'
   }
 }
