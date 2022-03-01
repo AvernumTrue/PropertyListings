@@ -15,3 +15,7 @@ h1{
   padding-top: 6px;
 }
 
+.change-cursor-to-hand{
+    cursor: pointer;
+}
+

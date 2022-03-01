@@ -15,6 +15,8 @@ export class SaleListComponent implements OnInit {
   adverts: Advert[] = [];
   loading: boolean;
   orderMessage: string;
+  headingHovered: boolean;
+  headingId: number;
 
   constructor(
     private advertService: AdvertService,
@@ -33,6 +35,15 @@ export class SaleListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  mouseEnter(id: number) {
+    this.headingId = id;
+    this.headingHovered = true;
+  }
+  mouseLeave(id: number) {
+    this.headingId = id;
+    this.headingHovered = false;
   }
 
   lowToHigh() {
