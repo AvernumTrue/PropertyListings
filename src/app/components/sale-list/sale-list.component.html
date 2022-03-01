@@ -1,1 +1,45 @@
-<p>sale-list works!</p>
+<h1 class="text-center">Adverts</h1>
+<div *ngIf="!loading">
+
+  <div *ngFor="let advert of adverts">
+    <div class="card container jumbotron">
+
+      <h2 class="display-4">{{advert.headline}}</h2>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Location {{advert.city}}, {{advert.province}}</li>
+        <li class="list-group-item">Price: R{{advert.price}}</li>
+      </ul>
+      <!-- <p class="card-text">{{advert.details}}</p> -->
+
+    </div>
+  </div>
+</div>
+
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>
+
+<!-- Page Components
+This page will consist of the following sections:
+- The Search Component at the top (5)
+- Underneath the search component, on the right a ‘Order by’ selection of either:
+o Price High to Low
+o Price Low to High
+- A list of adverts meeting the search criteria: Each advert item in the list will display the:
+o Advert Headline Text
+o Location (a combination of province and city)
+o Price
+Actions:
+- If a user clicks on the Advert Headline Text, the user should be redirected to the Advert
+Details Page for the relevant advert.
+Paging (You can add this if you have time after you’ve completed the project):
+- A maximum of 10 adverts should be displayed per page. Pagination navigation should be
+provided. -->

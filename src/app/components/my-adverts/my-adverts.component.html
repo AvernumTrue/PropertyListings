@@ -154,14 +154,13 @@
         </div>
       </div>
 
-      <h1 class="display-4">{{advert.headline}}</h1>
-      <p class="card-text">{{advert.details}}</p>
+      <h2 class="display-4">{{advert.headline}}</h2>
 
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Province: {{advert.province}}</li>
-        <li class="list-group-item">City: {{advert.city}}</li>
+        <li class="list-group-item">Location {{advert.city}}, {{advert.province}}</li>
         <li class="list-group-item">Price: R{{advert.price}}</li>
       </ul>
+      <p class="card-text">{{advert.details}}</p>
     </div>
   </div>
 </div>
