@@ -9,6 +9,7 @@ import { RegisterComponent } from "./components/register/register.component";
 import { SaleListComponent } from "./components/sale-list/sale-list.component";
 import { UserManagementComponent } from "./components/user-management/user-management.component";
 import { SellerDetailsComponent } from "./components/seller-details/seller-details.component";
+import { ManageMyAccountComponent } from "./components/manage-my-account/manage-my-account.component";
 
 export default RouterModule.forRoot([
   { path: 'home', component: HomeComponent },
@@ -17,6 +18,7 @@ export default RouterModule.forRoot([
   { path: 'sale-list', component: SaleListComponent },
   { path: 'my-adverts', component: MyAdvertsComponent },
   { path: 'user-management', component: UserManagementComponent },
+  { path: 'manage-my-account', component: ManageMyAccountComponent },
   { path: 'seller-details/:userIndex', component: SellerDetailsComponent },//TODO add user id as index like with advertIndex
   { path: 'advert-details/:advertIndex', component: AdvertDetailsComponent },
   { path: 'create-advert/:advertIndex', component: CreateAdvertComponent, canDeactivate: [CreateAdvertGuard] },
