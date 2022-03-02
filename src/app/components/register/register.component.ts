@@ -22,6 +22,10 @@ export class RegisterComponent implements OnInit {
   disableButtons = false;
   userId: number;
 
+  get isEditing() {
+    return this.userId != 0;
+  }
+
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     forenames: {
       required: 'Please enter a forename or forenames.',
