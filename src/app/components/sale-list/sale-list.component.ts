@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Spinkit } from 'ng-http-loader';
+import { Advert } from 'src/app/models/advert.model';
+import { AdvertService } from 'src/app/services/advert.service';
 
 @Component({
   selector: 'pl-sale-list',
@@ -7,9 +11,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaleListComponent implements OnInit {
 
-  constructor() { }
+  spinnerStyle = Spinkit;
+  adverts: Advert[] = [];
+  loading: boolean;
+  orderMessage: string;
+  headingHovered: boolean;
+  headingId: number;
+
+  constructor(
+    private advertService: AdvertService,
+    private router: Router,) {
+  };
 
   ngOnInit(): void {
+    this.getAdverts()
   }
 
+  getAdverts() {
+    this.loading = true;
+    this.advertService.getAdverts().subscribe({
+      next: adverts => {
+        this.adverts = adverts;
+        this.loading = false;
+      }
+    });
+  }
+
+  mouseEnter(id: number) {
+    this.headingId = id;
+    this.headingHovered = true;
+  }
+  mouseLeave(id: number) {
+    this.headingId = id;
+    this.headingHovered = false;
+  }
+
+  lowToHigh() {
+    function comparator(a: any, b: any) {
+      return parseInt(a.price) - parseInt(b.price);
+    }
+    this.adverts.sort(comparator);
+    this.orderMessage = 'Adverts ordered from low to high.'
+  }
+  highToLow() {
+    function comparator(a: any, b: any) {
+      return parseInt(b.price) - parseInt(a.price);
+    }
+    this.adverts.sort(comparator);
+    this.orderMessage = 'Adverts ordered from high to low.'
+  }
 }

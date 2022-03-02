@@ -1,1 +1,128 @@
-<p>sale-list works!</p>
+<h1 class="text-center">Sale List</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm text-center">
+      <div
+        *ngIf="orderMessage"
+        class="alert foo alert-primary">
+        {{orderMessage}}
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="dropdown text-end">
+        <button
+          class="btn btn-outline-primary dropdown-toggle"
+          type="button"
+          id="dropdownBasic1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Order by
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+          <li>
+            <button
+              class="dropdown-item"
+              (click)="highToLow()">
+              Price High to Low
+            </button>
+          </li>
+
+          <li>
+            <button
+              class="dropdown-item"
+              (click)="lowToHigh()">
+              Price Low to High
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="!loading">
+
+  <div *ngFor="let advert of adverts">
+    <div class="card container jumbotron">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <img class="advert-image" src="assets\images\default-house.png" alt="house image">
+          </div>
+          <div class="col-sm">
+
+            <div class="change-cursor-to-hand">
+              <h2
+                *ngIf="!headingHovered"
+                class="display-4"
+                [routerLink]="['/advert-details', advert.id]"
+                (mouseenter)="mouseEnter(advert.id)">
+                {{advert.headline}}
+              </h2>
+              <h2
+                *ngIf="advert.id !== headingId && headingHovered"
+                class="display-4"
+                [routerLink]="['/advert-details', advert.id]">
+                {{advert.headline}}
+              </h2>
+              <h2
+                *ngIf="headingHovered && advert.id === headingId"
+                class="display-4 alert-primary"
+                [routerLink]="['/advert-details', advert.id]"
+                (mouseleave)="mouseLeave(advert.id)">
+                {{advert.headline}}
+              </h2>
+            </div>
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h3>
+                  Price: R{{advert.price | currency:' '}}
+                </h3>
+              </li>
+              <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
+              <!-- <li class="list-group-item">{{advert.details}}</li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>
+
+<!-- Page Components
+This page will consist of the following sections:
+- The Search Component at the top (5)
+- Underneath the search component, on the right a ‘Order by’ selection of either:
+o Price High to Low
+o Price Low to High
+- A list of adverts meeting the search criteria: Each advert item in the list will display the:
+o Advert Headline Text
+o Location (a combination of province and city)
+o Price
+Actions:
+- If a user clicks on the Advert Headline Text, the user should be redirected to the Advert
+Details Page for the relevant advert.
+Paging (You can add this if you have time after you’ve completed the project):
+- A maximum of 10 adverts should be displayed per page. Pagination navigation should be
+provided. -->

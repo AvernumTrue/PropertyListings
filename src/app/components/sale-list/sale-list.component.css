@@ -1,0 +1,21 @@
+.jumbotron{
+  margin-bottom: 20px;
+}
+
+h1{
+  margin: 20px;
+}
+
+.dropdown{
+  margin-bottom: 20px;
+}
+
+.foo{
+  padding-bottom: 6px;
+  padding-top: 6px;
+}
+
+.change-cursor-to-hand{
+    cursor: pointer;
+}
+
