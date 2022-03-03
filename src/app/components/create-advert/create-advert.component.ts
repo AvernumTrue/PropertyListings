@@ -96,7 +96,7 @@ export class CreateAdvertComponent implements OnInit {
         this.dangerMessage = "Please ensure all fields are valid.";
         this.successMessage = "";
         break;
-      case "saveErrorMessage":
+      case "errorMessage":
         this.primaryMessage = "";
         this.dangerMessage = "There was an error saving the advert.";
         this.successMessage = "";
@@ -189,8 +189,8 @@ export class CreateAdvertComponent implements OnInit {
       next: () => {
         this.onSaveComplete();
       },
-      error: err => {
-        console.log(err);
+      error: () => {
+        this.selectMessage("errorMessage");
       }
     });
   }
@@ -203,7 +203,7 @@ export class CreateAdvertComponent implements OnInit {
       },
       error: () => {
         this.disableButtons = false;
-        this.selectMessage("saveErrorMessage");
+        this.selectMessage("errorMessage");
       }
     });
   }
