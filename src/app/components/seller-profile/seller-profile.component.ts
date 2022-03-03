@@ -50,7 +50,6 @@ export class SellerProfileComponent implements OnInit {
     this.userService.getUser(Number(localStorage.getItem('loggedInId'))).subscribe({
       next: user => {
         this.user = user;
-        console.log(this.user)
         this.createForm();
         this.loading = false;
       }
