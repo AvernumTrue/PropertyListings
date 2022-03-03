@@ -1,1 +1,117 @@
-<p>seller-profile works!</p>
+<div class="form-spacing">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+      </div>
+      <div class="col-sm">
+
+        <div class="card text-center">
+
+          <h1 class="card-header">
+            Seller Details
+          </h1>
+
+          <div class="container">
+            <form novalidate
+              (ngSubmit)="submit()"
+              [formGroup]="sellerProfileForm">
+              <div>
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="email">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Enter email"
+                    formControlName="email"
+                    [ngClass]="{'is-invalid': isInvalid(sellerProfileForm.get('email')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('email',sellerProfileForm.get('email')!)}}
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="phoneNumber">Phone Number (Optional)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="phoneNumber"
+                    placeholder="Enter phoneNumber"
+                    formControlName="phoneNumber"
+                    [ngClass]="{'is-invalid': isInvalid(sellerProfileForm.get('phoneNumber')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('phoneNumber',sellerProfileForm.get('phoneNumber')!)}}
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <button
+                (click)="submit()"
+                type="button"
+                class="btn btn-primary"
+                [disabled]="disableButtons">
+                Update Details
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                [routerLink]="['/home']"
+                [disabled]="disableButtons">
+                Cancel
+              </button>
+
+              <div
+                *ngIf="primaryMessage"
+                class="alert alert-primary"
+                role="alert">
+                {{primaryMessage}}
+              </div>
+              <div
+                *ngIf="dangerMessage"
+                class="alert alert-danger"
+                role="alert">
+                {{dangerMessage}}
+              </div>
+              <div
+                *ngIf="successMessage"
+                class="alert alert-success"
+                role="alert">
+                {{successMessage}}
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>
+
+<!-- Page Details
+The Seller profile page will display relevant seller information depending on the role of the seller.
+The following information will be available for editing. (Note: Always have this info in a form, so
+when the seller lands on this page, the info is already in input controls, ready to change and save).
+- Email Address string: required: min 6 chars, max 100 chars: Check for @ sign.
+- Phone Number string: not required: min 6 chars, max 30 chars: No validation.
+Actions:
+- Save Profile: Validate and save all the information
+- Cancel: Cancel all changes and redirects to the ‘My Adverts Page’ -->
