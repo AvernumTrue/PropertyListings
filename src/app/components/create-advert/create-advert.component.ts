@@ -18,7 +18,7 @@ export class CreateAdvertComponent implements OnInit {
   spinnerStyle = Spinkit;
   loading = true;
   advertForm: FormGroup;
-  errorMessage: string;
+  saveErrorMessage: string;
   displayMessage: string;
   primaryMessage: string;
   dangerMessage: string;
@@ -96,7 +96,7 @@ export class CreateAdvertComponent implements OnInit {
         this.dangerMessage = "Please ensure all fields are valid.";
         this.successMessage = "";
         break;
-      case "errorMessage":
+      case "saveErrorMessage":
         this.primaryMessage = "";
         this.dangerMessage = "There was an error saving the advert.";
         this.successMessage = "";
@@ -190,7 +190,7 @@ export class CreateAdvertComponent implements OnInit {
         this.onSaveComplete();
       },
       error: () => {
-        this.selectMessage("errorMessage");
+        this.selectMessage("saveErrorMessage");
       }
     });
   }
@@ -203,7 +203,7 @@ export class CreateAdvertComponent implements OnInit {
       },
       error: () => {
         this.disableButtons = false;
-        this.selectMessage("errorMessage");
+        this.selectMessage("saveErrorMessage");
       }
     });
   }

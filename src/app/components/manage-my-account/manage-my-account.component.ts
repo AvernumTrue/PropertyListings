@@ -17,7 +17,7 @@ export class ManageMyAccountComponent implements OnInit {
   spinnerStyle = Spinkit;
   accountForm!: FormGroup;
   user: User;
-  errorMessage: string;
+  saveErrorMessage: string;
   displayMessage: string;
   primaryMessage: string;
   dangerMessage: string;

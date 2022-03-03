@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
   user: User;
-  errorMessage: string;
+  saveErrorMessage: string;
   displayMessage: string;
   primaryMessage: string;
   dangerMessage: string;

@@ -15,7 +15,7 @@ export class SellerProfileComponent implements OnInit {
   spinnerStyle = Spinkit;
   sellerProfileForm!: FormGroup;
   user: User;
-  errorMessage: string;
+  saveErrorMessage: string;
   displayMessage: string;
   primaryMessage: string;
   dangerMessage: string;
