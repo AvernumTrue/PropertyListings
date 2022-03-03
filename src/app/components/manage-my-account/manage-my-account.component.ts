@@ -173,11 +173,17 @@ export class ManageMyAccountComponent implements OnInit {
           this.disableButtons = false;
           this.selectMessage("invalidMessage");
         }
+
       } else {
         this.selectMessage("incorrectOldPasswordMessage");
       }
+
     } else {
       this.changingPassword = false;
+      this.accountForm.controls['newPassword'].clearValidators();
+      this.accountForm.controls['confirmPassword'].clearValidators();
+      this.accountForm.controls['newPassword'].updateValueAndValidity();
+      this.accountForm.controls['confirmPassword'].updateValueAndValidity();
       if (this.accountForm.status === 'VALID') {
         this.disableButtons = true;
         this.selectMessage("savingMessage");
@@ -186,10 +192,6 @@ export class ManageMyAccountComponent implements OnInit {
         this.disableButtons = false;
         this.selectMessage("invalidMessage");
       }
-      this.accountForm.controls['newPassword'].clearValidators();
-      this.accountForm.controls['confirmPassword'].clearValidators();
-      this.accountForm.controls['newPassword'].updateValueAndValidity();
-      this.accountForm.controls['confirmPassword'].updateValueAndValidity();
     }
   }
 
