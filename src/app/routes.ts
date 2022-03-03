@@ -13,11 +13,12 @@ import { ManageMyAccountComponent } from "./components/manage-my-account/manage-
 import { SellerProfileComponent } from "./components/seller-profile/seller-profile.component";
 import { SellerProfileGuard } from "./components/seller-profile/seller-profile.guard";
 import { ManageMyAccountGuard } from "./components/manage-my-account/manage-my-account.guard";
+import { RegisterGuard } from "./components/register/register.guard";
 
 export default RouterModule.forRoot([
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent, canDeactivate: [RegisterGuard] },
   { path: 'sale-list', component: SaleListComponent },
   { path: 'my-adverts', component: MyAdvertsComponent },
   { path: 'user-management', component: UserManagementComponent },
