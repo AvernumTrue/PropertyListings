@@ -103,8 +103,8 @@ export class SellerProfileComponent implements OnInit {
   }
 
   finaliseUser() {
-    this.user.email = this.sellerProfileForm.get('email')?.value;
-    this.user.phoneNumber = this.sellerProfileForm.get('phoneNumber')?.value;
+    this.user.email = this.sellerProfileForm.get('email')?.value.trim();
+    this.user.phoneNumber = this.sellerProfileForm.get('phoneNumber')?.value.trim();
   }
 
   submit() {

@@ -156,11 +156,11 @@ export class CreateAdvertComponent implements OnInit {
   finaliseAdvert() {
     const advert = new Advert();
     advert.id = this.advertId;
-    advert.headline = this.advertForm.get('headline')?.value;
+    advert.headline = this.advertForm.get('headline')?.value.trim();
     advert.province = this.advertForm.get('province')?.value;
     advert.city = this.advertForm.get('city')?.value;
-    advert.details = this.advertForm.get('details')?.value;
-    advert.price = this.advertForm.get('price')?.value;
+    advert.details = this.advertForm.get('details')?.value.trim();
+    advert.price = this.advertForm.get('price')?.value.trim();
     advert.advertStatus = AdvertStatus.Live;
     advert.userId = Number(localStorage.getItem('loggedInId'));
     this.advert = advert;

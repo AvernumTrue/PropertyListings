@@ -134,9 +134,9 @@ export class RegisterComponent implements OnInit {
   finaliseUser() {
     const user = new User();
     user.id = this.userId;
-    user.forenames = this.registerForm.get('forenames')?.value;
-    user.surname = this.registerForm.get('surname')?.value;
-    user.email = this.registerForm.get('email')?.value;
+    user.forenames = this.registerForm.get('forenames')?.value.trim();
+    user.surname = this.registerForm.get('surname')?.value.trim();
+    user.email = this.registerForm.get('email')?.value.trim();
     user.password = this.registerForm.get('password')?.value.trim();
     user.isAdmin = false;
     this.user = user;

@@ -136,9 +136,9 @@ export class ManageMyAccountComponent implements OnInit {
   }
 
   finaliseUser() {
-    this.user.forenames = this.accountForm.get('forenames')?.value;
-    this.user.surname = this.accountForm.get('surname')?.value;
-    this.user.email = this.accountForm.get('email')?.value;
+    this.user.forenames = this.accountForm.get('forenames')?.value.trim();
+    this.user.surname = this.accountForm.get('surname')?.value.trim();
+    this.user.email = this.accountForm.get('email')?.value.trim();
     if (this.changingPassword) {
       this.user.password = this.accountForm.get('newPassword')?.value.trim();
     }
@@ -148,7 +148,7 @@ export class ManageMyAccountComponent implements OnInit {
   submit() {
     this.accountForm.markAllAsTouched();
 
-    if (this.accountForm.get('oldPassword').value.trim() || this.accountForm.get('newPassword').value.trim() || this.accountForm.get('confirmPassword').value.trim()) {
+    if (this.accountForm.get('oldPassword') || this.accountForm.get('newPassword') || this.accountForm.get('confirmPassword')) {
       this.changingPassword = true;
 
       const valueMatches = (GetOtherValue: () => string): ValidatorFn => {
