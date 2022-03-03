@@ -8,7 +8,7 @@
         <div class="card text-center">
 
           <h1 class="card-header">
-            Seller Details
+            Seller Profile
           </h1>
 
           <div class="container">
@@ -40,7 +40,7 @@
                     type="text"
                     class="form-control"
                     id="phoneNumber"
-                    placeholder="Enter phoneNumber"
+                    placeholder="Enter phone number"
                     formControlName="phoneNumber"
                     [ngClass]="{'is-invalid': isInvalid(sellerProfileForm.get('phoneNumber')!) }">
                   <span class="invalid-feedback">
@@ -56,7 +56,7 @@
                 type="button"
                 class="btn btn-primary"
                 [disabled]="disableButtons">
-                Update Details
+                Save Profile
               </button>
               <button
                 type="button"
