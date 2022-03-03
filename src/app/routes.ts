@@ -9,15 +9,22 @@ import { RegisterComponent } from "./components/register/register.component";
 import { SaleListComponent } from "./components/sale-list/sale-list.component";
 import { UserManagementComponent } from "./components/user-management/user-management.component";
 import { SellerDetailsComponent } from "./components/seller-details/seller-details.component";
+import { ManageMyAccountComponent } from "./components/manage-my-account/manage-my-account.component";
+import { SellerProfileComponent } from "./components/seller-profile/seller-profile.component";
+import { SellerProfileGuard } from "./components/seller-profile/seller-profile.guard";
+import { ManageMyAccountGuard } from "./components/manage-my-account/manage-my-account.guard";
+import { RegisterGuard } from "./components/register/register.guard";
 
 export default RouterModule.forRoot([
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent, canDeactivate: [RegisterGuard] },
   { path: 'sale-list', component: SaleListComponent },
   { path: 'my-adverts', component: MyAdvertsComponent },
   { path: 'user-management', component: UserManagementComponent },
-  { path: 'seller-details/:userIndex', component: SellerDetailsComponent },//TODO add user id as index like with advertIndex
+  { path: 'manage-my-account', component: ManageMyAccountComponent, canDeactivate: [ManageMyAccountGuard] },
+  { path: 'seller-profile', component: SellerProfileComponent, canDeactivate: [SellerProfileGuard] },
+  { path: 'seller-details/:userIndex', component: SellerDetailsComponent },
   { path: 'advert-details/:advertIndex', component: AdvertDetailsComponent },
   { path: 'create-advert/:advertIndex', component: CreateAdvertComponent, canDeactivate: [CreateAdvertGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

@@ -18,7 +18,7 @@ export class CreateAdvertComponent implements OnInit {
   spinnerStyle = Spinkit;
   loading = true;
   advertForm: FormGroup;
-  errorMessage: string;
+  saveErrorMessage: string;
   displayMessage: string;
   primaryMessage: string;
   dangerMessage: string;
@@ -189,8 +189,8 @@ export class CreateAdvertComponent implements OnInit {
       next: () => {
         this.onSaveComplete();
       },
-      error: err => {
-        console.log(err);
+      error: () => {
+        this.selectMessage("saveErrorMessage");
       }
     });
   }

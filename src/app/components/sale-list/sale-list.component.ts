@@ -37,15 +37,6 @@ export class SaleListComponent implements OnInit {
     });
   }
 
-  mouseEnter(id: number) {
-    this.headingId = id;
-    this.headingHovered = true;
-  }
-  mouseLeave(id: number) {
-    this.headingId = id;
-    this.headingHovered = false;
-  }
-
   lowToHigh() {
     function comparator(a: any, b: any) {
       return parseInt(a.price) - parseInt(b.price);

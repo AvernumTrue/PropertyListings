@@ -8,13 +8,13 @@
         <div class="card text-center">
 
           <h1 class="card-header">
-            Register
+            Manage Account
           </h1>
 
           <div class="container">
             <form novalidate
               (ngSubmit)="submit()"
-              [formGroup]="registerForm">
+              [formGroup]="accountForm">
 
               <div>
                 <div class="form-group form-lable-spacing">
@@ -25,10 +25,10 @@
                     id="forenames"
                     placeholder="Enter Forenames"
                     formControlName="forenames"
-                    [ngClass]="{'is-invalid': isInvalid(registerForm.get('forenames')!) }">
+                    [ngClass]="{'is-invalid': isInvalid(accountForm.get('forenames')!) }">
                   <span class="invalid-feedback">
                     <span>
-                      {{getErrorMessage('forenames',registerForm.get('forenames')!)}}
+                      {{getErrorMessage('forenames',accountForm.get('forenames')!)}}
                     </span>
                   </span>
                 </div>
@@ -43,10 +43,10 @@
                     id="surname"
                     placeholder="Enter Surname"
                     formControlName="surname"
-                    [ngClass]="{'is-invalid': isInvalid(registerForm.get('surname')!) }">
+                    [ngClass]="{'is-invalid': isInvalid(accountForm.get('surname')!) }">
                   <span class="invalid-feedback">
                     <span>
-                      {{getErrorMessage('surname',registerForm.get('surname')!)}}
+                      {{getErrorMessage('surname',accountForm.get('surname')!)}}
                     </span>
                   </span>
                 </div>
@@ -61,10 +61,10 @@
                     id="email"
                     placeholder="Enter Email Address"
                     formControlName="email"
-                    [ngClass]="{'is-invalid': isInvalid(registerForm.get('email')!) }">
+                    [ngClass]="{'is-invalid': isInvalid(accountForm.get('email')!) }">
                   <span class="invalid-feedback">
                     <span>
-                      {{getErrorMessage('email',registerForm.get('email')!)}}
+                      {{getErrorMessage('email',accountForm.get('email')!)}}
                     </span>
                   </span>
                 </div>
@@ -72,17 +72,17 @@
 
               <div>
                 <div class="form-group form-lable-spacing">
-                  <label class="text-primary" for="password">Password</label>
+                  <label class="text-primary" for="oldPassword">Change Password (Optional)</label>
                   <input
                     type="password"
                     class="form-control"
-                    id="password"
-                    placeholder="Enter Password"
-                    formControlName="password"
-                    [ngClass]="{'is-invalid': isInvalid(registerForm.get('password')!) }">
+                    id="oldPassword"
+                    placeholder="Enter Old Password"
+                    formControlName="oldPassword"
+                    [ngClass]="{'is-invalid': isInvalid(accountForm.get('oldPassword')!) }">
                   <span class="invalid-feedback">
                     <span>
-                      {{getErrorMessage('password',registerForm.get('password')!)}}
+                      {{getErrorMessage('oldPassword',accountForm.get('oldPassword')!)}}
                     </span>
                   </span>
                 </div>
@@ -90,17 +90,35 @@
 
               <div>
                 <div class="form-group form-lable-spacing">
-                  <label class="text-primary" for="confirmPassword">Confirm Password</label>
+                  <label class="text-primary" for="newPassword">New Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="newPassword"
+                    placeholder="Enter New Password"
+                    formControlName="newPassword"
+                    [ngClass]="{'is-invalid': isInvalid(accountForm.get('newPassword')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('newPassword',accountForm.get('newPassword')!)}}
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="confirmPassword">Confirm New Password</label>
                   <input
                     type="password"
                     class="form-control"
                     id="confirmPassword"
-                    placeholder="Confirm Password"
+                    placeholder="Confirm New Password"
                     formControlName="confirmPassword"
-                    [ngClass]="{'is-invalid': isInvalid(registerForm.get('confirmPassword')!) }">
+                    [ngClass]="{'is-invalid': isInvalid(accountForm.get('confirmPassword')!) }">
                   <span class="invalid-feedback">
                     <span>
-                      {{getErrorMessage('confirmPassword',registerForm.get('confirmPassword')!)}}
+                      {{getErrorMessage('confirmPassword',accountForm.get('confirmPassword')!)}}
                     </span>
                   </span>
                 </div>
@@ -111,14 +129,14 @@
                 type="button"
                 class="btn btn-primary"
                 [disabled]="disableButtons">
-                Register
+                Update Details
               </button>
               <button
                 type="button"
                 class="btn btn-primary"
-                [routerLink]="['/login']"
+                [routerLink]="['/my-adverts']"
                 [disabled]="disableButtons">
-                Login
+                Cancel
               </button>
 
               <div
@@ -149,3 +167,14 @@
     </div>
   </div>
 </div>
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>

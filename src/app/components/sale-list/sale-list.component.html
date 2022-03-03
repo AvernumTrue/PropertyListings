@@ -58,25 +58,8 @@
           </div>
           <div class="col-sm">
 
-            <div class="change-cursor-to-hand">
-              <h2
-                *ngIf="!headingHovered"
-                class="display-4"
-                [routerLink]="['/advert-details', advert.id]"
-                (mouseenter)="mouseEnter(advert.id)">
-                {{advert.headline}}
-              </h2>
-              <h2
-                *ngIf="advert.id !== headingId && headingHovered"
-                class="display-4"
-                [routerLink]="['/advert-details', advert.id]">
-                {{advert.headline}}
-              </h2>
-              <h2
-                *ngIf="headingHovered && advert.id === headingId"
-                class="display-4 alert-primary"
-                [routerLink]="['/advert-details', advert.id]"
-                (mouseleave)="mouseLeave(advert.id)">
+            <div>
+              <h2 class="display-4 headline" [routerLink]="['/advert-details', advert.id]">
                 {{advert.headline}}
               </h2>
             </div>

@@ -14,13 +14,17 @@ export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
   user: User;
-  errorMessage: string;
+  saveErrorMessage: string;
   displayMessage: string;
   primaryMessage: string;
   dangerMessage: string;
   successMessage: string;
   disableButtons = false;
   userId: number;
+
+  get isEditing() {
+    return this.userId != 0;
+  }
 
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     forenames: {
@@ -111,7 +115,7 @@ export class RegisterComponent implements OnInit {
       surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/(^[\s\S]*[A-Za-z]{3,100}[\s\S]*$)/)]],
       email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/^\S*$/i), Validators.minLength(8), Validators.maxLength(100)]],
-      confirmPassword: ['', [Validators.required, Validators.pattern(/^\S*$/i), Validators.minLength(8), Validators.maxLength(100), Validators.pattern(/^\S*$/i), valueMatches(getPassword)]],
+      confirmPassword: ['', [Validators.required, Validators.pattern(/^\S*$/i), Validators.minLength(8), Validators.maxLength(100), valueMatches(getPassword)]],
       id: 0
     });
   }

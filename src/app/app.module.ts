@@ -22,6 +22,8 @@ import { CreateAdvertComponent } from './components/create-advert/create-advert.
 import { InMemoryDataService } from './services/advert-user-province-data';
 import { AdvertDetailsComponent } from './components/advert-details/advert-details.component';
 import { SellerDetailsComponent } from './components/seller-details/seller-details.component';
+import { ManageMyAccountComponent } from './components/manage-my-account/manage-my-account.component';
+import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { SellerDetailsComponent } from './components/seller-details/seller-detai
     MyAdvertsComponent,
     CreateAdvertComponent,
     AdvertDetailsComponent,
-    SellerDetailsComponent
+    SellerDetailsComponent,
+    ManageMyAccountComponent,
+    SellerProfileComponent
   ],
   imports: [
     ReactiveFormsModule,

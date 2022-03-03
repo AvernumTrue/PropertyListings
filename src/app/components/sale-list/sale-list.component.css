@@ -15,7 +15,12 @@ h1{
   padding-top: 6px;
 }
 
-.change-cursor-to-hand{
-    cursor: pointer;
+.headline {
+  cursor: pointer;
 }
+
+.headline:hover {
+  color: #084298;
+  background-color: #CFE2FF;
+} 
 
