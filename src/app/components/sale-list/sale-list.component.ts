@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Spinkit } from 'ng-http-loader';
+import { AdvertFilter } from 'src/app/models/advert-filter.model';
 import { Advert } from 'src/app/models/advert.model';
 import { AdvertService } from 'src/app/services/advert.service';
 
@@ -50,5 +51,10 @@ export class SaleListComponent implements OnInit {
     }
     this.adverts.sort(comparator);
     this.orderMessage = 'Adverts ordered from high to low.'
+  }
+
+  onApplyFiltersClicked(advertFilter: any) {
+    console.log(advertFilter)
+    // console.log('onApplyFiltersClicked')
   }
 }
