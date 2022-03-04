@@ -46,10 +46,32 @@
     Minimum Price
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
-    <li *ngFor="let province of provinces">
+    <li>
       <button
-        class="dropdown-item">
-        {{province.province}}
+        class="dropdown-item"
+        (click)="filterMinimum(10000000)">
+        R10 000 000
+      </button>
+    </li>
+    <li>
+      <button
+        class="dropdown-item"
+        (click)="filterMinimum(1000000)">
+        R1 000 000
+      </button>
+    </li>
+    <li>
+      <button
+        class="dropdown-item"
+        (click)="filterMinimum(100000)">
+        R100 000
+      </button>
+    </li>
+    <li>
+      <button
+        class="dropdown-item"
+        (click)="filterMinimum(10000)">
+        R10 000
       </button>
     </li>
   </ul>
@@ -64,10 +86,32 @@
     Maximum Price
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
-    <li *ngFor="let province of provinces">
+    <li>
       <button
-        class="dropdown-item">
-        {{province.province}}
+        class="dropdown-item"
+        (click)="filterMaximum(100000000)">
+        R100 000 000
+      </button>
+    </li>
+    <li>
+      <button
+        class="dropdown-item"
+        (click)="filterMaximum(10000000)">
+        R10 000 000
+      </button>
+    </li>
+    <li>
+      <button
+        class="dropdown-item"
+        (click)="filterMaximum(1000000)">
+        R1 000 000
+      </button>
+    </li>
+    <li>
+      <button
+        class="dropdown-item"
+        (click)="filterMaximum(100000)">
+        R100 000
       </button>
     </li>
   </ul>
@@ -82,10 +126,32 @@
     Keywords
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
-    <li *ngFor="let province of provinces">
+    <li>
       <button
-        class="dropdown-item">
-        {{province.province}}
+        class="dropdown-item"
+        (click)="filterKeyWord('Big')">
+        Big
+      </button>
+    </li>
+    <li>
+      <button
+        class="dropdown-item"
+        (click)="filterKeyWord('Small')">
+        Small
+      </button>
+    </li>
+    <li>
+      <button
+        class="dropdown-item"
+        (click)="filterKeyWord('Green')">
+        Green
+      </button>
+    </li>
+    <li>
+      <button
+        class="dropdown-item"
+        (click)="filterKeyWord('Blue')">
+        Blue
       </button>
     </li>
   </ul>

@@ -39,4 +39,16 @@ export class SearchComponent implements OnInit {
     console.log(city)
   }
 
+  filterMinimum(minimum: number) {
+    console.log(minimum)
+  }
+
+  filterMaximum(maximum: number) {
+    console.log(maximum)
+  }
+
+  filterKeyWord(keyWord: string) {
+    console.log(keyWord)
+  }
+
 }
