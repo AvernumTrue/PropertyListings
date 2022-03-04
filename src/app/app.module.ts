@@ -24,6 +24,7 @@ import { AdvertDetailsComponent } from './components/advert-details/advert-detai
 import { SellerDetailsComponent } from './components/seller-details/seller-details.component';
 import { ManageMyAccountComponent } from './components/manage-my-account/manage-my-account.component';
 import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
+import { SearchComponent } from './shared/search/search.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SellerProfileComponent } from './components/seller-profile/seller-profi
     AdvertDetailsComponent,
     SellerDetailsComponent,
     ManageMyAccountComponent,
-    SellerProfileComponent
+    SellerProfileComponent,
+    SearchComponent
   ],
   imports: [
     ReactiveFormsModule,

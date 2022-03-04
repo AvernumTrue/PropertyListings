@@ -1,0 +1,31 @@
+<p>search works!</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+
+    <div class="col-sm">
+      <div class="dropdown text-end">
+        <button
+          class="btn btn-outline-primary dropdown-toggle"
+          type="button"
+          id="dropdownBasic1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Province
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+          <li *ngFor="let province of provinces">
+            <button
+              class="dropdown-item">
+              {{province.province}}
+            </button>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

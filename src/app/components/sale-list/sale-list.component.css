@@ -10,11 +10,6 @@ h1{
   margin-bottom: 20px;
 }
 
-.foo{
-  padding-bottom: 6px;
-  padding-top: 6px;
-}
-
 .headline {
   cursor: pointer;
 }
@@ -23,4 +18,3 @@ h1{
   color: #084298;
   background-color: #CFE2FF;
 } 
-
