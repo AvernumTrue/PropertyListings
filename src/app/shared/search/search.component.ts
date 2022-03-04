@@ -12,6 +12,7 @@ export class SearchComponent implements OnInit {
 
   provinces: Province[];
   loading: boolean;
+  selectedProvince: Province;
 
   constructor(
     private provinceService: ProvinceService) {
@@ -27,6 +28,15 @@ export class SearchComponent implements OnInit {
         console.log(err);
       }
     });
-
   }
+
+  filterProvince(province: Province) {
+    this.selectedProvince = province;
+    console.log(province)
+  }
+
+  filterCity(city: string) {
+    console.log(city)
+  }
+
 }

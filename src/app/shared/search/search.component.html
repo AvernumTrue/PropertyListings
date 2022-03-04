@@ -1,31 +1,98 @@
-<p>search works!</p>
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-    </div>
-
-    <div class="col-sm">
-      <div class="dropdown text-end">
-        <button
-          class="btn btn-outline-primary dropdown-toggle"
-          type="button"
-          id="dropdownBasic1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Province
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
-
-          <li *ngFor="let province of provinces">
-            <button
-              class="dropdown-item">
-              {{province.province}}
-            </button>
-          </li>
-
-        </ul>
-      </div>
-    </div>
-  </div>
+<div class="dropdown text-end">
+  <button
+    class="btn btn-outline-primary dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false">
+    Province
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+    <li *ngFor="let province of provinces">
+      <button
+        class="dropdown-item"
+        (click)="filterProvince(province)">
+        {{province.province}}
+      </button>
+    </li>
+  </ul>
 </div>
+
+<div *ngIf="selectedProvince"
+  class="dropdown text-end">
+  <button
+    class="btn btn-outline-primary dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false">
+    City
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+    <li *ngFor="let city of selectedProvince.cities">
+      <button
+        class="dropdown-item"
+        (click)="filterCity(city)">
+        {{city}}
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div class="dropdown text-end">
+  <button
+    class="btn btn-outline-primary dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false">
+    Minimum Price
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+    <li *ngFor="let province of provinces">
+      <button
+        class="dropdown-item">
+        {{province.province}}
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div class="dropdown text-end">
+  <button
+    class="btn btn-outline-primary dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false">
+    Maximum Price
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+    <li *ngFor="let province of provinces">
+      <button
+        class="dropdown-item">
+        {{province.province}}
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div class="dropdown text-end">
+  <button
+    class="btn btn-outline-primary dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false">
+    Keywords
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+    <li *ngFor="let province of provinces">
+      <button
+        class="dropdown-item">
+        {{province.province}}
+      </button>
+    </li>
+  </ul>
+</div>
+
+<button
+  type="button"
+  class="btn btn-primary">
+  Search
+</button>

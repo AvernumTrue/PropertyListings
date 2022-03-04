@@ -10,6 +10,11 @@ h1{
   margin-bottom: 20px;
 }
 
+.message-spacing{
+  padding-bottom: 6px;
+  padding-top: 6px;
+}
+
 .headline {
   cursor: pointer;
 }
