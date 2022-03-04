@@ -37,29 +37,47 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  cancelFilterProvince() {
+    this.selectedProvince = undefined;
+    this.selectedCity = undefined;
+  }
+
+  cancelFilterCity() {
+    this.selectedCity = undefined;
+  }
+
+  cancelFilterMinimum() {
+    this.selectedMinFilter = undefined;
+  }
+
+  cancelFilterMaximum() {
+    this.selectedMaxFilter = undefined;
+  }
+
   filterProvince(province: Province) {
     this.selectedProvince = province;
-    console.log(province)
+    this.selectedCity = undefined;
+    console.log(province);
   }
 
   filterCity(city: string) {
     this.selectedCity = city;
-    console.log(city)
+    console.log(city);
   }
 
   filterMinimum(minimum: number) {
     this.selectedMinFilter = minimum;
-    console.log(minimum)
+    console.log(minimum);
   }
 
   filterMaximum(maximum: number) {
     this.selectedMaxFilter = maximum;
-    console.log(maximum)
+    console.log(maximum);
   }
 
   filterKeyWord(keyWord: string) {
     // TODO 
-    console.log(keyWord)
+    console.log(keyWord);
   }
 
   finaliseAdvertFilter() {
@@ -72,7 +90,7 @@ export class SearchComponent implements OnInit {
   }
 
   applyFilters() {
-    this.finaliseAdvertFilter()
+    this.finaliseAdvertFilter();
     this.applyFiltersClicked.emit(this.advertFilter);
   }
 }

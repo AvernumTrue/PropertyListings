@@ -156,10 +156,10 @@ export class RegisterComponent implements OnInit {
 
   addUser() {
     this.finaliseUser();
-    this.userService.addUser(this.user).pipe(delay(2000)).subscribe({
+    this.userService.addUser(this.user).subscribe({
       next: user => {
         this.userService.setLocalStorage(user);
-        this.userService.login(this.registerForm.get('email').value, this.registerForm.get('password').value).pipe(delay(2000)).subscribe({
+        this.userService.login(this.registerForm.get('email').value, this.registerForm.get('password').value).subscribe({
           next: () => {
           }
         });

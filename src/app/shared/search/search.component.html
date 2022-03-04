@@ -4,9 +4,21 @@
     type="button"
     data-bs-toggle="dropdown"
     aria-expanded="false">
-    Province
+    {{selectedProvince ? 'Province: ' + selectedProvince.province : 'Province' }}
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+    <div *ngIf="selectedProvince">
+      <li>
+        <button
+          class="dropdown-item"
+          (click)="cancelFilterProvince()">
+          Cancel
+        </button>
+      </li>
+      <div
+        class="dropdown-divider">
+      </div>
+    </div>
     <li *ngFor="let province of provinces">
       <button
         class="dropdown-item"
@@ -17,23 +29,46 @@
   </ul>
 </div>
 
-<div *ngIf="selectedProvince"
-  class="dropdown text-end">
+<div class="dropdown text-end">
   <button
     class="btn btn-outline-primary dropdown-toggle"
     type="button"
     data-bs-toggle="dropdown"
     aria-expanded="false">
-    City
+    {{selectedCity ? 'City: ' + selectedCity : 'City' }}
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
-    <li *ngFor="let city of selectedProvince.cities">
-      <button
-        class="dropdown-item"
-        (click)="filterCity(city)">
-        {{city}}
-      </button>
-    </li>
+    <div *ngIf="selectedCity">
+      <div>
+        <li>
+          <button
+            class="dropdown-item"
+            (click)="cancelFilterCity()">
+            Cancel
+          </button>
+        </li>
+      </div>
+      <div
+        class="dropdown-divider">
+      </div>
+    </div>
+    <div *ngIf="!selectedProvince">
+      <li>
+        <button
+          class="dropdown-item">
+          Select a Province first
+        </button>
+      </li>
+    </div>
+    <div *ngIf="selectedProvince">
+      <li *ngFor="let city of selectedProvince.cities">
+        <button
+          class="dropdown-item"
+          (click)="filterCity(city)">
+          {{city}}
+        </button>
+      </li>
+    </div>
   </ul>
 </div>
 
@@ -43,35 +78,50 @@
     type="button"
     data-bs-toggle="dropdown"
     aria-expanded="false">
-    Minimum Price
+    {{selectedMinFilter ? 'Minimum Price: ' : 'Minimum Price' }}
+    {{selectedMinFilter | currency:'R'}}
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+    <div *ngIf="selectedMinFilter">
+      <li>
+        <button
+          class="dropdown-item"
+          (click)="cancelFilterMinimum()">
+          Cancel
+        </button>
+      </li>
+      <div
+        class="dropdown-divider">
+      </div>
+    </div>
+
     <li>
       <button
         class="dropdown-item"
-        (click)="filterMinimum(10000000)">
-        R10 000 000
-      </button>
-    </li>
-    <li>
-      <button
-        class="dropdown-item"
-        (click)="filterMinimum(1000000)">
-        R1 000 000
+        (click)="filterMinimum(10000)">
+        R10,000.00
       </button>
     </li>
     <li>
       <button
         class="dropdown-item"
         (click)="filterMinimum(100000)">
-        R100 000
+        R100,000.00
       </button>
     </li>
     <li>
       <button
         class="dropdown-item"
-        (click)="filterMinimum(10000)">
-        R10 000
+        (click)="filterMinimum(1000000)">
+        R1,000,000.00
+      </button>
+    </li>
+    <li>
+      <button
+        class="dropdown-item"
+        (click)="filterMinimum(10000000)">
+        R10,000,000.00
       </button>
     </li>
   </ul>
@@ -83,35 +133,50 @@
     type="button"
     data-bs-toggle="dropdown"
     aria-expanded="false">
-    Maximum Price
+    {{selectedMaxFilter ? 'Maximum Price: ' : 'Maximum Price' }}
+    {{selectedMaxFilter | currency:'R'}}
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+    <div *ngIf="selectedMaxFilter">
+      <li>
+        <button
+          class="dropdown-item"
+          (click)="cancelFilterMaximum()">
+          Cancel
+        </button>
+      </li>
+      <div
+        class="dropdown-divider">
+      </div>
+    </div>
+
     <li>
       <button
         class="dropdown-item"
         (click)="filterMaximum(100000000)">
-        R100 000 000
+        R100,000,000.00
       </button>
     </li>
     <li>
       <button
         class="dropdown-item"
         (click)="filterMaximum(10000000)">
-        R10 000 000
+        R10,000,000.00
       </button>
     </li>
     <li>
       <button
         class="dropdown-item"
         (click)="filterMaximum(1000000)">
-        R1 000 000
+        R1,000,000.00
       </button>
     </li>
     <li>
       <button
         class="dropdown-item"
         (click)="filterMaximum(100000)">
-        R100 000
+        R100,000.00
       </button>
     </li>
   </ul>
