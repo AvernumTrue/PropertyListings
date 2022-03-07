@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AdvertFilter } from 'src/app/models/advert-filter.model';
 import { Province } from 'src/app/models/province.model';
 import { ProvinceService } from 'src/app/services/province.service';
@@ -10,8 +11,9 @@ import { ProvinceService } from 'src/app/services/province.service';
 })
 export class SearchComponent implements OnInit {
 
-  @Output() applyFiltersClicked = new EventEmitter<AdvertFilter>();
+  @Output() applyFiltersEmitter = new EventEmitter<AdvertFilter>();
 
+  searchForm!: FormGroup;
   provinces: Province[];
   loading: boolean;
   selectedProvince: Province;
@@ -22,11 +24,12 @@ export class SearchComponent implements OnInit {
   advertFilter: AdvertFilter;
 
   constructor(
+    private fb: FormBuilder,
     private provinceService: ProvinceService) {
   }
 
   ngOnInit(): void {
-
+    this.createForm()
     this.provinceService.getProvinces().subscribe({
       next: provinces => {
         this.provinces = provinces;
@@ -34,6 +37,12 @@ export class SearchComponent implements OnInit {
       }, error: (err: any) => {
         console.log(err);
       }
+    });
+  }
+
+  createForm(): void {
+    this.searchForm = this.fb.group({
+      keyWord: ''
     });
   }
 
@@ -62,22 +71,29 @@ export class SearchComponent implements OnInit {
 
   filterCity(city: string) {
     this.selectedCity = city;
-    console.log(city);
+    // console.log(city);
   }
 
   filterMinimum(minimum: number) {
     this.selectedMinFilter = minimum;
-    console.log(minimum);
+    // console.log(minimum);
   }
 
   filterMaximum(maximum: number) {
     this.selectedMaxFilter = maximum;
-    console.log(maximum);
+    // console.log(maximum);
   }
 
   filterKeyWord(keyWord: string) {
-    // TODO 
-    console.log(keyWord);
+    // TODO : add keywords
+    // console.log(keyWord);
+  }
+
+  clearAll() {
+    this.selectedProvince = undefined;
+    this.selectedCity = undefined;
+    this.selectedMinFilter = undefined;
+    this.selectedMaxFilter = undefined;
   }
 
   finaliseAdvertFilter() {
@@ -86,11 +102,12 @@ export class SearchComponent implements OnInit {
     advertFilter.selectedCity = this.selectedCity;
     advertFilter.selectedMinFilter = this.selectedMinFilter;
     advertFilter.selectedMaxFilter = this.selectedMaxFilter;
+    advertFilter.selectedKeyWords = this.searchForm.get('keyWord')?.value.trim();
     this.advertFilter = advertFilter;
   }
 
-  applyFilters() {
+  search() {
     this.finaliseAdvertFilter();
-    this.applyFiltersClicked.emit(this.advertFilter);
+    this.applyFiltersEmitter.emit(this.advertFilter);
   }
 }

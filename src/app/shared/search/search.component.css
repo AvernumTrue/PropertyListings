@@ -5,3 +5,13 @@ h1{
 .dropdown{
   margin-bottom: 20px;
 }
+
+.foo{
+  margin: 8px;
+}
+
+.form-group{
+  margin-top: 4px;
+  margin-left: 4px;
+  margin-right: 4px;
+}

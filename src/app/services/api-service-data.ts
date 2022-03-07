@@ -32,7 +32,7 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'Free State',
         city: 'Arlington',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 20000
+        price: 100000
       },
       {
         userId: 1,
@@ -42,7 +42,7 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'Gauteng',
         city: 'Alexandra',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 30000
+        price: 1000000
       },
       {
         userId: 1,
@@ -52,68 +52,68 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'KwaZulu-Natal',
         city: 'Dannhauser',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 40000
+        price: 10000000
       },
       {
         userId: 1,
         advertStatus: AdvertStatus.Deleted,
         id: 5,
-        headline: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m',
+        headline: 'Big Green Flat',
         province: 'Eastern Cape',
         city: 'Barkly East',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 50000
+        price: 100000000
       },
 
       {
         userId: 2,
         advertStatus: AdvertStatus.Live,
         id: 6,
-        headline: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m',
+        headline: 'Round Orange Flat',
         province: 'Free State',
         city: 'Bethlehem',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 10000
+        price: 100000000
       },
       {
         userId: 2,
         advertStatus: AdvertStatus.Live,
         id: 7,
-        headline: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m',
+        headline: 'Big Blue Flat',
         province: 'Gauteng',
         city: 'Lenasia',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 20000
+        price: 10000000
       },
       {
         userId: 2,
         advertStatus: AdvertStatus.Live,
         id: 8,
-        headline: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m',
+        headline: 'Wide Green Flat',
         province: 'KwaZulu-Natal',
         city: 'Madadeni',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 30000
+        price: 1000000
       },
       {
         userId: 2,
         advertStatus: AdvertStatus.Hidden,
         id: 9,
-        headline: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m',
+        headline: 'Small Yellow Flat',
         province: 'Eastern Cape',
         city: 'Barkly East',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 40000
+        price: 100000
       },
       {
         userId: 2,
         advertStatus: AdvertStatus.Deleted,
         id: 10,
-        headline: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean me',
+        headline: 'Small Yellow House',
         province: 'Free State',
         city: 'Clarens',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 50000
+        price: 10000
       },
     ];
     {
@@ -193,7 +193,7 @@ export class InMemoryDataService implements InMemoryDbService {
           cities: ['Amalia', 'Bray', 'Ganyesa', 'Mareetsane']
         },
       ];
-      return { adverts, users, provinces };
+      return { adverts, users, provinces, };
     }
   }
 }

@@ -1,6 +1,6 @@
 <h1 class="text-center">Sale List</h1>
 
-<pl-search (applyFiltersClicked)="onApplyFiltersClicked($event)"></pl-search>
+<pl-search (applyFiltersEmitter)="onApplyFiltersClicked($event)"></pl-search>
 
 <div class="container">
   <div class="row">
@@ -46,11 +46,9 @@
   </div>
 </div>
 
-
-
 <div *ngIf="!loading">
 
-  <div *ngFor="let advert of adverts">
+  <div *ngFor="let advert of filteredAdverts">
     <div class="card container jumbotron">
 
       <div class="container">
@@ -73,7 +71,6 @@
                 </h3>
               </li>
               <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
-              <!-- <li class="list-group-item">{{advert.details}}</li> -->
             </ul>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdvertFilter } from 'src/app/models/advert-filter.model';
 
 @Component({
   selector: 'pl-home',
@@ -12,4 +13,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onApplyFiltersClicked(advertFilter: AdvertFilter) {
+
+    console.log(advertFilter)
+
+  }
 }

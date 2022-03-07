@@ -5,6 +5,5 @@ export class AdvertFilter {
   selectedCity: string;
   selectedMaxFilter: number;
   selectedMinFilter: number;
-  // TODO
-  // selectedKeyWord: string[];
+  selectedKeyWords: string;
 }
