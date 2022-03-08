@@ -1,7 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Spinkit } from 'ng-http-loader';
 import { AdvertFilter } from 'src/app/models/advert-filter.model';
 import { Province } from 'src/app/models/province.model';
+import { AdvertService } from 'src/app/services/advert.service';
 import { ProvinceService } from 'src/app/services/province.service';
 
 @Component({
@@ -13,6 +16,7 @@ export class SearchComponent implements OnInit {
 
   @Output() applyFiltersEmitter = new EventEmitter<AdvertFilter>();
 
+  spinnerStyle = Spinkit;
   searchForm!: FormGroup;
   provinces: Province[];
   loading: boolean;
@@ -20,19 +24,40 @@ export class SearchComponent implements OnInit {
   selectedCity: string;
   selectedMaxFilter: number;
   selectedMinFilter: number;
-  selectedKeyWord: string[];
-  advertFilter: AdvertFilter;
+  selectedKeyWord: string;
+
+  // advertFilter: AdvertFilter;
+
+  get advertFilter(): AdvertFilter {
+    return this.advertService.advertFilter;
+  }
+  set advertFilter(value: AdvertFilter) {
+    this.advertService.advertFilter = value;
+  }
 
   constructor(
+    private advertService: AdvertService,
+    private router: Router,
     private fb: FormBuilder,
     private provinceService: ProvinceService) {
   }
 
   ngOnInit(): void {
+    this.loading = true;
+    // if (this.router.url === "/home") {
+    //   this.advertFilter = undefined;
+    // }
     this.createForm()
     this.provinceService.getProvinces().subscribe({
       next: provinces => {
         this.provinces = provinces;
+
+        this.selectedProvince = this.advertService.advertFilter.selectedProvince ?? undefined;
+        this.selectedCity = this.advertService.advertFilter.selectedCity ?? undefined;
+        this.selectedMaxFilter = this.advertService.advertFilter.selectedMaxFilter ?? undefined;
+        this.selectedMinFilter = this.advertService.advertFilter.selectedMinFilter ?? undefined;
+        this.selectedKeyWord = this.advertService.advertFilter.selectedKeyWords ?? undefined;
+
         this.loading = false;
       }, error: (err: any) => {
         console.log(err);
@@ -109,5 +134,9 @@ export class SearchComponent implements OnInit {
   search() {
     this.finaliseAdvertFilter();
     this.applyFiltersEmitter.emit(this.advertFilter);
+    this.loading = false;
+    if (this.router.url === "/home") {
+      this.router.navigate(['/sale-list']);
+    }
   }
 }

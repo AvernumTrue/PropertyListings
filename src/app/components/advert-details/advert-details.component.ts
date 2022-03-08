@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Spinkit } from 'ng-http-loader';
 import { Advert } from '../../models/advert.model';
-import { User } from '../../models/user.model';
 import { AdvertService } from '../../services/advert.service';
 
 @Component({

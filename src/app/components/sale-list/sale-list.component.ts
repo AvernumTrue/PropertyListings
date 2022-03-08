@@ -16,15 +16,21 @@ export class SaleListComponent implements OnInit {
   adverts: Advert[] = [];
   loading: boolean;
   orderMessage: string;
-  headingHovered: boolean;
   headingId: number;
-  advertFilter: AdvertFilter;
   filteredAdverts: Advert[] = [];
+
+  // advertFilter: AdvertFilter;
+
+  get advertFilter(): AdvertFilter {
+    return this.advertService.advertFilter;
+  }
+  set advertFilter(value: AdvertFilter) {
+    this.advertService.advertFilter = value;
+  }
 
   constructor(
     private advertService: AdvertService,
-    private router: Router,) {
-  };
+    private router: Router,) { };
 
   ngOnInit(): void {
     this.getFilteredAdverts();
