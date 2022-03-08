@@ -27,62 +27,16 @@ export class SaleListComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.getAdverts()
-
+    this.getFilteredAdverts();
   }
 
-  getAdverts() {
+  // TODO : figure out how to wait for this.filteredAdverts to be assigned a value before continuing
+  getFilteredAdverts() {
     this.loading = true;
-    this.advertService.getAdverts().subscribe({
-      next: adverts => {
-        this.adverts = adverts;
-        this.performFilter();
-        this.highToLow();
-        this.loading = false;
-      }
-    });
-  }
-
-  // TODO : perperformFilter
-  performFilter() {
-    this.filteredAdverts = this.adverts
-    if (this.advertFilter) {
-      const filterByProvince = this.advertFilter.selectedProvince ?? undefined;
-      const filterByCity = this.advertFilter.selectedCity ?? undefined;
-      const filterByMaxFilter = this.advertFilter.selectedMaxFilter ?? undefined;
-      const filterByMinFilter = this.advertFilter.selectedMinFilter ?? undefined;
-      const filterByKeyWord = this.advertFilter.selectedKeyWords ?? undefined;
-
-      if (filterByProvince) {
-        this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-          advert.province.includes(filterByProvince.province));
-      }
-
-      if (filterByCity) {
-        this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-          advert.city.includes(filterByCity));
-      }
-
-      // TODO : Add warning of impossible filter
-      if (filterByMaxFilter < filterByMinFilter) {
-        console.log("Impossible filter message")
-      }
-
-      if (filterByMaxFilter) {
-        this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-          advert.price <= (filterByMaxFilter));
-      }
-
-      if (filterByMinFilter) {
-        this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-          advert.price >= (filterByMinFilter));
-      }
-
-      if (filterByKeyWord) {
-        this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-          advert.headline.toLowerCase().includes(filterByKeyWord.toLowerCase()));
-      }
-    }
+    this.filteredAdverts = this.advertService.getFilteredAdverts(this.advertFilter);
+    console.log("third")
+    this.highToLow();
+    this.loading = false;
   }
 
   lowToHigh() {
@@ -102,7 +56,64 @@ export class SaleListComponent implements OnInit {
 
   onApplyFiltersClicked(advertFilter: AdvertFilter) {
     this.advertFilter = advertFilter;
-    console.log(this.advertFilter.selectedKeyWords)
-    this.performFilter()
+    this.getFilteredAdverts();
   }
 }
+
+ // ngOnInit(): void {
+  //   this.getAdverts()
+  // }
+
+  // getAdverts() {
+  //   this.loading = true;
+  //   this.advertService.getAdverts().subscribe({
+  //     next: adverts => {
+  //       this.adverts = adverts;
+  //       // this.performFilter();
+  //       this.highToLow();
+  //       this.loading = false;
+  //     }
+  //   });
+  // }
+
+  // TODO : perperformFilter
+  // performFilter() {
+  //   this.filteredAdverts = this.adverts
+  //   if (this.advertFilter) {
+  //     const filterByProvince = this.advertFilter.selectedProvince ?? undefined;
+  //     const filterByCity = this.advertFilter.selectedCity ?? undefined;
+  //     const filterByMaxFilter = this.advertFilter.selectedMaxFilter ?? undefined;
+  //     const filterByMinFilter = this.advertFilter.selectedMinFilter ?? undefined;
+  //     const filterByKeyWord = this.advertFilter.selectedKeyWords ?? undefined;
+
+  //     if (filterByProvince) {
+  //       this.filteredAdverts = this.filteredAdverts.filter((advert) =>
+  //         advert.province.includes(filterByProvince.province));
+  //     }
+
+  //     if (filterByCity) {
+  //       this.filteredAdverts = this.filteredAdverts.filter((advert) =>
+  //         advert.city.includes(filterByCity));
+  //     }
+
+  //     // TODO : Add warning of impossible filter
+  //     if (filterByMaxFilter < filterByMinFilter) {
+  //       console.log("Impossible filter message")
+  //     }
+
+  //     if (filterByMaxFilter) {
+  //       this.filteredAdverts = this.filteredAdverts.filter((advert) =>
+  //         advert.price <= (filterByMaxFilter));
+  //     }
+
+  //     if (filterByMinFilter) {
+  //       this.filteredAdverts = this.filteredAdverts.filter((advert) =>
+  //         advert.price >= (filterByMinFilter));
+  //     }
+
+  //     if (filterByKeyWord) {
+  //       this.filteredAdverts = this.filteredAdverts.filter((advert) =>
+  //         advert.headline.toLowerCase().includes(filterByKeyWord.toLowerCase()));
+  //     }
+  //   }
+  // }

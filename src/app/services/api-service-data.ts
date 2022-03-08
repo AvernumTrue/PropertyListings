@@ -193,7 +193,7 @@ export class InMemoryDataService implements InMemoryDbService {
           cities: ['Amalia', 'Bray', 'Ganyesa', 'Mareetsane']
         },
       ];
-      return { adverts, users, provinces, };
+      return { adverts, users, provinces };
     }
   }
 }
