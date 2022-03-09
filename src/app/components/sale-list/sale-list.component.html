@@ -2,49 +2,47 @@
 
 <pl-search (applyFiltersEmitter)="onApplyFiltersClicked($event)"></pl-search>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-    </div>
-    <div class="col-sm text-center">
-      <div
-        *ngIf="orderMessage"
-        class="alert message-spacing alert-primary">
-        {{orderMessage}}
-      </div>
-    </div>
-    <div class="col-sm">
-      <div class="dropdown text-end">
-        <button
-          class="btn btn-outline-primary dropdown-toggle"
-          type="button"
-          id="dropdownBasic1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Order by
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+<div class="d-flex justify-content-end">
 
-          <li>
-            <button
-              class="dropdown-item"
-              (click)="highToLow()">
-              Price High to Low
-            </button>
-          </li>
-
-          <li>
-            <button
-              class="dropdown-item"
-              (click)="lowToHigh()">
-              Price Low to High
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div
+    *ngIf="orderMessage"
+    class="alert message-spacing alert-primary">
+    {{orderMessage}}
   </div>
+
+
+
+  <div class="dropdown text-end">
+    <button
+      class="btn btn-outline-primary dropdown-toggle"
+      type="button"
+      id="dropdownBasic1"
+      data-bs-toggle="dropdown"
+      aria-expanded="false">
+      Order by
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+      <li>
+        <button
+          class="dropdown-item"
+          (click)="highToLow()">
+          Price High to Low
+        </button>
+      </li>
+
+      <li>
+        <button
+          class="dropdown-item"
+          (click)="lowToHigh()">
+          Price Low to High
+        </button>
+      </li>
+    </ul>
+  </div>
+
 </div>
+
 
 <div *ngIf="!loading">
 

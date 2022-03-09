@@ -26,8 +26,6 @@ export class SearchComponent implements OnInit {
   selectedMinFilter: number;
   selectedKeyWord: string;
 
-  // advertFilter: AdvertFilter;
-
   get advertFilter(): AdvertFilter {
     return this.advertService.advertFilter;
   }
@@ -91,27 +89,22 @@ export class SearchComponent implements OnInit {
   filterProvince(province: Province) {
     this.selectedProvince = province;
     this.selectedCity = undefined;
-    console.log(province);
   }
 
   filterCity(city: string) {
     this.selectedCity = city;
-    // console.log(city);
   }
 
   filterMinimum(minimum: number) {
     this.selectedMinFilter = minimum;
-    // console.log(minimum);
   }
 
   filterMaximum(maximum: number) {
     this.selectedMaxFilter = maximum;
-    // console.log(maximum);
   }
 
   filterKeyWord(keyWord: string) {
-    // TODO : add keywords
-    // console.log(keyWord);
+
   }
 
   clearAll() {

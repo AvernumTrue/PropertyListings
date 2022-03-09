@@ -36,13 +36,11 @@ export class SaleListComponent implements OnInit {
     this.getFilteredAdverts();
   }
 
-  // TODO : figure out how to wait for this.filteredAdverts to be assigned a value before continuing
   getFilteredAdverts() {
     this.loading = true;
     this.advertService.getFilteredAdverts(this.advertFilter).subscribe({
       next: filteredAdverts => {
         this.filteredAdverts = filteredAdverts;
-        console.log("third");
         this.highToLow();
         this.loading = false;
       },

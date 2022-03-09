@@ -25,8 +25,6 @@ export class AdvertService {
         next: adverts => {
           try {
             this.adverts = adverts;
-            console.log("first")
-
             this.advertFilter = advertFilter;
             this.filteredAdverts = this.adverts
 
@@ -61,9 +59,6 @@ export class AdvertService {
                   advert.headline.toLowerCase().includes(filterByKeyWord.toLowerCase()));
               }
             }
-            console.log("second")
-            console.log(this.filteredAdverts);
-
             observer.next(this.filteredAdverts);
           } catch (err) {
             observer.error(err);
