@@ -22,30 +22,24 @@
           <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
           <li class="list-group-item">{{advert.details}}</li>
         </ul>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm">
-              <button
-                type="button"
-                class="btn btn-primary"
-                [routerLink]="['/seller-details', advert.userId]">
-                Seller Details
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                [routerLink]="['/sale-list']">
-                Back
-              </button>
-            </div>
-          </div>
-        </div>
-        <pl-contact-seller></pl-contact-seller>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/sale-list']">
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="addToFavourites()">
+          Add to Favourites
+        </button>
       </div>
+      <pl-contact-seller [advert]="advert"></pl-contact-seller>
     </div>
   </div>
-</div>
 
+</div>
 <ng-http-loader
   *ngIf="loading"
   [backdrop]="true"

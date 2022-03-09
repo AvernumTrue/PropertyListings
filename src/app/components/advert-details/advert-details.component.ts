@@ -38,4 +38,9 @@ export class AdvertDetailsComponent implements OnInit {
       }
     });
   }
+
+  addToFavourites() {
+    console.log('addToFavourites');
+  }
+
 }

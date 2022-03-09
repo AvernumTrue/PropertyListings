@@ -125,6 +125,7 @@ export class InMemoryDataService implements InMemoryDbService {
           email: '1@1.com',
           password: 'password1',
           isAdmin: false,
+          phoneNumber: '123 456 7890'
         },
         {
           id: 2,
@@ -141,6 +142,7 @@ export class InMemoryDataService implements InMemoryDbService {
           email: '3@3.com',
           password: 'password3',
           isAdmin: false,
+          phoneNumber: '111 222 3333'
         },
         {
           id: 4,
@@ -149,6 +151,7 @@ export class InMemoryDataService implements InMemoryDbService {
           email: '4@4.com',
           password: 'password4',
           isAdmin: false,
+          phoneNumber: '3211231234'
         },
         {
           id: 5,
