@@ -39,10 +39,20 @@ export class SaleListComponent implements OnInit {
   // TODO : figure out how to wait for this.filteredAdverts to be assigned a value before continuing
   getFilteredAdverts() {
     this.loading = true;
-    this.filteredAdverts = this.advertService.getFilteredAdverts(this.advertFilter);
-    console.log("third")
-    this.highToLow();
-    this.loading = false;
+    this.advertService.getFilteredAdverts(this.advertFilter).subscribe({
+      next: filteredAdverts => {
+        this.filteredAdverts = filteredAdverts;
+        console.log("third");
+        this.highToLow();
+        this.loading = false;
+      },
+      error: err => {
+        console.log('Failed to fetch filtered adverts');
+        console.error(err);
+        this.filteredAdverts = [];
+        this.loading = false;
+      }
+    });
   }
 
   lowToHigh() {

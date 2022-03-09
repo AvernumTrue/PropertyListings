@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Spinkit } from 'ng-http-loader';
-import { delay } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 

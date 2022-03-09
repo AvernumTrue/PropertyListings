@@ -44,9 +44,9 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    // if (this.router.url === "/home") {
-    //   this.advertFilter = undefined;
-    // }
+    if (this.router.url === "/home") {
+      this.advertFilter = undefined;
+    }
     this.createForm()
     this.provinceService.getProvinces().subscribe({
       next: provinces => {
@@ -119,6 +119,8 @@ export class SearchComponent implements OnInit {
     this.selectedCity = undefined;
     this.selectedMinFilter = undefined;
     this.selectedMaxFilter = undefined;
+    this.finaliseAdvertFilter();
+    this.applyFiltersEmitter.emit(this.advertFilter);
   }
 
   finaliseAdvertFilter() {

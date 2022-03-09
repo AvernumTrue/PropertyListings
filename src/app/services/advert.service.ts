@@ -16,54 +16,62 @@ export class AdvertService {
   };
 
   adverts: Advert[] = [];
-  advertFilter: AdvertFilter;
+  advertFilter: AdvertFilter = {};
   filteredAdverts: Advert[] = [];
 
   getFilteredAdverts(advertFilter: AdvertFilter) {
-    const value = this.http.get<Advert[]>(this.advertUrl).pipe(delay(2000));
-    value.subscribe({
-      next: adverts => {
-        this.adverts = adverts;
-        console.log("first")
-      }
+    return new Observable<Advert[]>(observer => {
+      this.http.get<Advert[]>(this.advertUrl).pipe(delay(2000)).subscribe({
+        next: adverts => {
+          try {
+            this.adverts = adverts;
+            console.log("first")
+
+            this.advertFilter = advertFilter;
+            this.filteredAdverts = this.adverts
+
+            if (this.advertFilter) {
+              const filterByProvince = this.advertFilter.selectedProvince;
+              const filterByCity = this.advertFilter.selectedCity;
+              const filterByMaxFilter = this.advertFilter.selectedMaxFilter;
+              const filterByMinFilter = this.advertFilter.selectedMinFilter;
+              const filterByKeyWord = this.advertFilter.selectedKeyWords;
+
+              if (filterByProvince) {
+                this.filteredAdverts = this.filteredAdverts.filter((advert) =>
+                  advert.province.includes(filterByProvince.province));
+              }
+              if (filterByCity) {
+                this.filteredAdverts = this.filteredAdverts.filter((advert) =>
+                  advert.city.includes(filterByCity));
+              }
+              if (filterByMaxFilter < filterByMinFilter) {
+                console.log("Impossible filter message")
+              }
+              if (filterByMaxFilter) {
+                this.filteredAdverts = this.filteredAdverts.filter((advert) =>
+                  advert.price <= (filterByMaxFilter));
+              }
+              if (filterByMinFilter) {
+                this.filteredAdverts = this.filteredAdverts.filter((advert) =>
+                  advert.price >= (filterByMinFilter));
+              }
+              if (filterByKeyWord) {
+                this.filteredAdverts = this.filteredAdverts.filter((advert) =>
+                  advert.headline.toLowerCase().includes(filterByKeyWord.toLowerCase()));
+              }
+            }
+            console.log("second")
+            console.log(this.filteredAdverts);
+
+            observer.next(this.filteredAdverts);
+          } catch (err) {
+            observer.error(err);
+          }
+        },
+        error: (err) => observer.error(err),
+      });
     });
-
-    this.advertFilter = advertFilter;
-    this.filteredAdverts = this.adverts
-
-    if (this.advertFilter) {
-      const filterByProvince = this.advertFilter.selectedProvince ?? undefined;
-      const filterByCity = this.advertFilter.selectedCity ?? undefined;
-      const filterByMaxFilter = this.advertFilter.selectedMaxFilter ?? undefined;
-      const filterByMinFilter = this.advertFilter.selectedMinFilter ?? undefined;
-      const filterByKeyWord = this.advertFilter.selectedKeyWords ?? undefined;
-
-      if (filterByProvince) {
-        this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-          advert.province.includes(filterByProvince.province));
-      }
-      if (filterByCity) {
-        this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-          advert.city.includes(filterByCity));
-      }
-      if (filterByMaxFilter < filterByMinFilter) {
-        console.log("Impossible filter message")
-      }
-      if (filterByMaxFilter) {
-        this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-          advert.price <= (filterByMaxFilter));
-      }
-      if (filterByMinFilter) {
-        this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-          advert.price >= (filterByMinFilter));
-      }
-      if (filterByKeyWord) {
-        this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-          advert.headline.toLowerCase().includes(filterByKeyWord.toLowerCase()));
-      }
-    }
-    console.log("second")
-    return this.filteredAdverts;
   }
 
   getAdvert(id: number): Observable<Advert> {

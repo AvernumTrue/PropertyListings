@@ -25,6 +25,7 @@ import { SellerDetailsComponent } from './components/seller-details/seller-detai
 import { ManageMyAccountComponent } from './components/manage-my-account/manage-my-account.component';
 import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
 import { SearchComponent } from './shared/search/search.component';
+import { ContactSellerComponent } from './components/contact-seller/contact-seller.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SearchComponent } from './shared/search/search.component';
     SellerDetailsComponent,
     ManageMyAccountComponent,
     SellerProfileComponent,
-    SearchComponent
+    SearchComponent,
+    ContactSellerComponent
   ],
   imports: [
     ReactiveFormsModule,
