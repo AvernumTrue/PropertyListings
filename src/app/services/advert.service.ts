@@ -49,6 +49,7 @@ export class AdvertService {
         next: adverts => {
           try {
             this.adverts = adverts;
+            // TODO Only return adverts that have advertStatus === "LIVE"
             this.advertFilter = advertFilter;
             this.filteredAdverts = this.adverts
 

@@ -2,15 +2,13 @@
 
 <pl-search (applyFiltersEmitter)="onApplyFiltersClicked($event)"></pl-search>
 
-<div class="d-flex justify-content-end">
+<div class="order-spacing d-flex justify-content-end">
 
   <div
     *ngIf="orderMessage"
     class="alert message-spacing alert-primary">
     {{orderMessage}}
   </div>
-
-
 
   <div class="dropdown text-end">
     <button
