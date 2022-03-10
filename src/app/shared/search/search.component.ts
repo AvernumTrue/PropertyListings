@@ -42,20 +42,15 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    if (this.router.url === "/home") {
-      this.advertFilter = undefined;
-    }
-    this.createForm()
+    this.createForm();
     this.provinceService.getProvinces().subscribe({
       next: provinces => {
         this.provinces = provinces;
-
-        this.selectedProvince = this.advertService.advertFilter.selectedProvince ?? undefined;
-        this.selectedCity = this.advertService.advertFilter.selectedCity ?? undefined;
-        this.selectedMaxFilter = this.advertService.advertFilter.selectedMaxFilter ?? undefined;
-        this.selectedMinFilter = this.advertService.advertFilter.selectedMinFilter ?? undefined;
-        this.selectedKeyWord = this.advertService.advertFilter.selectedKeyWords ?? undefined;
-
+        this.selectedProvince = this.advertService.advertFilter.selectedProvince;
+        this.selectedCity = this.advertService.advertFilter.selectedCity;
+        this.selectedMaxFilter = this.advertService.advertFilter.selectedMaxFilter;
+        this.selectedMinFilter = this.advertService.advertFilter.selectedMinFilter;
+        this.selectedKeyWord = this.advertService.advertFilter.selectedKeyWords;
         this.loading = false;
       }, error: (err: any) => {
         console.log(err);

@@ -22,7 +22,8 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'Eastern Cape',
         city: 'Aliwal North',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 10000
+        price: 10000,
+        featured: true
       },
       {
         userId: 1,
@@ -32,7 +33,8 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'Free State',
         city: 'Arlington',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 100000
+        price: 100000,
+        featured: false
       },
       {
         userId: 1,
@@ -42,7 +44,8 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'Gauteng',
         city: 'Alexandra',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 1000000
+        price: 1000000,
+        featured: true
       },
       {
         userId: 1,
@@ -52,7 +55,8 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'KwaZulu-Natal',
         city: 'Dannhauser',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 10000000
+        price: 10000000,
+        featured: false
       },
       {
         userId: 1,
@@ -62,7 +66,8 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'Eastern Cape',
         city: 'Barkly East',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 100000000
+        price: 100000000,
+        featured: true
       },
 
       {
@@ -73,7 +78,8 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'Free State',
         city: 'Bethlehem',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 100000000
+        price: 100000000,
+        featured: true
       },
       {
         userId: 2,
@@ -83,7 +89,8 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'Gauteng',
         city: 'Lenasia',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 10000000
+        price: 10000000,
+        featured: true
       },
       {
         userId: 2,
@@ -93,7 +100,8 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'KwaZulu-Natal',
         city: 'Madadeni',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 1000000
+        price: 1000000,
+        featured: true
       },
       {
         userId: 2,
@@ -103,7 +111,8 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'Eastern Cape',
         city: 'Barkly East',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 100000
+        price: 100000,
+        featured: false
       },
       {
         userId: 2,
@@ -113,7 +122,8 @@ export class InMemoryDataService implements InMemoryDbService {
         province: 'Free State',
         city: 'Clarens',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
-        price: 10000
+        price: 10000,
+        featured: false
       },
     ];
     {
