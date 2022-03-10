@@ -15,9 +15,33 @@ export class AdvertService {
   constructor(private http: HttpClient) {
   };
 
+  advert: Advert;
   adverts: Advert[] = [];
   advertFilter: AdvertFilter = {};
   filteredAdverts: Advert[] = [];
+  featuredAdverts: Advert[] = [];
+
+  getFeaturedAdverts() {
+    return new Observable<Advert[]>(observer => {
+      this.http.get<Advert[]>(this.advertUrl).pipe(delay(2000)).subscribe({
+        next: adverts => {
+          try {
+            this.adverts = adverts;
+            for (let advert of this.adverts) {
+              this.advert = advert;
+              if (this.advert.featured === true && this.advert.advertStatus === "LIVE") {
+                this.featuredAdverts = this.featuredAdverts.concat(this.advert);
+              }
+            }
+            observer.next(this.featuredAdverts);
+          } catch (err) {
+            observer.error(err);
+          }
+        },
+        error: (err) => observer.error(err),
+      });
+    });
+  }
 
   getFilteredAdverts(advertFilter: AdvertFilter) {
     return new Observable<Advert[]>(observer => {
@@ -42,9 +66,6 @@ export class AdvertService {
               if (filterByCity) {
                 this.filteredAdverts = this.filteredAdverts.filter((advert) =>
                   advert.city.includes(filterByCity));
-              }
-              if (filterByMaxFilter < filterByMinFilter) {
-                console.log("Impossible filter message")
               }
               if (filterByMaxFilter) {
                 this.filteredAdverts = this.filteredAdverts.filter((advert) =>

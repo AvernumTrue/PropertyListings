@@ -19,35 +19,11 @@ export class FeaturedHomesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAdverts();
-  }
-
-  getAdverts() {
-    this.loading = true;
-    this.advertService.getAdverts().subscribe({
-      next: adverts => {
-        this.adverts = adverts;
-        this.getFeaturedAdverts();
-        console.log(this.adverts)
-        this.loading = false;
-      },
-      error: err => {
-        console.log('Failed to fetch adverts');
-        console.error(err);
-        this.loading = false;
+    this.advertService.getFeaturedAdverts().subscribe({
+      next: featuredAdverts => {
+        this.featuredAdverts = featuredAdverts
       }
     });
-  }
-
-  getFeaturedAdverts() {
-
-    for (let advert of this.adverts) {
-      this.advert = advert;
-      if (this.advert.featured === true && this.advert.advertStatus === "LIVE") {
-        // console.log(this.featuredAdverts.concat(this.advert));
-        this.featuredAdverts = this.featuredAdverts.concat(this.advert);
-      }
-    }
   }
 
 }
