@@ -143,11 +143,11 @@ export class ContactSellerComponent implements OnInit {
     this.selectMessage("successMessage");
     this.contactForm.reset();
     this.contactForm.controls['name'].clearValidators();
+    this.contactForm.controls['name'].updateValueAndValidity();
     this.contactForm.controls['email'].clearValidators();
+    this.contactForm.controls['email'].updateValueAndValidity();
     this.contactForm.controls['message'].clearValidators();
-    this.contactForm.controls['name'].markAsPristine();
-    this.contactForm.markAsPristine();
-    this.contactForm.markAsUntouched();
+    this.contactForm.controls['message'].updateValueAndValidity();
     this.disableButtons = false;
   }
 }

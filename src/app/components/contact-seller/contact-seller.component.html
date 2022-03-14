@@ -1,132 +1,165 @@
 <div *ngIf="!loading">
-  <div class="form-spacing">
-    <div class="card text-center">
 
-      <h1 class="card-header">
-        Contact Seller
-      </h1>
-
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <h3>Seller Details</h3>
-        </li>
-        <li class="list-group-item">
-          {{user.forenames + ' ' + user.surname}}
-        </li>
-        <li class="list-group-item">
-          Email: {{user.email}}
-        </li>
-        <li class="list-group-item">
-          Phone Number: {{user.phoneNumber ? user.phoneNumber : 'Not Avaliable'}}
-        </li>
-      </ul>
-
-      <div class="container">
-        <form novalidate
-          (ngSubmit)="submit()"
-          [formGroup]="contactForm">
-
-          <div>
-            <div class="form-group form-lable-spacing">
-              <label class="text-primary" for="name">Your Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                placeholder="Enter name"
-                formControlName="name"
-                [ngClass]="{'is-invalid': isInvalid(contactForm.get('name')!) }">
-              <span class="invalid-feedback">
-                <span>
-                  {{getErrorMessage('name',contactForm.get('name')!)}}
-                </span>
-              </span>
-            </div>
-          </div>
-
-          <div>
-            <div class="form-group form-lable-spacing">
-              <label class="text-primary" for="email">Your Email</label>
-              <input
-                type="text"
-                class="form-control"
-                id="email"
-                placeholder="Enter email"
-                formControlName="email"
-                [ngClass]="{'is-invalid': isInvalid(contactForm.get('email')!) }">
-              <span class="invalid-feedback">
-                <span>
-                  {{getErrorMessage('email',contactForm.get('email')!)}}
-                </span>
-              </span>
-            </div>
-          </div>
-
-          <div>
-            <div class="form-group form-lable-spacing">
-              <label class="text-primary" for="number">Your Number</label>
-              <input
-                type="text"
-                class="form-control"
-                id="number"
-                placeholder="Enter number"
-                formControlName="number"
-                [ngClass]="{'is-invalid': isInvalid(contactForm.get('number')!) }">
-              <span class="invalid-feedback">
-                <span>
-                  {{getErrorMessage('number',contactForm.get('number')!)}}
-                </span>
-              </span>
-            </div>
-          </div>
-
-          <div>
-            <div class="form-group form-lable-spacing">
-              <label class="text-primary" for="message">Message</label>
-              <input
-                type="text"
-                class="form-control"
-                id="message"
-                placeholder="Enter message"
-                formControlName="message"
-                [ngClass]="{'is-invalid': isInvalid(contactForm.get('message')!) }">
-              <span class="invalid-feedback">
-                <span>
-                  {{getErrorMessage('message',contactForm.get('message')!)}}
-                </span>
-              </span>
-            </div>
-          </div>
-
-          <button
-            (click)="submit()"
-            type="button"
-            class="btn btn-primary"
-            [disabled]="disableButtons">
-            Send Message
-          </button>
-
-          <div
-            *ngIf="primaryMessage"
-            class="alert alert-primary"
-            role="alert">
-            {{primaryMessage}}
-          </div>
-          <div
-            *ngIf="dangerMessage"
-            class="alert alert-danger"
-            role="alert">
-            {{dangerMessage}}
-          </div>
-          <div
-            *ngIf="successMessage"
-            class="alert alert-success"
-            role="alert">
-            {{successMessage}}
-          </div>
-
-        </form>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
       </div>
+
+      <div class="col-sm">
+
+        <div class="form-spacing">
+          <div class="card text-center">
+
+            <h1 class="card-header">
+              Contact Seller
+            </h1>
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h3>Seller Details</h3>
+              </li>
+              <div class="list-group-item-dark">
+                Seller Name
+              </div>
+              <li class="list-group-item">
+                {{user.forenames + ' ' + user.surname}}
+              </li>
+              <div class="list-group-item-dark">
+                Seller Email Address
+              </div>
+              <li class="list-group-item">
+                {{user.email}}
+              </li>
+              <div *ngIf="user.phoneNumber">
+                <div class="list-group-item-dark">
+                  Seller Phone number
+                </div>
+                <li class="list-group-item">
+                  {{user.phoneNumber}}
+                </li>
+              </div>
+            </ul>
+
+            <div class="container">
+              <form novalidate
+                (ngSubmit)="submit()"
+                [formGroup]="contactForm">
+
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <h3>Message Seller</h3>
+                  </li>
+                </ul>
+
+
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="name">Your Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Enter name"
+                    formControlName="name"
+                    [ngClass]="{'is-invalid': isInvalid(contactForm.get('name')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('name',contactForm.get('name')!)}}
+                    </span>
+                  </span>
+                </div>
+
+
+
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="email">Your Email</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    placeholder="Enter email"
+                    formControlName="email"
+                    [ngClass]="{'is-invalid': isInvalid(contactForm.get('email')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('email',contactForm.get('email')!)}}
+                    </span>
+                  </span>
+                </div>
+
+
+
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="number">Your Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="number"
+                    placeholder="Enter number"
+                    formControlName="number"
+                    [ngClass]="{'is-invalid': isInvalid(contactForm.get('number')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('number',contactForm.get('number')!)}}
+                    </span>
+                  </span>
+                </div>
+
+
+
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="message">Message</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="message"
+                    placeholder="Enter message"
+                    formControlName="message"
+                    [ngClass]="{'is-invalid': isInvalid(contactForm.get('message')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('message',contactForm.get('message')!)}}
+                    </span>
+                  </span>
+                </div>
+
+
+                <button
+                  (click)="submit()"
+                  type="button"
+                  class="btn btn-primary"
+                  [disabled]="disableButtons">
+                  Send Message
+                </button>
+
+                <div
+                  *ngIf="primaryMessage"
+                  class="alert alert-primary"
+                  role="alert">
+                  {{primaryMessage}}
+                </div>
+                <div
+                  *ngIf="dangerMessage"
+                  class="alert alert-danger"
+                  role="alert">
+                  {{dangerMessage}}
+                </div>
+                <div
+                  *ngIf="successMessage"
+                  class="alert alert-success"
+                  role="alert">
+                  {{successMessage}}
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm">
+      </div>
+
     </div>
   </div>
 
