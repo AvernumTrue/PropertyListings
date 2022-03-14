@@ -39,7 +39,6 @@ export class SaleListComponent implements OnInit {
     this.advertService.getFilteredAdverts(this.advertFilter).subscribe({
       next: filteredAdverts => {
         this.filteredAdverts = filteredAdverts;
-        console.log(this.filteredAdverts)
         this.loading = false;
       },
       error: err => {

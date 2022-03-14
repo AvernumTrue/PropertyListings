@@ -21,11 +21,24 @@ export class AdvertService {
   filteredAdverts: Advert[] = [];
   featuredAdverts: Advert[] = [];
 
+  filteredfeaturedAdverts: Advert[] = [];
+  unFilteredfeaturedAdverts: Advert[] = [];
+
   highToLow() {
     function comparator(a: any, b: any) {
       return parseInt(b.price) - parseInt(a.price);
     }
-    this.filteredAdverts.sort(comparator);
+    for (let advert of this.filteredAdverts) {
+      if (advert.featured) {
+        this.filteredfeaturedAdverts = this.filteredfeaturedAdverts.concat(advert);
+      }
+      if (!advert.featured) {
+        this.unFilteredfeaturedAdverts = this.unFilteredfeaturedAdverts.concat(advert);
+      }
+    }
+    this.filteredfeaturedAdverts.sort(comparator);
+    this.unFilteredfeaturedAdverts.sort(comparator);
+    this.filteredAdverts = this.filteredfeaturedAdverts.concat(this.unFilteredfeaturedAdverts);
   }
 
   getFeaturedAdverts() {
@@ -36,7 +49,7 @@ export class AdvertService {
             this.adverts = adverts;
             for (let advert of this.adverts) {
               this.advert = advert;
-              if (this.advert.advertStatus === "LIVE") {
+              if (this.advert.advertStatus === "LIVE" && this.advert.featured) {
                 this.featuredAdverts = this.featuredAdverts.concat(this.advert);
               }
             }
@@ -100,10 +113,8 @@ export class AdvertService {
                   advert.headline.toLowerCase().includes(filterByKeyWord.toLowerCase()));
 
               }
-              this.highToLow();
-
-              // TODO return adverts with featured adverts first
             }
+            this.highToLow();
             observer.next(this.filteredAdverts);
           } catch (err) {
             observer.error(err);
