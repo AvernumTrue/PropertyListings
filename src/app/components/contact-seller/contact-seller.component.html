@@ -6,6 +6,21 @@
         Contact Seller
       </h1>
 
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h3>Seller Details</h3>
+        </li>
+        <li class="list-group-item">
+          {{user.forenames + ' ' + user.surname}}
+        </li>
+        <li class="list-group-item">
+          Email: {{user.email}}
+        </li>
+        <li class="list-group-item">
+          Phone Number: {{user.phoneNumber ? user.phoneNumber : 'Not Avaliable'}}
+        </li>
+      </ul>
+
       <div class="container">
         <form novalidate
           (ngSubmit)="submit()"
@@ -131,20 +146,7 @@
 
 
 
-<!-- <ul class="list-group list-group-flush">
-  <li class="list-group-item">
-    <h3>Seller Details</h3>
-  </li>
-  <li class="list-group-item">
-    {{user.forenames + ' ' + user.surname}}
-  </li>
-  <li class="list-group-item">
-    Email: {{user.email}}
-  </li>
-  <li class="list-group-item">
-    Phone Number: {{user.phoneNumber ? user.phoneNumber : 'Not Avaliable'}}
-  </li>
-</ul> -->
+
 
 
 

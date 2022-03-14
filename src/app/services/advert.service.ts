@@ -21,6 +21,13 @@ export class AdvertService {
   filteredAdverts: Advert[] = [];
   featuredAdverts: Advert[] = [];
 
+  highToLow() {
+    function comparator(a: any, b: any) {
+      return parseInt(b.price) - parseInt(a.price);
+    }
+    this.filteredAdverts.sort(comparator);
+  }
+
   getFeaturedAdverts() {
     return new Observable<Advert[]>(observer => {
       this.http.get<Advert[]>(this.advertUrl).pipe(delay(2000)).subscribe({
@@ -29,7 +36,7 @@ export class AdvertService {
             this.adverts = adverts;
             for (let advert of this.adverts) {
               this.advert = advert;
-              if (this.advert.featured === true && this.advert.advertStatus === "LIVE") {
+              if (this.advert.advertStatus === "LIVE") {
                 this.featuredAdverts = this.featuredAdverts.concat(this.advert);
               }
             }
@@ -48,10 +55,22 @@ export class AdvertService {
       this.http.get<Advert[]>(this.advertUrl).pipe(delay(2000)).subscribe({
         next: adverts => {
           try {
-            this.adverts = adverts;
-            // TODO Only return adverts that have advertStatus === "LIVE"
             this.advertFilter = advertFilter;
-            this.filteredAdverts = this.adverts
+            this.filteredAdverts = this.adverts;
+
+            for (let advert of adverts) {
+              this.advert = advert;
+              if (this.advert.advertStatus === "LIVE" && this.advert.featured) {
+                this.filteredAdverts = this.filteredAdverts.concat(this.advert);
+              }
+            }
+
+            for (let advert of adverts) {
+              this.advert = advert;
+              if (this.advert.advertStatus === "LIVE" && !this.advert.featured) {
+                this.filteredAdverts = this.filteredAdverts.concat(this.advert);
+              }
+            }
 
             if (this.advertFilter) {
               const filterByProvince = this.advertFilter.selectedProvince;
@@ -79,7 +98,11 @@ export class AdvertService {
               if (filterByKeyWord) {
                 this.filteredAdverts = this.filteredAdverts.filter((advert) =>
                   advert.headline.toLowerCase().includes(filterByKeyWord.toLowerCase()));
+
               }
+              this.highToLow();
+
+              // TODO return adverts with featured adverts first
             }
             observer.next(this.filteredAdverts);
           } catch (err) {

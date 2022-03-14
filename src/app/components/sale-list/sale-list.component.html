@@ -55,7 +55,10 @@
           <div class="col-sm">
 
             <div>
-              <h2 class="display-4 headline" [routerLink]="['/advert-details', advert.id]">
+              <div *ngIf="advert.featured">
+                Featured
+              </div>
+              <h2 class="display-6 headline" [routerLink]="['/advert-details', advert.id]">
                 {{advert.headline}}
               </h2>
             </div>

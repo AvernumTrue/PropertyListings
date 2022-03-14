@@ -19,8 +19,6 @@ export class SaleListComponent implements OnInit {
   headingId: number;
   filteredAdverts: Advert[] = [];
 
-  // advertFilter: AdvertFilter;
-
   get advertFilter(): AdvertFilter {
     return this.advertService.advertFilter;
   }
@@ -41,11 +39,11 @@ export class SaleListComponent implements OnInit {
     this.advertService.getFilteredAdverts(this.advertFilter).subscribe({
       next: filteredAdverts => {
         this.filteredAdverts = filteredAdverts;
-        this.highToLow();
+        console.log(this.filteredAdverts)
         this.loading = false;
       },
       error: err => {
-        console.log('Failed to fetch filtered adverts');
+        console.log('Failed to fetch filtered adverts.');
         console.error(err);
         this.filteredAdverts = [];
         this.loading = false;
@@ -73,61 +71,3 @@ export class SaleListComponent implements OnInit {
     this.getFilteredAdverts();
   }
 }
-
- // ngOnInit(): void {
-  //   this.getAdverts()
-  // }
-
-  // getAdverts() {
-  //   this.loading = true;
-  //   this.advertService.getAdverts().subscribe({
-  //     next: adverts => {
-  //       this.adverts = adverts;
-  //       // this.performFilter();
-  //       this.highToLow();
-  //       this.loading = false;
-  //     }
-  //   });
-  // }
-
-  // TODO : perperformFilter
-  // performFilter() {
-  //   this.filteredAdverts = this.adverts
-  //   if (this.advertFilter) {
-  //     const filterByProvince = this.advertFilter.selectedProvince ?? undefined;
-  //     const filterByCity = this.advertFilter.selectedCity ?? undefined;
-  //     const filterByMaxFilter = this.advertFilter.selectedMaxFilter ?? undefined;
-  //     const filterByMinFilter = this.advertFilter.selectedMinFilter ?? undefined;
-  //     const filterByKeyWord = this.advertFilter.selectedKeyWords ?? undefined;
-
-  //     if (filterByProvince) {
-  //       this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-  //         advert.province.includes(filterByProvince.province));
-  //     }
-
-  //     if (filterByCity) {
-  //       this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-  //         advert.city.includes(filterByCity));
-  //     }
-
-  //     // TODO : Add warning of impossible filter
-  //     if (filterByMaxFilter < filterByMinFilter) {
-  //       console.log("Impossible filter message")
-  //     }
-
-  //     if (filterByMaxFilter) {
-  //       this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-  //         advert.price <= (filterByMaxFilter));
-  //     }
-
-  //     if (filterByMinFilter) {
-  //       this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-  //         advert.price >= (filterByMinFilter));
-  //     }
-
-  //     if (filterByKeyWord) {
-  //       this.filteredAdverts = this.filteredAdverts.filter((advert) =>
-  //         advert.headline.toLowerCase().includes(filterByKeyWord.toLowerCase()));
-  //     }
-  //   }
-  // }
