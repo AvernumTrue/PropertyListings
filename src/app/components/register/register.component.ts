@@ -137,6 +137,7 @@ export class RegisterComponent implements OnInit {
     user.surname = this.registerForm.get('surname')?.value.trim();
     user.email = this.registerForm.get('email')?.value.trim();
     user.password = this.registerForm.get('password')?.value.trim();
+    user.favouriteHouses = [];
     user.isAdmin = false;
     this.user = user;
   }

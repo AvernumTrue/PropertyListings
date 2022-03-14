@@ -57,7 +57,6 @@ export class ContactSellerComponent implements OnInit {
     this.userService.getUser(this.advert.userId).subscribe({
       next: user => {
         this.user = user;
-        console.log(this.user);
         this.loading = false;
       }, error: err => {
         console.log(err);

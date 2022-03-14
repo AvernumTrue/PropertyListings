@@ -6,4 +6,5 @@ export class User {
   password!: string;
   isAdmin!: boolean;
   phoneNumber?: string;
+  favouriteHouses?: number[] = [];
 }

@@ -22,18 +22,43 @@
           <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
           <li class="list-group-item">{{advert.details}}</li>
         </ul>
-        <button
-          type="button"
-          class="btn btn-primary"
-          [routerLink]="['/sale-list']">
-          Back
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="addToFavourites()">
-          Add to Favourites
-        </button>
+        <div class="d-flex justify-content-start">
+          <button
+            type="button"
+            class="btn btn-primary"
+            [routerLink]="['/sale-list']">
+            Back
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="addToFavourites()"
+            [disabled]="disableButtons">
+            {{favouritesButton}}
+          </button>
+          <div *ngIf="favouritedMessage" class="alert favouritedMessage alert-primary">Favourited</div>
+
+        </div>
+
+        <div
+          *ngIf="primaryMessage"
+          class="alert alert-primary"
+          role="alert">
+          {{primaryMessage}}
+        </div>
+        <div
+          *ngIf="dangerMessage"
+          class="alert alert-danger"
+          role="alert">
+          {{dangerMessage}}
+        </div>
+        <div
+          *ngIf="successMessage"
+          class="alert alert-success"
+          role="alert">
+          {{successMessage}}
+        </div>
+
       </div>
       <pl-contact-seller [advert]="advert"></pl-contact-seller>
     </div>

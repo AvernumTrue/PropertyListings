@@ -23,7 +23,7 @@ export class InMemoryDataService implements InMemoryDbService {
         city: 'Aliwal North',
         details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
         price: 10000,
-        featured: true
+        featured: true,
       },
       {
         userId: 1,
@@ -135,7 +135,8 @@ export class InMemoryDataService implements InMemoryDbService {
           email: '1@1.com',
           password: 'password1',
           isAdmin: false,
-          phoneNumber: '123 456 7890'
+          phoneNumber: '123 456 7890',
+          favouriteHouses: []
         },
         {
           id: 2,
@@ -144,6 +145,7 @@ export class InMemoryDataService implements InMemoryDbService {
           email: '2@2.com',
           password: 'password2',
           isAdmin: false,
+          favouriteHouses: []
         },
         {
           id: 3,
@@ -152,7 +154,8 @@ export class InMemoryDataService implements InMemoryDbService {
           email: '3@3.com',
           password: 'password3',
           isAdmin: false,
-          phoneNumber: '111 222 3333'
+          phoneNumber: '111 222 3333',
+          favouriteHouses: []
         },
         {
           id: 4,
@@ -161,14 +164,18 @@ export class InMemoryDataService implements InMemoryDbService {
           email: '4@4.com',
           password: 'password4',
           isAdmin: false,
-          phoneNumber: '3211231234'
+          phoneNumber: '3211231234',
+          favouriteHouses: []
         },
+
         {
           id: 5,
           forenames: 'admin',
           surname: 'admin',
           email: 'admin@admin',
           password: 'asdfasdf',
+          phoneNumber: '3211231234',
+          favouriteHouses: [],
           isAdmin: true,
         },
       ];

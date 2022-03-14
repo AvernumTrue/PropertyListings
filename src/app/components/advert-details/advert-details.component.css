@@ -9,3 +9,10 @@ button {
 h1{
   margin: 20px;
 }
+
+.favouritedMessage{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 6px;
+  padding-bottom: 0px;
+}
