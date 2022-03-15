@@ -28,6 +28,7 @@ export class AdvertDetailsComponent implements OnInit {
   disableButtons: boolean;
   isAddingFavourite: boolean;
   favouritedMessage: boolean;
+  isLoggedIn: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,28 +38,30 @@ export class AdvertDetailsComponent implements OnInit {
     this.advertId = Number(route.snapshot.paramMap.get('advertIndex'));
   }
 
-  // TODO : remove favourite option if user is not logged in.
-  // TODO : fix ERROR TypeError: Cannot read properties of undefined (reading 'id')
   ngOnInit(): void {
     this.loading = true;
-    this.userService.getUser(Number(localStorage.getItem('loggedInId'))).subscribe({
-      next: user => {
-        this.user = user;
-        const checkFavouriteHouseIdExists = (id: number) => {
-          return id === this.advert.id;
-        }
-        if (!this.user.favouriteHouses.find(checkFavouriteHouseIdExists)) {
-          this.favouritesButton = 'Add to favourites'
-          this.isAddingFavourite = true;
-        } else {
-          this.favouritedMessage = true;
-          this.favouritesButton = 'Remove from favourites'
-          this.isAddingFavourite = false;
-        }
-      },
-      error: () => {
-      },
-    });
+    if (localStorage.getItem('loggedInId')) {
+      this.isLoggedIn = true;
+      this.userService.getUser(Number(localStorage.getItem('loggedInId'))).subscribe({
+        next: user => {
+          this.user = user;
+          const checkFavouriteHouseIdExists = (id: number) => {
+            return id === this.advert.id;
+          }
+          if (!this.user.favouriteHouses.find(checkFavouriteHouseIdExists)) {
+            this.favouritesButton = 'Add to favourites';
+            this.isAddingFavourite = true;
+          } else {
+            this.favouritedMessage = true;
+            this.favouritesButton = 'Remove from favourites';
+            this.isAddingFavourite = false;
+          }
+        },
+        error: () => {
+          this.selectMessage("saveErrorMessage");
+        },
+      });
+    }
     this.getAdvert();
   }
 

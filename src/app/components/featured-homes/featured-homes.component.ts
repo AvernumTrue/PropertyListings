@@ -19,11 +19,13 @@ export class FeaturedHomesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loading = true
     this.advertService.getFeaturedAdverts().subscribe({
       next: featuredAdverts => {
-        this.featuredAdverts = featuredAdverts
+        this.featuredAdverts = featuredAdverts;
+        this.loading = false;
       }
     });
   }
 
-}
+} 

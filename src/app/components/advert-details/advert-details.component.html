@@ -26,16 +26,27 @@
           <button
             type="button"
             class="btn btn-primary"
-            [routerLink]="['/sale-list']">
+            [routerLink]="['/sale-list']"
+            [disabled]="disableButtons">
             Back
           </button>
           <button
+            *ngIf="isLoggedIn"
             type="button"
             class="btn btn-primary"
             (click)="addToFavourites()"
             [disabled]="disableButtons">
             {{favouritesButton}}
           </button>
+          <button
+            *ngIf="!isLoggedIn"
+            type="button"
+            class="btn btn-primary"
+            [routerLink]="['/login']"
+            [disabled]="disableButtons">
+            Login to add to favourites
+          </button>
+
           <div *ngIf="favouritedMessage" class="alert favouritedMessage alert-primary">Favourited</div>
 
         </div>
@@ -65,6 +76,7 @@
   </div>
 
 </div>
+
 <ng-http-loader
   *ngIf="loading"
   [backdrop]="true"
