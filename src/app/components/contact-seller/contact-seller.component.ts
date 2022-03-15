@@ -27,7 +27,7 @@ export class ContactSellerComponent implements OnInit {
   private validationMessage: { [K in string]: { [K in string]: string } } = {
     name: {
       required: 'Please enter a name.',
-      minlength: 'Name must be at least 8 characters.',
+      minlength: 'Name must be at least 5 characters.',
       maxlength: 'Name cannot exceed 100 characters.',
       pattern: 'Forename must include a letter.',
     },
