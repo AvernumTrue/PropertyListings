@@ -98,15 +98,12 @@ export class SearchComponent implements OnInit {
     this.selectedMaxFilter = maximum;
   }
 
-  filterKeyWord(keyWord: string) {
-
-  }
-
   clearAll() {
     this.selectedProvince = undefined;
     this.selectedCity = undefined;
     this.selectedMinFilter = undefined;
     this.selectedMaxFilter = undefined;
+    this.searchForm.reset();
     this.finaliseAdvertFilter();
     this.applyFiltersEmitter.emit(this.advertFilter);
   }
@@ -117,7 +114,7 @@ export class SearchComponent implements OnInit {
     advertFilter.selectedCity = this.selectedCity;
     advertFilter.selectedMinFilter = this.selectedMinFilter;
     advertFilter.selectedMaxFilter = this.selectedMaxFilter;
-    advertFilter.selectedKeyWords = this.searchForm.get('keyWord')?.value.trim();
+    advertFilter.selectedKeyWords = this.searchForm.get('keyWord').value?.trim();
     this.advertFilter = advertFilter;
   }
 
