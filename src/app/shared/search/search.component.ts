@@ -92,10 +92,16 @@ export class SearchComponent implements OnInit {
 
   filterMinimum(minimum: number) {
     this.selectedMinFilter = minimum;
+    if (this.selectedMinFilter > this.selectedMaxFilter) {
+      this.selectedMaxFilter = undefined;
+    }
   }
 
   filterMaximum(maximum: number) {
     this.selectedMaxFilter = maximum;
+    if (this.selectedMinFilter < this.selectedMaxFilter) {
+      this.selectedMinFilter = undefined;
+    }
   }
 
   clearAll() {
