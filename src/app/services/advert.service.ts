@@ -22,24 +22,7 @@ export class AdvertService {
   featuredAdverts: Advert[] = [];
 
   filteredfeaturedAdverts: Advert[] = [];
-  unFilteredfeaturedAdverts: Advert[] = [];
-
-  highToLow() {
-    function comparator(a: any, b: any) {
-      return parseInt(b.price) - parseInt(a.price);
-    }
-    for (let advert of this.filteredAdverts) {
-      if (advert.featured) {
-        this.filteredfeaturedAdverts = this.filteredfeaturedAdverts.concat(advert);
-      }
-      if (!advert.featured) {
-        this.unFilteredfeaturedAdverts = this.unFilteredfeaturedAdverts.concat(advert);
-      }
-    }
-    this.filteredfeaturedAdverts.sort(comparator);
-    this.unFilteredfeaturedAdverts.sort(comparator);
-    this.filteredAdverts = this.filteredfeaturedAdverts.concat(this.unFilteredfeaturedAdverts);
-  }
+  filteredUnfeaturedAdverts: Advert[] = [];
 
   getFeaturedAdverts() {
     return new Observable<Advert[]>(observer => {
@@ -64,6 +47,7 @@ export class AdvertService {
   }
 
   getFilteredAdverts(advertFilter: AdvertFilter) {
+    this.filteredAdverts = [];
     return new Observable<Advert[]>(observer => {
       this.http.get<Advert[]>(this.advertUrl).pipe(delay(2000)).subscribe({
         next: adverts => {
@@ -111,10 +95,10 @@ export class AdvertService {
               if (filterByKeyWord) {
                 this.filteredAdverts = this.filteredAdverts.filter((advert) =>
                   advert.headline.toLowerCase().includes(filterByKeyWord.toLowerCase()));
-
               }
+
             }
-            this.highToLow();
+            this.orderAdverts();
             observer.next(this.filteredAdverts);
           } catch (err) {
             observer.error(err);
@@ -123,6 +107,26 @@ export class AdvertService {
         error: (err) => observer.error(err),
       });
     });
+  }
+
+  orderAdverts() {
+    console.log(this.filteredAdverts);
+    this.filteredUnfeaturedAdverts = [];
+    this.filteredfeaturedAdverts = [];
+    function comparator(a: any, b: any) {
+      return parseInt(b.price) - parseInt(a.price);
+    }
+    for (let filteredAdvert of this.filteredAdverts) {
+      if (filteredAdvert.featured) {
+        this.filteredfeaturedAdverts = this.filteredfeaturedAdverts.concat(filteredAdvert);
+      }
+      if (!filteredAdvert.featured) {
+        this.filteredUnfeaturedAdverts = this.filteredUnfeaturedAdverts.concat(filteredAdvert);
+      }
+    }
+    this.filteredfeaturedAdverts.sort(comparator);
+    this.filteredUnfeaturedAdverts.sort(comparator);
+    this.filteredAdverts = this.filteredfeaturedAdverts.concat(this.filteredUnfeaturedAdverts);
   }
 
   getAdvert(id: number): Observable<Advert> {

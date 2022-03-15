@@ -67,6 +67,7 @@ export class SaleListComponent implements OnInit {
 
   onApplyFiltersClicked(advertFilter: AdvertFilter) {
     this.advertFilter = advertFilter;
+    this.orderMessage = undefined;
     this.getFilteredAdverts();
   }
 }
