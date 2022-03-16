@@ -138,6 +138,7 @@ export class InMemoryDataService implements InMemoryDbService {
           phoneNumber: '123 456 7890',
           favouriteHouses: [],
           isLocked: false,
+          isEmailValidated: true,
         },
         {
           id: 2,
@@ -148,7 +149,7 @@ export class InMemoryDataService implements InMemoryDbService {
           isAdmin: false,
           favouriteHouses: [],
           isLocked: true,
-
+          isEmailValidated: false
         },
         {
           id: 3,
@@ -160,6 +161,7 @@ export class InMemoryDataService implements InMemoryDbService {
           phoneNumber: '111 222 3333',
           favouriteHouses: [],
           isLocked: false,
+          isEmailValidated: true,
         },
         {
           id: 4,
@@ -171,6 +173,7 @@ export class InMemoryDataService implements InMemoryDbService {
           phoneNumber: '3211231234',
           favouriteHouses: [],
           isLocked: true,
+          isEmailValidated: true,
         },
 
         {
@@ -183,6 +186,7 @@ export class InMemoryDataService implements InMemoryDbService {
           favouriteHouses: [],
           isAdmin: true,
           isLocked: false,
+          isEmailValidated: true,
         },
       ];
       const provinces: Province[] = [

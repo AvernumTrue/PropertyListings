@@ -140,6 +140,7 @@ export class RegisterComponent implements OnInit {
     user.favouriteHouses = [];
     user.isAdmin = false;
     user.isLocked = false;
+    user.isEmailValidated = false;
     this.user = user;
   }
 

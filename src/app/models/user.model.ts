@@ -8,4 +8,5 @@ export class User {
   phoneNumber?: string;
   favouriteHouses?: number[] = [];
   isLocked: boolean;
+  isEmailValidated: boolean;
 }
