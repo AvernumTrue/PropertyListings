@@ -55,19 +55,21 @@ export class SaleListComponent implements OnInit {
       return parseInt(a.price) - parseInt(b.price);
     }
     this.filteredAdverts.sort(comparator);
-    this.orderMessage = 'Adverts ordered from low to high.'
+    this.orderMessage = 'Adverts ordered from low to high.';
   }
   highToLow() {
     function comparator(a: any, b: any) {
       return parseInt(b.price) - parseInt(a.price);
     }
     this.filteredAdverts.sort(comparator);
-    this.orderMessage = 'Adverts ordered from high to low.'
+    this.orderMessage = 'Adverts ordered from high to low.';
   }
 
-  onApplyFiltersClicked(advertFilter: AdvertFilter) {
-    this.advertFilter = advertFilter;
+  onApplyFiltersClicked(filteredAdverts: Advert[]) {
+
+    this.filteredAdverts = filteredAdverts;
+    // this.advertFilter = advertFilter;
     this.orderMessage = undefined;
-    this.getFilteredAdverts();
+    // this.getFilteredAdverts();
   }
 }

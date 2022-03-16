@@ -110,7 +110,6 @@ export class AdvertService {
   }
 
   orderAdverts() {
-    console.log(this.filteredAdverts);
     this.filteredUnfeaturedAdverts = [];
     this.filteredfeaturedAdverts = [];
     function comparator(a: any, b: any) {

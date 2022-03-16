@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Spinkit } from 'ng-http-loader';
 import { AdvertFilter } from 'src/app/models/advert-filter.model';
+import { Advert } from 'src/app/models/advert.model';
 import { Province } from 'src/app/models/province.model';
 import { AdvertService } from 'src/app/services/advert.service';
 import { ProvinceService } from 'src/app/services/province.service';
@@ -14,7 +15,8 @@ import { ProvinceService } from 'src/app/services/province.service';
 })
 export class SearchComponent implements OnInit {
 
-  @Output() applyFiltersEmitter = new EventEmitter<AdvertFilter>();
+  // @Output() applyFiltersEmitter = new EventEmitter<AdvertFilter>();
+  @Output() applyFiltersEmitter = new EventEmitter<Advert[]>();
 
   spinnerStyle = Spinkit;
   searchForm!: FormGroup;
@@ -25,6 +27,7 @@ export class SearchComponent implements OnInit {
   selectedMaxFilter: number;
   selectedMinFilter: number;
   selectedKeyWord: string;
+  filteredAdverts: Advert[];
 
   get advertFilter(): AdvertFilter {
     return this.advertService.advertFilter;
@@ -111,7 +114,7 @@ export class SearchComponent implements OnInit {
     this.selectedMaxFilter = undefined;
     this.searchForm.reset();
     this.finaliseAdvertFilter();
-    this.applyFiltersEmitter.emit(this.advertFilter);
+    // this.applyFiltersEmitter.emit(this.advertFilter);
   }
 
   finaliseAdvertFilter() {
@@ -124,10 +127,27 @@ export class SearchComponent implements OnInit {
     this.advertFilter = advertFilter;
   }
 
+  getFilteredAdverts() {
+    this.loading = true;
+    this.advertService.getFilteredAdverts(this.advertFilter).subscribe({
+      next: filteredAdverts => {
+        this.filteredAdverts = filteredAdverts;
+        this.applyFiltersEmitter.emit(this.filteredAdverts);
+        this.loading = false;
+      },
+      error: err => {
+        console.log('Failed to fetch filtered adverts.');
+        console.error(err);
+        this.filteredAdverts = [];
+        this.loading = false;
+      }
+    });
+  }
+
   search() {
     this.finaliseAdvertFilter();
-    this.applyFiltersEmitter.emit(this.advertFilter);
-    this.loading = false;
+    this.getFilteredAdverts();
+    // this.applyFiltersEmitter.emit(this.advertFilter);
     if (this.router.url === "/home") {
       this.router.navigate(['/sale-list']);
     }
