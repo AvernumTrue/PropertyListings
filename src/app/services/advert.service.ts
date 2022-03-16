@@ -54,6 +54,7 @@ export class AdvertService {
           try {
             this.advertFilter = advertFilter;
             this.filteredAdverts = this.adverts;
+            this.adverts = [];
 
             for (let advert of adverts) {
               this.advert = advert;
