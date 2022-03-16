@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { MatIconModule } from '@angular/material/icon';
 
+const materialModules = [
+  MatIconModule
+];
 @Component({
   selector: 'pl-user-management',
   templateUrl: './user-management.component.html',
