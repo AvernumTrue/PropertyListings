@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { delay } from 'rxjs';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 @Component({
@@ -138,6 +137,7 @@ export class RegisterComponent implements OnInit {
     user.surname = this.registerForm.get('surname')?.value.trim();
     user.email = this.registerForm.get('email')?.value.trim();
     user.password = this.registerForm.get('password')?.value.trim();
+    user.favouriteHouses = [];
     user.isAdmin = false;
     this.user = user;
   }
@@ -156,10 +156,10 @@ export class RegisterComponent implements OnInit {
 
   addUser() {
     this.finaliseUser();
-    this.userService.addUser(this.user).pipe(delay(2000)).subscribe({
+    this.userService.addUser(this.user).subscribe({
       next: user => {
         this.userService.setLocalStorage(user);
-        this.userService.login(this.registerForm.get('email').value, this.registerForm.get('password').value).pipe(delay(2000)).subscribe({
+        this.userService.login(this.registerForm.get('email').value, this.registerForm.get('password').value).subscribe({
           next: () => {
           }
         });

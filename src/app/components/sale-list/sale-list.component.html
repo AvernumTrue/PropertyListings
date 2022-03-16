@@ -1,54 +1,51 @@
 <h1 class="text-center">Sale List</h1>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-    </div>
-    <div class="col-sm text-center">
-      <div
-        *ngIf="orderMessage"
-        class="alert foo alert-primary">
-        {{orderMessage}}
-      </div>
-    </div>
-    <div class="col-sm">
-      <div class="dropdown text-end">
-        <button
-          class="btn btn-outline-primary dropdown-toggle"
-          type="button"
-          id="dropdownBasic1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Order by
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+<!-- <pl-search (applyFiltersEmitter)="onApplyFiltersClicked($event)"></pl-search> -->
+<pl-search (applyFiltersEmitter)="onApplyFiltersClicked($event)"></pl-search>
 
-          <li>
-            <button
-              class="dropdown-item"
-              (click)="highToLow()">
-              Price High to Low
-            </button>
-          </li>
+<div class="order-spacing d-flex justify-content-end">
 
-          <li>
-            <button
-              class="dropdown-item"
-              (click)="lowToHigh()">
-              Price Low to High
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div
+    *ngIf="orderMessage"
+    class="alert message-spacing alert-primary">
+    {{orderMessage}}
   </div>
-</div>
 
+  <div class="dropdown text-end">
+    <button
+      class="btn btn-outline-primary dropdown-toggle"
+      type="button"
+      id="dropdownBasic1"
+      data-bs-toggle="dropdown"
+      aria-expanded="false">
+      Order by
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+      <li>
+        <button
+          class="dropdown-item"
+          (click)="highToLow()">
+          Price High to Low
+        </button>
+      </li>
+
+      <li>
+        <button
+          class="dropdown-item"
+          (click)="lowToHigh()">
+          Price Low to High
+        </button>
+      </li>
+    </ul>
+  </div>
+
+</div>
 
 
 <div *ngIf="!loading">
 
-  <div *ngFor="let advert of adverts">
+  <div *ngFor="let advert of filteredAdverts">
     <div class="card container jumbotron">
 
       <div class="container">
@@ -59,7 +56,10 @@
           <div class="col-sm">
 
             <div>
-              <h2 class="display-4 headline" [routerLink]="['/advert-details', advert.id]">
+              <div *ngIf="advert.featured">
+                Featured
+              </div>
+              <h2 class="display-6 headline" [routerLink]="['/advert-details', advert.id]">
                 {{advert.headline}}
               </h2>
             </div>
@@ -71,14 +71,15 @@
                 </h3>
               </li>
               <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
-              <!-- <li class="list-group-item">{{advert.details}}</li> -->
             </ul>
+
           </div>
         </div>
       </div>
 
     </div>
   </div>
+
 </div>
 
 

@@ -1,0 +1,204 @@
+<div *ngIf="!loading">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+      </div>
+
+      <div class="col-sm">
+
+        <div class="form-spacing">
+          <div class="card text-center">
+
+            <h1 class="card-header">
+              Contact Seller
+            </h1>
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h3>Seller Details</h3>
+              </li>
+              <div class="list-group-item-dark">
+                Seller Name
+              </div>
+              <li class="list-group-item">
+                {{user.forenames + ' ' + user.surname}}
+              </li>
+              <div class="list-group-item-dark">
+                Seller Email Address
+              </div>
+              <li class="list-group-item">
+                {{user.email}}
+              </li>
+              <div *ngIf="user.phoneNumber">
+                <div class="list-group-item-dark">
+                  Seller Phone number
+                </div>
+                <li class="list-group-item">
+                  {{user.phoneNumber}}
+                </li>
+              </div>
+            </ul>
+
+            <div class="container">
+              <form novalidate
+                (ngSubmit)="submit()"
+                [formGroup]="contactForm">
+
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <h3>Message Seller</h3>
+                  </li>
+                </ul>
+
+
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="name">Your Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Enter name"
+                    formControlName="name"
+                    [ngClass]="{'is-invalid': isInvalid(contactForm.get('name')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('name',contactForm.get('name')!)}}
+                    </span>
+                  </span>
+                </div>
+
+
+
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="email">Your Email</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    placeholder="Enter email"
+                    formControlName="email"
+                    [ngClass]="{'is-invalid': isInvalid(contactForm.get('email')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('email',contactForm.get('email')!)}}
+                    </span>
+                  </span>
+                </div>
+
+
+
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="number">Your Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="number"
+                    placeholder="Enter number"
+                    formControlName="number"
+                    [ngClass]="{'is-invalid': isInvalid(contactForm.get('number')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('number',contactForm.get('number')!)}}
+                    </span>
+                  </span>
+                </div>
+
+
+
+                <div class="form-group form-lable-spacing">
+                  <label class="text-primary" for="message">Message</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="message"
+                    placeholder="Enter message"
+                    formControlName="message"
+                    [ngClass]="{'is-invalid': isInvalid(contactForm.get('message')!) }">
+                  <span class="invalid-feedback">
+                    <span>
+                      {{getErrorMessage('message',contactForm.get('message')!)}}
+                    </span>
+                  </span>
+                </div>
+
+
+                <button
+                  (click)="submit()"
+                  type="button"
+                  class="btn btn-primary"
+                  [disabled]="disableButtons">
+                  Send Message
+                </button>
+
+                <div
+                  *ngIf="primaryMessage"
+                  class="alert alert-primary"
+                  role="alert">
+                  {{primaryMessage}}
+                </div>
+                <div
+                  *ngIf="dangerMessage"
+                  class="alert alert-danger"
+                  role="alert">
+                  {{dangerMessage}}
+                </div>
+                <div
+                  *ngIf="successMessage"
+                  class="alert alert-success"
+                  role="alert">
+                  {{successMessage}}
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm">
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>
+
+
+
+
+
+
+
+
+
+<!-- The following info should be displayed and captured in this component:
+- Display the seller’s first and last name
+- Display the seller’s phone number
+- Display the seller’s email address.
+- Display a ‘Add to Favourites’ icon. If clicked, add this advert to the user’s list of favourite
+adverts.
+- Also display a contact form underneath the above detail with the following information:
+o Your Name string: required: min 5 chars, max 100 chars: Name of the user.
+o Your Email string: required: min 6 chars, max 100 chars: Check for @ only, no
+other validation necessary
+o Your Number string: not required: min 0 chars, max 100 chars: Free text, no
+validation
+o Message string: required: min 10 chars, max 2000 chars: Free text
+Actions:
+- Send Message: Validate the fields and just display a message ‘Email Sent’. We won’t
+integrate any email sending as it’s beyond the scope of this project.
+o On validation failure, highlight failed input’s and display failure alert.
+o On success, clear all inputs and display success alert. -->

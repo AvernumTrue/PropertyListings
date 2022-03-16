@@ -9,7 +9,7 @@
       </div>
       <div class="col-sm">
         <h2
-          class="display-4"
+          class="display-6"
           [routerLink]="['/advert-details', advert.id]">
           {{advert.headline}}
         </h2>
@@ -22,27 +22,59 @@
           <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
           <li class="list-group-item">{{advert.details}}</li>
         </ul>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm">
-              <button
-                type="button"
-                class="btn btn-primary"
-                [routerLink]="['/seller-details', advert.userId]">
-                Seller Details
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                [routerLink]="['/sale-list']">
-                Back
-              </button>
-            </div>
-          </div>
+        <div class="d-flex justify-content-start">
+          <button
+            type="button"
+            class="btn btn-primary"
+            [routerLink]="['/sale-list']"
+            [disabled]="disableButtons">
+            Back
+          </button>
+          <button
+            *ngIf="isLoggedIn"
+            type="button"
+            class="btn btn-primary"
+            (click)="addToFavourites()"
+            [disabled]="disableButtons">
+            {{favouritesButton}}
+          </button>
+          <button
+            *ngIf="!isLoggedIn"
+            type="button"
+            class="btn btn-primary"
+            [routerLink]="['/login']"
+            [disabled]="disableButtons">
+            Login to add to favourites
+          </button>
+
+          <div *ngIf="favouritedMessage" class="alert favouritedMessage alert-primary">Favourited</div>
+
         </div>
+
+        <div
+          *ngIf="primaryMessage"
+          class="alert alert-primary"
+          role="alert">
+          {{primaryMessage}}
+        </div>
+        <div
+          *ngIf="dangerMessage"
+          class="alert alert-danger"
+          role="alert">
+          {{dangerMessage}}
+        </div>
+        <div
+          *ngIf="successMessage"
+          class="alert alert-success"
+          role="alert">
+          {{successMessage}}
+        </div>
+
       </div>
+      <pl-contact-seller [advert]="advert"></pl-contact-seller>
     </div>
   </div>
+
 </div>
 
 <ng-http-loader

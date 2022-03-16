@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Spinkit } from 'ng-http-loader';
-import { delay } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -38,10 +37,10 @@ export class MainMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.userService.loggedInUserObservable.pipe(delay(2000)).subscribe({
+    this.userService.loggedInUserObservable.subscribe({
       next: user => this.checkUser(user)
     });
-    this.userService.getLoggedInUser().pipe(delay(2000)).subscribe({
+    this.userService.getLoggedInUser().subscribe({
       next: user => this.checkUser(user),
       error: () => this.checkUser(undefined),
     });

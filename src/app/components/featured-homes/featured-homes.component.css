@@ -1,0 +1,12 @@
+.headline {
+  cursor: pointer;
+}
+
+.headline:hover {
+  color: #084298;
+  background-color: #CFE2FF;
+}
+
+h2{
+  margin: 20px;
+}

@@ -1,0 +1,326 @@
+<div class="card">
+
+  <div class="card-body">
+    <h4 class="card-title text-center card-header">Search</h4>
+
+    <div class="row">
+
+      <div class="col-2 col-sm-2 text-center">
+        <h5>
+          Province
+        </h5>
+      </div>
+
+      <div class="col-2 col-sm-2 text-center">
+        <h5>
+          City
+        </h5>
+      </div>
+
+      <div class="col-2 col-sm-2 text-center">
+        <h5>
+          Minimum Price
+        </h5>
+      </div>
+
+      <div class="col-2 col-sm-2 text-center">
+
+        <h5>
+          Maximum Price
+        </h5>
+      </div>
+
+      <div class="col-2 col-sm-2 text-center">
+        <h5>
+          Key Word
+        </h5>
+      </div>
+
+      <div class="col-2 col-sm-2 text-center">
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="col-2 col-sm-2 text-center">
+        <div class="p-2 bd-highlight">
+          <button
+            class="btn btn-outline-primary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+            {{selectedProvince ? selectedProvince.province : 'Any' }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+            <div *ngIf="selectedProvince">
+              <li>
+                <button
+                  class="dropdown-item"
+                  (click)="cancelFilterProvince()">
+                  Clear
+                </button>
+              </li>
+              <div
+                class="dropdown-divider">
+              </div>
+            </div>
+            <li *ngFor="let province of provinces">
+              <button
+                class="dropdown-item"
+                (click)="filterProvince(province)">
+                {{province.province}}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-2 col-sm-2 text-center">
+        <div class="p-2 bd-highlight">
+          <button
+            class="btn btn-outline-primary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+            {{selectedCity ? selectedCity : 'Any' }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+            <div *ngIf="selectedCity">
+              <div>
+                <li>
+                  <button
+                    class="dropdown-item"
+                    (click)="cancelFilterCity()">
+                    Clear
+                  </button>
+                </li>
+              </div>
+              <div
+                class="dropdown-divider">
+              </div>
+            </div>
+            <div *ngIf="!selectedProvince">
+              <li>
+                <button
+                  class="dropdown-item">
+                  Select a Province first
+                </button>
+              </li>
+            </div>
+            <div *ngIf="selectedProvince">
+              <li *ngFor="let city of selectedProvince.cities">
+                <button
+                  class="dropdown-item"
+                  (click)="filterCity(city)">
+                  {{city}}
+                </button>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-2 col-sm-2 text-center">
+        <div class="p-2 bd-highlight">
+          <button
+            class="btn btn-outline-primary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+            {{selectedMinFilter ? '' : 'Any' }}
+            {{selectedMinFilter | currency:'R'}}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+            <div *ngIf="selectedMinFilter">
+              <li>
+                <button
+                  class="dropdown-item"
+                  (click)="cancelFilterMinimum()">
+                  Clear
+                </button>
+              </li>
+              <div
+                class="dropdown-divider">
+              </div>
+            </div>
+
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMinimum(10000)">
+                R10,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMinimum(50000)">
+                R50,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMinimum(100000)">
+                R100,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMinimum(500000)">
+                R500,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMinimum(1000000)">
+                R1,000,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMinimum(5000000)">
+                R5,000,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMinimum(10000000)">
+                R10,000,000.00
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-2 col-sm-2 text-center">
+        <div class="p-2 bd-highlight">
+          <button
+            class="btn btn-outline-primary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+            {{selectedMaxFilter ? '' : 'Any' }}
+            {{selectedMaxFilter | currency:'R'}}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+            <div *ngIf="selectedMaxFilter">
+              <li>
+                <button
+                  class="dropdown-item"
+                  (click)="cancelFilterMaximum()">
+                  Clear
+                </button>
+              </li>
+              <div
+                class="dropdown-divider">
+              </div>
+            </div>
+
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMaximum(100000000)">
+                R100,000,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMaximum(50000000)">
+                R50,000,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMaximum(10000000)">
+                R10,000,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMaximum(5000000)">
+                R5,000,000.00
+              </button>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMaximum(1000000)">
+                R1,000,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMaximum(500000)">
+                R500,000.00
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="filterMaximum(100000)">
+                R100,000.00
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-2 col-sm-2 text-center">
+        <div class="form-group">
+          <form novalidate
+            [formGroup]="searchForm">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="keyWord"
+                placeholder="Enter Key Word"
+                formControlName="keyWord"
+                maxlength="100">
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-2 col-sm-2">
+        <div class="d-flex justify-content-end">
+          <button
+            type="button"
+            class="btn btn-search-reset btn-outline-primary"
+            (click)="search()">
+            Search
+          </button>
+          <button
+            type="button"
+            class="btn btn-search-reset btn-outline-primary"
+            (click)="clearAll()">
+            Reset
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>

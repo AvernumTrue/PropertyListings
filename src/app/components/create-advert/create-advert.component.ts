@@ -163,6 +163,7 @@ export class CreateAdvertComponent implements OnInit {
     advert.price = this.advertForm.get('price')?.value.trim();
     advert.advertStatus = AdvertStatus.Live;
     advert.userId = Number(localStorage.getItem('loggedInId'));
+    this.advert.featured = false;
     this.advert = advert;
   }
 

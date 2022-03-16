@@ -4,7 +4,6 @@ import { Advert } from 'src/app/models/advert.model';
 import { AdvertStatus } from 'src/app/models/advert.status.enum';
 import { AdvertService } from 'src/app/services/advert.service';
 import { Spinkit } from 'ng-http-loader';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'pl-my-adverts',

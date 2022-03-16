@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Spinkit } from 'ng-http-loader';
-import { delay } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 

@@ -9,4 +9,5 @@ export class Advert {
   city: string;
   details: string;
   price: number;
+  featured: boolean;
 }
