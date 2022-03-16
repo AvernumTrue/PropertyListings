@@ -7,4 +7,5 @@ export class User {
   isAdmin!: boolean;
   phoneNumber?: string;
   favouriteHouses?: number[] = [];
+  isLocked: boolean;
 }

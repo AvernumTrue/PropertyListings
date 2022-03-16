@@ -139,6 +139,7 @@ export class RegisterComponent implements OnInit {
     user.password = this.registerForm.get('password')?.value.trim();
     user.favouriteHouses = [];
     user.isAdmin = false;
+    user.isLocked = false;
     this.user = user;
   }
 
