@@ -22,6 +22,11 @@ export class FavouriteHousesComponent implements OnInit {
   filteredAdverts: Advert[] = [];
   filteredFavouriteAdverts: Advert[] = [];
   user: User;
+  selectedAdvert: Advert;
+
+  primaryMessage: string;
+  dangerMessage: string;
+  successMessage: string;
 
   get advertFilter(): AdvertFilter {
     return this.advertService.advertFilter;
@@ -35,6 +40,30 @@ export class FavouriteHousesComponent implements OnInit {
     private router: Router,
     private userService: UserService) { };
 
+  selectMessage(message: string) {
+    switch (message) {
+
+      case "unfavouriteErrorMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "There was an error unfavouriting " + this.selectedAdvert.headline;
+        this.successMessage = "";
+        break;
+      case "unfavouriteSuccessMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "";
+        this.successMessage = "Unfavourited " + this.selectedAdvert.headline;
+        break;
+      case "noAdvertsMessage":
+        this.primaryMessage = "";
+        this.dangerMessage = "";
+        this.successMessage = "Advert removed from favourites.";
+        break;
+      default:
+        console.log("No Message");
+        break;
+    }
+  }
+
   ngOnInit(): void {
     this.loading = true;
     this.getFilteredAdverts();
@@ -46,17 +75,34 @@ export class FavouriteHousesComponent implements OnInit {
     })
   }
 
+  // TODO : check if there is a better way to do this
   unfavourite(advert: Advert) {
-    // TODO : Remove array entry from this.user.favouriteHouses with same number value as advert.id
-    // this.user.favouriteHouses = 
-    this.userService.editUser(this.user).subscribe({
-      next: () => {
-        // TODO : add success message
-      },
-      error: () => {
-        // TODO : add error message
+    this.selectedAdvert = advert;
+    for (let favouriteHouseId of this.user.favouriteHouses) {
+      if (advert.id === favouriteHouseId) {
+        for (var i = 0; i < this.user.favouriteHouses.length; i++) {
+          if (this.user.favouriteHouses[i] === favouriteHouseId) {
+            this.user.favouriteHouses.splice(i, 1);
+            for (var i = 0; i < this.filteredFavouriteAdverts.length; i++) {
+              if (this.filteredFavouriteAdverts[i].id === favouriteHouseId) {
+                this.filteredFavouriteAdverts.splice(i, 1);
+              }
+            }
+          }
+        }
+        this.loading = true;
+        this.userService.editUser(this.user).subscribe({
+          next: () => {
+            this.loading = false;
+            this.selectMessage("unfavouriteSuccessMessage");
+          },
+          error: () => {
+            this.loading = false;
+            this.selectMessage("unfavouriteErrorMessage");
+          }
+        });
       }
-    });
+    }
   }
 
   getFilteredAdverts() {

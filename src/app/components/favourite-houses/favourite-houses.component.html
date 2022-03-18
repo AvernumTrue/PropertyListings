@@ -4,10 +4,29 @@
 
 <div class="order-spacing d-flex justify-content-end">
 
+  <div *ngIf="filteredFavouriteAdverts.length === 0"
+    class="alert message-spacing alert-danger">
+    No favourite adverts found
+  </div>
+
+  <button
+    *ngIf="filteredFavouriteAdverts.length === 0"
+    type="button"
+    class="btn btn-primary alert-button"
+    [routerLink]="['/sale-list']">
+    Go to Adverts
+  </button>
+
   <div
-    *ngIf="orderMessage"
+    *ngIf="successMessage"
     class="alert message-spacing alert-primary">
-    {{orderMessage}}
+    {{successMessage}}
+  </div>
+
+  <div
+    *ngIf="dangerMessage"
+    class="alert message-spacing alert-danger">
+    {{dangerMessage}}
   </div>
 
   <div class="dropdown text-end">
