@@ -45,24 +45,27 @@ export class AdvertDetailsComponent implements OnInit {
       this.userService.getUser(Number(localStorage.getItem('loggedInId'))).subscribe({
         next: user => {
           this.user = user;
-          const checkFavouriteHouseIdExists = (id: number) => {
-            return id === this.advert.id;
-          }
-          if (!this.user.favouriteHouses.find(checkFavouriteHouseIdExists)) {
-            this.favouritesButton = 'Add to favourites';
-            this.isAddingFavourite = true;
-          } else {
-            this.favouritedMessage = true;
-            this.favouritesButton = 'Remove from favourites';
-            this.isAddingFavourite = false;
-          }
+          this.getAdvert();
         },
         error: () => {
           this.selectMessage("saveErrorMessage");
         },
       });
     }
-    this.getAdvert();
+  }
+
+  checkFavouriteHouseIdExists() {
+    const checkFavouriteHouseIdExists = (id: number) => {
+      return id === this.advert.id;
+    }
+    if (!this.user.favouriteHouses.find(checkFavouriteHouseIdExists)) {
+      this.favouritesButton = 'Add to favourites';
+      this.isAddingFavourite = true;
+    } else {
+      this.favouritedMessage = true;
+      this.favouritesButton = 'Remove from favourites';
+      this.isAddingFavourite = false;
+    }
   }
 
   selectMessage(message: string) {
@@ -103,6 +106,7 @@ export class AdvertDetailsComponent implements OnInit {
     this.advertService.getAdvert(this.advertId).subscribe({
       next: advert => {
         this.advert = advert;
+        this.checkFavouriteHouseIdExists();
         this.loading = false;
       }, error: err => {
         console.log(err);
