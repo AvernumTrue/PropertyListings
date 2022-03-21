@@ -1,4 +1,4 @@
-<h1 class="text-center">Advert List</h1>
+<h1 class="text-center">Advert Management</h1>
 
 <div>
 
@@ -7,10 +7,6 @@
       aria-expanded="false">
       Select User
     </button>
-
-    <div *ngIf="selectedUser">
-      {{selectedUser.email}}
-    </div>
 
     <ul class="dropdown-menu" aria-labelledby="userSearch">
 
@@ -81,13 +77,16 @@
           <div class="col-sm">
             <div class="dropdown">
               <button
+
+                *ngIf="!statusToChange || selectedAdvert === advert"
                 class="btn btn-outline-primary dropdown-toggle"
                 type="button"
                 id="dropdownBasic1"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 (click)="setSelectedAdvert(advert)"
-                [disabled]="disableAction">Actions
+                [disabled]="disableAction">
+                Change Status
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
 
@@ -98,7 +97,7 @@
                       <button
                         class="dropdown-item"
                         *ngIf="advert.advertStatus != 'HIDDEN'"
-                        (click)="changeAdvertStatus(advert,'hide')">
+                        (click)="prepChangeAdvertStatus(advert,'hide')">
                         Set Advert as hidden
                       </button>
                     </li>
@@ -107,7 +106,7 @@
                       <button
                         class="dropdown-item"
                         *ngIf="advert.advertStatus != 'LIVE'"
-                        (click)="changeAdvertStatus(advert,'show')">
+                        (click)="prepChangeAdvertStatus(advert,'show')">
                         Set Advert as live
                       </button>
                     </li>
@@ -116,7 +115,7 @@
                       <button
                         class="dropdown-item"
                         *ngIf="advert.advertStatus != 'DELETED'"
-                        (click)="changeAdvertStatus(advert,'delete')">
+                        (click)="prepChangeAdvertStatus(advert,'delete')">
                         Set Advert as deleted
                       </button>
                     </li>
@@ -126,13 +125,17 @@
               </ul>
 
               <button
+                *ngIf="selectedAdvert === advert && statusToChange"
                 type="button"
-                class="btn btn-primary">
+                class="btn btn-primary"
+                (click)="changeAdvertStatus()">
                 Save
               </button>
               <button
+                *ngIf="selectedAdvert === advert && statusToChange"
                 type="button"
-                class="btn btn-primary">
+                class="btn btn-primary"
+                (click)="cancel()">
                 Cancel
               </button>
 

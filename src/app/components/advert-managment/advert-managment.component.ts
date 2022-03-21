@@ -25,6 +25,8 @@ export class AdvertManagmentComponent implements OnInit {
   noticicationMessage: string;
   selectedAdvertHeadline: string;
 
+  statusToChange: string;
+
   selectedAdvert: Advert;
   disableAction = false;
 
@@ -70,28 +72,33 @@ export class AdvertManagmentComponent implements OnInit {
     });
   }
 
-  changeAdvertStatus(advert: Advert, change: string) {
+  prepChangeAdvertStatus(advert: Advert, change: string) {
     this.selectedAdvert = advert;
-    if (change === 'hide') {
+    this.statusToChange = change;
+  }
+  changeAdvertStatus() {
+    if (this.statusToChange === 'hide') {
       this.selectedAdvert.advertStatus = AdvertStatus.Hidden;
       this.noticicationMessage = "HIDDEN"
     }
-    if (change === 'show') {
+    if (this.statusToChange === 'show') {
       this.selectedAdvert.advertStatus = AdvertStatus.Live;
       this.noticicationMessage = "LIVE"
     }
-    if (change === 'delete') {
+    if (this.statusToChange === 'delete') {
       this.selectedAdvert.advertStatus = AdvertStatus.Deleted;
       this.noticicationMessage = "DELETE"
     }
-
-    this.selectedAdvertHeadline = advert.headline;
+    this.selectedAdvertHeadline = this.selectedAdvert.headline;
     this.loading = true;
     this.advertService.editAdvert(this.selectedAdvert).subscribe();
+    this.statusToChange = undefined;
+    this.selectedAdvert = undefined;
     this.getSelectedUserAdverts();
   }
 
   setSelectedUser(user: User) {
+    this.statusToChange = undefined;
     this.selectedUser = user;
     this.getSelectedUserAdverts()
   }
@@ -101,6 +108,8 @@ export class AdvertManagmentComponent implements OnInit {
   };
 
   cancel() {
+    this.statusToChange = undefined;
+    this.selectedAdvert = undefined;
     this.busyDeleting = false;
     this.disableAction = false;
   }
