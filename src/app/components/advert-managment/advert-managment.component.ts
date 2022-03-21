@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Spinkit } from 'ng-http-loader';
 import { AdvertFilter } from 'src/app/models/advert-filter.model';
@@ -15,6 +16,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AdvertManagmentComponent implements OnInit {
 
+  filteredUsers: User[];
   spinnerStyle = Spinkit;
   selectedUserAdverts: Advert[] = [];
   loading: boolean;
@@ -51,6 +53,7 @@ export class AdvertManagmentComponent implements OnInit {
     this.userService.getUsers().subscribe({
       next: allUsers => {
         this.allUsers = allUsers;
+        this.filteredUsers = allUsers;
         this.loading = false;
       }
     })
@@ -86,8 +89,9 @@ export class AdvertManagmentComponent implements OnInit {
       this.noticicationMessage = "LIVE"
     }
     if (this.statusToChange === 'delete') {
+      console.log(this.statusToChange);
       this.selectedAdvert.advertStatus = AdvertStatus.Deleted;
-      this.noticicationMessage = "DELETE"
+      this.noticicationMessage = "DELETED"
     }
     this.selectedAdvertHeadline = this.selectedAdvert.headline;
     this.loading = true;
@@ -100,7 +104,7 @@ export class AdvertManagmentComponent implements OnInit {
   setSelectedUser(user: User) {
     this.statusToChange = undefined;
     this.selectedUser = user;
-    this.getSelectedUserAdverts()
+    this.getSelectedUserAdverts();
   }
 
   setSelectedAdvert(advert: Advert) {

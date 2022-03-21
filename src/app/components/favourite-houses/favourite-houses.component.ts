@@ -75,7 +75,6 @@ export class FavouriteHousesComponent implements OnInit {
     })
   }
 
-  // TODO : check if there is a better way to do this
   unfavourite(advert: Advert) {
     this.selectedAdvert = advert;
     for (let favouriteHouseId of this.user.favouriteHouses) {
@@ -120,7 +119,6 @@ export class FavouriteHousesComponent implements OnInit {
     });
   }
 
-  // TODO : check if there is a better way to do this
   getFilteredFavouriteAdverts() {
     let index = 0;
     for (let i of this.filteredAdverts) {
