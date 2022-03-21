@@ -1,0 +1,199 @@
+<h1 class="text-center">Advert List</h1>
+
+<div>
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="userSearch" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      Select User
+    </button>
+
+    <div *ngIf="selectedUser">
+      {{selectedUser.email}}
+    </div>
+
+    <ul class="dropdown-menu" aria-labelledby="userSearch">
+
+      <li *ngFor="let user of allUsers">
+        <button class="dropdown-item"
+          (click)="setSelectedUser(user)">
+          {{user.email}}
+        </button>
+      </li>
+
+    </ul>
+  </div>
+
+  <div
+    *ngIf="noticicationMessage === 'HIDDEN'"
+    class="alert alert-danger">
+    <h2>
+      {{selectedAdvertHeadline}} is now hidden.
+    </h2>
+  </div>
+
+  <div
+    *ngIf="noticicationMessage === 'LIVE'"
+    class="alert alert-success">
+    <h2>
+      {{selectedAdvertHeadline}} is now live.
+    </h2>
+  </div>
+
+  <div
+    *ngIf="noticicationMessage === 'DELETED'"
+    class="alert alert-danger">
+    <h2>
+      {{selectedAdvertHeadline}} has been deleted.
+    </h2>
+  </div>
+
+  <div *ngFor="let advert of selectedUserAdverts">
+    <div class="card container jumbotron">
+
+      <div class="container">
+        <div class="row">
+
+          <div class="col-sm">
+            <div
+              role="alert">
+              <div *ngIf="advert.advertStatus === 'LIVE'"
+                class="alert alert-success">
+                <h4 class="text-center">Status: {{advert.advertStatus}}</h4>
+              </div>
+              <div *ngIf="advert.advertStatus === 'HIDDEN'"
+                class="alert alert-danger"
+                role="alert">
+                <h4 class="text-center">Status: {{advert.advertStatus}}</h4>
+              </div>
+              <div *ngIf="advert.advertStatus === 'DELETED'"
+                class="alert alert-danger"
+                role="alert">
+                <h4 class="text-center">Status: {{advert.advertStatus}}</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm">
+            One of three columns
+          </div>
+
+          <div class="col-sm">
+            <div class="dropdown">
+              <button
+                class="btn btn-outline-primary dropdown-toggle"
+                type="button"
+                id="dropdownBasic1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                (click)="setSelectedAdvert(advert)"
+                [disabled]="disableAction">Actions
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+
+                <div>
+                  <div>
+                    <li>
+                      <button
+                        class="dropdown-item"
+                        *ngIf="advert.advertStatus != 'HIDDEN'"
+                        (click)="changeAdvertStatus(advert,'hide')">
+                        Set Advert as hidden
+                      </button>
+                    </li>
+
+                    <li>
+                      <button
+                        class="dropdown-item"
+                        *ngIf="advert.advertStatus != 'LIVE'"
+                        (click)="changeAdvertStatus(advert,'show')">
+                        Set Advert as live
+                      </button>
+                    </li>
+
+                    <li>
+                      <button
+                        class="dropdown-item"
+                        *ngIf="advert.advertStatus != 'DELETED'"
+                        (click)="changeAdvertStatus(advert,'delete')">
+                        Set Advert as deleted
+                      </button>
+                    </li>
+
+                  </div>
+                </div>
+              </ul>
+
+              <button
+                type="button"
+                class="btn btn-primary">
+                Save
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary">
+                Cancel
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm">
+          <img class="advert-image" src="assets\images\default-house.png" alt="house image">
+        </div>
+        <div class="col-sm">
+
+          <div>
+            <div *ngIf="advert.featured">
+              Featured
+            </div>
+            <h2 class="display-6 headline" [routerLink]="['/advert-details', advert.id]">
+              {{advert.headline}}
+            </h2>
+          </div>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <h3>
+                Price: R{{advert.price | currency:' '}}
+              </h3>
+            </li>
+            <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>
+
+<!-- Allows the site administrator to manually change advert statuses.
+Page Details
+The page will consist of the following sections:
+- Searchable user list
+- List of the selected user’s adverts (in the normal advert list display format). Each advert will
+have a dropdown list with the advert statuses that will allow the administrator to change the
+advert status to any other status. Next to the status list should be a save button that will
+save the status change.
+Actions:
+- Save: Update the advert’s status to the selected status and submit the advert to the API. -->

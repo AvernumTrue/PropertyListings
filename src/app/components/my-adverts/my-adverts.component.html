@@ -55,6 +55,7 @@
   <div class="card container jumbotron">
 
     <div class="row">
+
       <div class="col">
         <div
           role="alert">
@@ -68,8 +69,8 @@
             <h4 class="text-center">Status: {{advert.advertStatus}}</h4>
           </div>
         </div>
-
       </div>
+
       <div class="col col-lg-8">
         <div *ngIf="busyDeleting && selectedAdvert === advert.id"
           class="alert alert-danger"
@@ -168,7 +169,6 @@
                 </h3>
               </li>
               <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
-              <!-- <li class="list-group-item">{{advert.details}}</li> -->
             </ul>
           </div>
         </div>

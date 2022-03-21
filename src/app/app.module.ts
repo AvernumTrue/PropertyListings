@@ -29,6 +29,7 @@ import { FeaturedHomesComponent } from './components/featured-homes/featured-hom
 import { FavouriteHousesComponent } from './components/favourite-houses/favourite-houses.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material/material.module';
+import { AdvertManagmentComponent } from './components/advert-managment/advert-managment.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MaterialModule } from './shared/modules/material/material.module';
     ContactSellerComponent,
     FeaturedHomesComponent,
     FavouriteHousesComponent,
+    AdvertManagmentComponent,
   ],
   imports: [
     ReactiveFormsModule,

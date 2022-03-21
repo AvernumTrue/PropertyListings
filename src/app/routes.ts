@@ -14,6 +14,7 @@ import { SellerProfileGuard } from "./components/seller-profile/seller-profile.g
 import { ManageMyAccountGuard } from "./components/manage-my-account/manage-my-account.guard";
 import { RegisterGuard } from "./components/register/register.guard";
 import { FavouriteHousesComponent } from "./components/favourite-houses/favourite-houses.component";
+import { AdvertManagmentComponent } from "./components/advert-managment/advert-managment.component";
 
 export default RouterModule.forRoot([
   { path: 'home', component: HomeComponent },
@@ -23,6 +24,7 @@ export default RouterModule.forRoot([
   { path: 'my-adverts', component: MyAdvertsComponent },
   { path: 'favourite-houses', component: FavouriteHousesComponent },
   { path: 'user-management', component: UserManagementComponent },
+  { path: 'advert-management', component: AdvertManagmentComponent },
   { path: 'manage-my-account', component: ManageMyAccountComponent, canDeactivate: [ManageMyAccountGuard] },
   { path: 'seller-profile', component: SellerProfileComponent, canDeactivate: [SellerProfileGuard] },
   { path: 'advert-details/:advertIndex', component: AdvertDetailsComponent },

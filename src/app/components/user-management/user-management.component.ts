@@ -31,20 +31,35 @@ export class UserManagementComponent implements OnInit {
 
   selectMessage(message: string) {
     switch (message) {
-      case "invalidMessage":
+      case "invalidEmail":
         this.primaryMessage = "";
         this.dangerMessage = "Email Invalid";
         this.successMessage = "";
         break;
-      case "saveErrorMessage":
+      case "emailSaveError":
         this.primaryMessage = "";
         this.dangerMessage = "Error saving email";
         this.successMessage = "";
         break;
-      case "saveSuccessMessage":
+      case "saveEmailSuccess":
         this.primaryMessage = "";
         this.dangerMessage = "";
         this.successMessage = "Email saved";
+        break;
+      case "savingMessage":
+        this.primaryMessage = "Saving...";
+        this.dangerMessage = "";
+        this.successMessage = "";
+        break;
+      case "unlockSaveError":
+        this.primaryMessage = "";
+        this.dangerMessage = "Error unlocking user";
+        this.successMessage = "";
+        break;
+      case "unlockSuccess":
+        this.primaryMessage = "";
+        this.dangerMessage = "";
+        this.successMessage = "User unlocked";
         break;
       case "savingMessage":
         this.primaryMessage = "Saving...";
@@ -102,27 +117,29 @@ export class UserManagementComponent implements OnInit {
   }
 
   unlockAccount(user: User) {
+    this.selectMessage("");
     this.loading = true;
     this.selectMessage("savingMessage");
     this.userService.editUser(user).subscribe({
       next: () => {
         this.loading = false;
         user.isLocked = false;
-        this.selectMessage("saveSuccessMessage");
+        this.selectMessage("unlockSuccess");
       },
       error: (err) => {
         console.log(err);
-        this.selectMessage("saveErrorMessage");
+        this.selectMessage("unlockSaveError");
         this.loading = false;
       }
     });
   }
 
-  closeModal() {
+  clearMessages() {
     this.selectMessage("");
   }
 
   setSelectedUser(user: User) {
+    this.selectMessage("");
     this.selectedUser = user;
     this.createEmailForm();
   }
@@ -134,17 +151,17 @@ export class UserManagementComponent implements OnInit {
       this.selectedUser.email = this.emailForm.get('email').value?.trim();
       this.userService.editUser(this.selectedUser).subscribe({
         next: () => {
-          this.selectMessage("saveSuccessMessage");
+          this.selectMessage("saveEmailSuccess");
           this.disableButtons = false;
         },
         error: (err) => {
           console.log(err);
-          this.selectMessage("saveErrorMessage");
+          this.selectMessage("emailSaveError");
           this.disableButtons = false;
         }
       });
     } else {
-      this.selectMessage("invalidMessage");
+      this.selectMessage("invalidEmail");
       this.disableButtons = false;
     }
     this.emailForm.markAllAsTouched();

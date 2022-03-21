@@ -18,3 +18,12 @@ h1{
 .dropdown-item{
   margin: 0px;
 }
+
+.headline {
+  cursor: pointer;
+}
+
+.headline:hover {
+  color: #084298;
+  background-color: #CFE2FF;
+} 

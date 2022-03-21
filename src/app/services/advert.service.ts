@@ -152,4 +152,8 @@ export class AdvertService {
     return this.http.get<Advert[]>(this.advertUrl).pipe(map(x => x.filter(a => a.userId === userId && a.advertStatus !== "DELETED"))).pipe(delay(2000));
   }
 
+  getAllAdvertsByUserId(userId: number): Observable<Advert[]> {
+    return this.http.get<Advert[]>(this.advertUrl).pipe(map(x => x.filter(a => a.userId === userId))).pipe(delay(2000));
+  }
+
 } 
