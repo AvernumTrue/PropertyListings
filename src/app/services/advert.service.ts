@@ -3,6 +3,7 @@ import { delay, map, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Advert } from '../models/advert.model';
 import { AdvertFilter } from '../models/advert-filter.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class AdvertService {
   adverts: Advert[] = [];
   advertFilter: AdvertFilter = {};
   filteredAdverts: Advert[] = [];
+  favouriteAdverts: Advert[] = [];
   featuredAdverts: Advert[] = [];
 
   filteredfeaturedAdverts: Advert[] = [];
@@ -101,6 +103,35 @@ export class AdvertService {
             }
             this.orderAdverts();
             observer.next(this.filteredAdverts);
+          } catch (err) {
+            observer.error(err);
+          }
+        },
+        error: (err) => observer.error(err),
+      });
+    });
+  }
+
+  getFavouriteAdverts(user: User) {
+    const loggedInId = Number(localStorage.getItem('loggedInId'))
+    this.favouriteAdverts = [];
+    return new Observable<Advert[]>(observer => {
+      this.http.get<Advert[]>(this.advertUrl).pipe(delay(2000)).subscribe({
+        next: adverts => {
+          try {
+
+            this.favouriteAdverts = this.adverts;
+            this.adverts = [];
+
+            for (let advert of adverts) {
+              for (let favouriteHouseId of user.favouriteHouses) {
+                if (advert.advertStatus === "LIVE" && advert.id === favouriteHouseId) {
+                  this.favouriteAdverts = this.favouriteAdverts.concat(advert);
+                }
+              }
+            }
+
+            observer.next(this.favouriteAdverts);
           } catch (err) {
             observer.error(err);
           }

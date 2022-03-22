@@ -19,8 +19,7 @@ export class FavouriteHousesComponent implements OnInit {
   loading: boolean;
   orderMessage: string;
   headingId: number;
-  filteredAdverts: Advert[] = [];
-  filteredFavouriteAdverts: Advert[] = [];
+  favouriteAdverts: Advert[] = [];
   user: User;
   selectedAdvert: Advert;
 
@@ -66,89 +65,65 @@ export class FavouriteHousesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.getFilteredAdverts();
     this.userService.getUser(Number(localStorage.getItem('loggedInId'))).subscribe({
       next: user => {
         this.user = user;
-        this.getFilteredFavouriteAdverts();
+        this.getFavouriteAdverts();
       }
     })
   }
 
   unfavourite(advert: Advert) {
     this.selectedAdvert = advert;
-    for (let favouriteHouseId of this.user.favouriteHouses) {
-      if (advert.id === favouriteHouseId) {
-        for (var i = 0; i < this.user.favouriteHouses.length; i++) {
-          if (this.user.favouriteHouses[i] === favouriteHouseId) {
-            this.user.favouriteHouses.splice(i, 1);
-            for (var i = 0; i < this.filteredFavouriteAdverts.length; i++) {
-              if (this.filteredFavouriteAdverts[i].id === favouriteHouseId) {
-                this.filteredFavouriteAdverts.splice(i, 1);
-              }
-            }
-          }
-        }
-        this.loading = true;
-        this.userService.editUser(this.user).subscribe({
-          next: () => {
-            this.loading = false;
-            this.selectMessage("unfavouriteSuccessMessage");
-          },
-          error: () => {
-            this.loading = false;
-            this.selectMessage("unfavouriteErrorMessage");
-          }
-        });
+    console.log(this.user.favouriteHouses)
+    for (let i = 0; i < this.user.favouriteHouses.length; i++) {
+      if (this.user.favouriteHouses[i] === this.selectedAdvert.id) {
+        this.user.favouriteHouses.splice(i, 1);
+        console.log(this.user.favouriteHouses)
       }
     }
+
+    this.loading = true;
+    this.userService.editUser(this.user).subscribe({
+      next: () => {
+        this.loading = true;
+        this.getFavouriteAdverts();
+        this.selectMessage("unfavouriteSuccessMessage");
+      },
+      error: () => {
+        this.loading = false;
+        this.selectMessage("unfavouriteErrorMessage");
+      }
+    });
   }
 
-  getFilteredAdverts() {
-    this.advertService.getFilteredAdverts(this.advertFilter).subscribe({
-      next: filteredAdverts => {
-        this.filteredAdverts = filteredAdverts;
+  getFavouriteAdverts() {
+    this.advertService.getFavouriteAdverts(this.user).subscribe({
+      next: favouriteAdverts => {
+        this.favouriteAdverts = favouriteAdverts;
         this.loading = false;
       },
       error: err => {
         console.log('Failed to fetch filtered adverts.');
         console.error(err);
-        this.filteredAdverts = [];
+        this.favouriteAdverts = [];
         this.loading = false;
       }
     });
-  }
-
-  getFilteredFavouriteAdverts() {
-    let index = 0;
-    for (let i of this.filteredAdverts) {
-      index++
-      for (let advert of this.filteredAdverts) {
-        if (this.user.favouriteHouses[index] === advert.id) {
-          this.filteredFavouriteAdverts = this.filteredFavouriteAdverts.concat(advert);
-        }
-      }
-    }
-    this.loading = false;
   }
 
   lowToHigh() {
     function comparator(a: any, b: any) {
       return parseInt(a.price) - parseInt(b.price);
     }
-    this.filteredFavouriteAdverts.sort(comparator);
+    this.favouriteAdverts.sort(comparator);
     this.orderMessage = 'Adverts ordered from low to high.';
   }
   highToLow() {
     function comparator(a: any, b: any) {
       return parseInt(b.price) - parseInt(a.price);
     }
-    this.filteredFavouriteAdverts.sort(comparator);
+    this.favouriteAdverts.sort(comparator);
     this.orderMessage = 'Adverts ordered from high to low.';
-  }
-
-  onApplyFiltersClicked(filteredAdverts: Advert[]) {
-    this.filteredAdverts = filteredAdverts;
-    this.orderMessage = undefined;
   }
 }

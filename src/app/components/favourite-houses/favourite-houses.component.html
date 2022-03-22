@@ -1,13 +1,13 @@
 <h1 class="text-center">Favourite Houses</h1>
 <div class="order-spacing d-flex justify-content-end">
 
-  <div *ngIf="filteredFavouriteAdverts.length === 0"
+  <div *ngIf="favouriteAdverts.length === 0"
     class="alert message-spacing alert-danger">
     No favourite adverts found
   </div>
 
   <button
-    *ngIf="filteredFavouriteAdverts.length === 0"
+    *ngIf="favouriteAdverts.length === 0"
     type="button"
     class="btn btn-primary alert-button"
     [routerLink]="['/sale-list']">
@@ -66,7 +66,7 @@
 
 <div *ngIf="!loading">
 
-  <div *ngFor="let advert of filteredFavouriteAdverts">
+  <div *ngFor="let advert of favouriteAdverts">
     <div class="card container jumbotron">
 
       <div class="container">
