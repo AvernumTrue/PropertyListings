@@ -88,8 +88,10 @@ export class UserManagementComponent implements OnInit {
     this.userService.getUsers().subscribe({
       next: users => {
         this.users = users;
+        this.users = this.users.filter((user) =>
+          user.isAdmin === false);
+        this.filteredUsers = this.users;
         this.loading = false;
-        this.filteredUsers = users;
       }
     });
   }
