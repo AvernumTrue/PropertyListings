@@ -24,7 +24,7 @@ export class AdvertManagmentComponent implements OnInit {
   allUsers: User[];
   selectedUser: User;
   busyDeleting = false;
-  noticicationMessage: string;
+  notificationMessage: string;
   selectedAdvertHeadline: string;
 
   statusToChange: string;
@@ -80,18 +80,18 @@ export class AdvertManagmentComponent implements OnInit {
     this.statusToChange = change;
   }
   changeAdvertStatus() {
-    if (this.statusToChange === 'hide') {
+    if (this.statusToChange === 'HIDDEN') {
       this.selectedAdvert.advertStatus = AdvertStatus.Hidden;
-      this.noticicationMessage = "HIDDEN"
+      this.notificationMessage = "HIDDEN"
     }
-    if (this.statusToChange === 'show') {
+    if (this.statusToChange === 'LIVE') {
       this.selectedAdvert.advertStatus = AdvertStatus.Live;
-      this.noticicationMessage = "LIVE"
+      this.notificationMessage = "LIVE"
     }
-    if (this.statusToChange === 'delete') {
+    if (this.statusToChange === 'DELETED') {
       console.log(this.statusToChange);
       this.selectedAdvert.advertStatus = AdvertStatus.Deleted;
-      this.noticicationMessage = "DELETED"
+      this.notificationMessage = "DELETED"
     }
     this.selectedAdvertHeadline = this.selectedAdvert.headline;
     this.loading = true;

@@ -1,4 +1,9 @@
 <h1 class="text-center">Advert Management</h1>
+<h2
+  *ngIf="selectedUser"
+  class="text-center">
+  Showing adverts for {{selectedUser.email}}
+</h2>
 
 <div class="d-flex justify-content-between">
   <div class="p-2">
@@ -23,26 +28,26 @@
   <div class="p-2">
 
     <div
-      *ngIf="noticicationMessage === 'HIDDEN'"
+      *ngIf="notificationMessage === 'HIDDEN'"
       class="alert alert-danger">
       <h2>
-        {{selectedAdvertHeadline}} is now hidden.
+        {{selectedAdvertHeadline}} is set as hidden.
       </h2>
     </div>
 
     <div
-      *ngIf="noticicationMessage === 'LIVE'"
+      *ngIf="notificationMessage === 'LIVE'"
       class="alert alert-success">
       <h2>
-        {{selectedAdvertHeadline}} is now live.
+        {{selectedAdvertHeadline}} is set as live.
       </h2>
     </div>
 
     <div
-      *ngIf="noticicationMessage === 'DELETED'"
+      *ngIf="notificationMessage === 'DELETED'"
       class="alert alert-danger">
       <h2>
-        {{selectedAdvertHeadline}} has been deleted.
+        {{selectedAdvertHeadline}} is set as deleted.
       </h2>
     </div>
 
@@ -75,6 +80,22 @@
           </div>
         </div>
 
+        <div
+          *ngIf="selectedAdvert === advert && statusToChange === 'LIVE'"
+          class="p-2 alert alert-success">
+          Set this advert as {{statusToChange}}?
+        </div>
+        <div
+          *ngIf="selectedAdvert === advert && statusToChange === 'HIDDEN'"
+          class="p-2 alert alert-danger">
+          Set this advert as {{statusToChange}}?
+        </div>
+        <div
+          *ngIf="selectedAdvert === advert && statusToChange === 'DELETED'"
+          class="p-2 alert alert-danger">
+          Set this advert as {{statusToChange}}?
+        </div>
+
         <div class="p-2">
           <div class="dropdown">
             <button
@@ -94,7 +115,7 @@
                 <button
                   class="dropdown-item"
                   *ngIf="advert.advertStatus != 'HIDDEN'"
-                  (click)="prepChangeAdvertStatus(advert,'hide')">
+                  (click)="prepChangeAdvertStatus(advert,'HIDDEN')">
                   Set Advert as hidden
                 </button>
               </li>
@@ -103,7 +124,7 @@
                 <button
                   class="dropdown-item"
                   *ngIf="advert.advertStatus != 'LIVE'"
-                  (click)="prepChangeAdvertStatus(advert,'show')">
+                  (click)="prepChangeAdvertStatus(advert,'LIVE')">
                   Set Advert as live
                 </button>
               </li>
@@ -112,7 +133,7 @@
                 <button
                   class="dropdown-item"
                   *ngIf="advert.advertStatus != 'DELETED'"
-                  (click)="prepChangeAdvertStatus(advert,'delete')">
+                  (click)="prepChangeAdvertStatus(advert,'DELETED')">
                   Set Advert as deleted
                 </button>
               </li>
