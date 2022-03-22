@@ -122,10 +122,10 @@ export class UserManagementComponent implements OnInit {
     this.selectMessage("");
     this.loading = true;
     this.selectMessage("savingMessage");
+    user.isLocked = false;
     this.userService.editUser(user).subscribe({
       next: () => {
         this.loading = false;
-        user.isLocked = false;
         this.selectMessage("unlockSuccess");
       },
       error: (err) => {
