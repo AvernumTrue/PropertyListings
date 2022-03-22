@@ -136,14 +136,14 @@ export class FavouriteHousesComponent implements OnInit {
     function comparator(a: any, b: any) {
       return parseInt(a.price) - parseInt(b.price);
     }
-    this.filteredAdverts.sort(comparator);
+    this.filteredFavouriteAdverts.sort(comparator);
     this.orderMessage = 'Adverts ordered from low to high.';
   }
   highToLow() {
     function comparator(a: any, b: any) {
       return parseInt(b.price) - parseInt(a.price);
     }
-    this.filteredAdverts.sort(comparator);
+    this.filteredFavouriteAdverts.sort(comparator);
     this.orderMessage = 'Adverts ordered from high to low.';
   }
 

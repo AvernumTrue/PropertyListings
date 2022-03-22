@@ -26,6 +26,12 @@
     {{dangerMessage}}
   </div>
 
+  <div
+    *ngIf="orderMessage"
+    class="alert message-spacing alert-primary">
+    {{orderMessage}}
+  </div>
+
   <div class="dropdown text-end">
     <button
       class="btn btn-outline-primary dropdown-toggle"
