@@ -79,11 +79,8 @@
   </div>
 </div>
 
-
-
-
 <div class="container">
-  <h1 class="text-center">User List</h1>
+  <h1 class="text-center">User Managment</h1>
 
   <div class="d-flex justify-content-center">
     <div class="d-2">
@@ -124,22 +121,23 @@
           <th class="text-primary" scope="col">Forenames</th>
           <th class="text-primary" scope="col">Surname</th>
           <th class="text-primary" scope="col">Email address</th>
+          <th class="text-primary" scope="col">Locked</th>
           <th class="text-primary" scope="col">
             <div
               *ngIf="primaryMessage"
-              class="alert alert-primary"
+              class="text-primary"
               role="alert">
               {{primaryMessage}}
             </div>
             <div
               *ngIf="dangerMessage"
-              class="alert alert-danger"
+              class="text-danger"
               role="alert">
               {{dangerMessage}}
             </div>
             <div
               *ngIf="successMessage"
-              class="alert alert-success"
+              class="text-success"
               role="alert">
               {{successMessage}}
             </div>
@@ -155,9 +153,11 @@
           <td>
             {{user.email}}
             <mat-icon *ngIf="!user.isEmailValidated" aria-label="Example home icon">report problem</mat-icon>
-            <mat-icon *ngIf="user.isLocked" aria-label="Example home icon">lock</mat-icon>
           </td>
 
+          <td>
+            <mat-icon *ngIf="user.isLocked" aria-label="Example home icon">lock</mat-icon>
+          </td>
           <td>
 
             <div class="p-2 bd-highlight">
