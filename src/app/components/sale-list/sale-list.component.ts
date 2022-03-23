@@ -4,6 +4,7 @@ import { Spinkit } from 'ng-http-loader';
 import { AdvertFilter } from 'src/app/models/advert-filter.model';
 import { Advert } from 'src/app/models/advert.model';
 import { AdvertService } from 'src/app/services/advert.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'pl-sale-list',
@@ -26,11 +27,17 @@ export class SaleListComponent implements OnInit {
     this.advertService.advertFilter = value;
   }
 
+  set returnPage(value: string) {
+    this.userService.returnPage = value;
+  }
+
   constructor(
     private advertService: AdvertService,
+    private userService: UserService,
     private router: Router,) { };
 
   ngOnInit(): void {
+    this.returnPage = '/sale-list';
     this.getFilteredAdverts();
   }
 

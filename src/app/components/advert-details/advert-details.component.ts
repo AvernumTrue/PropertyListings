@@ -30,6 +30,10 @@ export class AdvertDetailsComponent implements OnInit {
   favouritedMessage: boolean;
   isLoggedIn: boolean;
 
+  get returnPage(): string {
+    return this.userService.returnPage;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -136,6 +140,10 @@ export class AdvertDetailsComponent implements OnInit {
     this.disableButtons = true;
     this.updateFavourites();
     console.log(this.user.favouriteHouses);
+  }
+
+  goBack() {
+    this.router.navigate([this.returnPage]);
   }
 
   updateFavourites() {

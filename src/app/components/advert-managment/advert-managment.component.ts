@@ -22,21 +22,25 @@ export class AdvertManagmentComponent implements OnInit {
   loading: boolean;
   allAdverts: Advert[];
   allUsers: User[];
-  selectedUser: User;
   busyDeleting = false;
   notificationMessage: string;
   selectedAdvertHeadline: string;
 
   statusToChange: string;
 
+  // selectedUser: User;
   selectedAdvert: Advert;
   disableAction = false;
 
-  get advertFilter(): AdvertFilter {
-    return this.advertService.advertFilter;
+  get selectedUser(): User {
+    return this.userService.selectedUser;
   }
-  set advertFilter(value: AdvertFilter) {
-    this.advertService.advertFilter = value;
+  set selectedUser(value: User) {
+    this.userService.selectedUser = value;
+  }
+
+  set returnPage(value: string) {
+    this.userService.returnPage = value;
   }
 
   constructor(
@@ -46,6 +50,11 @@ export class AdvertManagmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.returnPage = '/advert-management';
+    if (this.selectedUser) {
+      this.selectedUser = this.selectedUser;
+      this.getSelectedUserAdverts();
+    }
     this.getAllUsers();
   }
 
