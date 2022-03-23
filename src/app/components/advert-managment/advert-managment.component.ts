@@ -61,6 +61,11 @@ export class AdvertManagmentComponent implements OnInit {
   getAllUsers() {
     this.userService.getUsers().subscribe({
       next: allUsers => {
+        for (let i = 0; i < allUsers.length; i++) {
+          if (allUsers[i].isAdmin === true) {
+            allUsers.splice(i, 1);
+          }
+        }
         this.allUsers = allUsers;
         this.filteredUsers = allUsers;
         this.loading = false;

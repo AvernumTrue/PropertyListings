@@ -34,6 +34,10 @@ export class FavouriteHousesComponent implements OnInit {
     this.advertService.advertFilter = value;
   }
 
+  set returnPage(value: string) {
+    this.userService.returnPage = value;
+  }
+
   constructor(
     private advertService: AdvertService,
     private router: Router,
@@ -65,6 +69,7 @@ export class FavouriteHousesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.returnPage = '/favourite-houses';
     this.userService.getUser(Number(localStorage.getItem('loggedInId'))).subscribe({
       next: user => {
         this.user = user;
