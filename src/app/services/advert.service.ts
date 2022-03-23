@@ -27,6 +27,9 @@ export class AdvertService {
   filteredUnfeaturedAdverts: Advert[] = [];
 
   getFeaturedAdverts() {
+    this.adverts = [];
+    this.advert = undefined;
+    this.featuredAdverts = [];
     return new Observable<Advert[]>(observer => {
       this.http.get<Advert[]>(this.advertUrl).pipe(delay(2000)).subscribe({
         next: adverts => {
@@ -50,6 +53,9 @@ export class AdvertService {
 
   getFilteredAdverts(advertFilter: AdvertFilter) {
     this.filteredAdverts = [];
+    this.advertFilter = undefined;
+    this.adverts = [];
+    this.advert = undefined;
     return new Observable<Advert[]>(observer => {
       this.http.get<Advert[]>(this.advertUrl).pipe(delay(2000)).subscribe({
         next: adverts => {
@@ -113,16 +119,15 @@ export class AdvertService {
   }
 
   getFavouriteAdverts(user: User) {
-    const loggedInId = Number(localStorage.getItem('loggedInId'))
+    this.adverts = [];
+    this.advert = undefined;
     this.favouriteAdverts = [];
+    const loggedInId = Number(localStorage.getItem('loggedInId'))
     return new Observable<Advert[]>(observer => {
       this.http.get<Advert[]>(this.advertUrl).pipe(delay(2000)).subscribe({
         next: adverts => {
           try {
-
             this.favouriteAdverts = this.adverts;
-            this.adverts = [];
-
             for (let advert of adverts) {
               for (let favouriteHouseId of user.favouriteHouses) {
                 if (advert.advertStatus === "LIVE" && advert.id === favouriteHouseId) {
