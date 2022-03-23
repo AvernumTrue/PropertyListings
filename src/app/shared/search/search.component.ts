@@ -15,7 +15,6 @@ import { ProvinceService } from 'src/app/services/province.service';
 })
 export class SearchComponent implements OnInit {
 
-  // @Output() applyFiltersEmitter = new EventEmitter<AdvertFilter>();
   @Output() applyFiltersEmitter = new EventEmitter<Advert[]>();
 
   spinnerStyle = Spinkit;

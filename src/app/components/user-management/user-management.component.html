@@ -1,31 +1,231 @@
-<div class="container">
-  <h1 class="text-center">User List</h1>
-  <div class="container">
+<div class="modal fade" id="changeEmail" tabindex="-1" aria-labelledby="changeEmailLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changeEmailLabel">Change Email</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="clearMessages()"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <form
+            novalidate
+            *ngIf="emailForm"
+            [formGroup]="emailForm">
+
+            <div>
+              <div class="form-group form-lable-spacing">
+                <label class="text-primary" for="email">Change email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Change email"
+                  formControlName="email"
+                  [ngClass]="{'is-invalid': isInvalid(emailForm.get('email')!) }">
+                <span class="invalid-feedback">
+                  <span>
+                    {{getErrorMessage('email',emailForm.get('email')!)}}
+                  </span>
+                </span>
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <div
+          *ngIf="primaryMessage"
+          class="alert alert-primary"
+          role="alert">
+          {{primaryMessage}}
+        </div>
+        <div
+          *ngIf="dangerMessage"
+          class="alert alert-danger"
+          role="alert">
+          {{dangerMessage}}
+        </div>
+        <div
+          *ngIf="successMessage"
+          class="alert alert-success"
+          role="alert">
+          {{successMessage}}
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          [disabled]="disableButtons"
+          (click)="clearMessages()">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          [disabled]="disableButtons"
+          (click)="changeEmail()">
+          Save
+        </button>
+
+      </div>
+    </div>
   </div>
+</div>
+
+<div class="container">
+  <h1 class="text-center">User Managment</h1>
+
+  <div class="d-flex justify-content-center">
+    <div class="d-2">
+      <form novalidate
+        [formGroup]="surnameForm">
+
+        <div>
+          <div class="form-group form-lable-spacing">
+            <label class="text-primary" for="surname">Search Surname</label>
+            <input
+              type="text"
+              class="form-control"
+              id="surname"
+              placeholder="Search Surname"
+              formControlName="surname">
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="d-2">
+      <button
+        type="button"
+        class="btn search-button btn-outline-primary"
+        (click)="search()"
+        [disabled]="disableButtons">
+        Search
+      </button>
+    </div>
+
+  </div>
+
   <div class='table-responsive'>
     <table class="table">
       <thead>
         <tr>
-          <th class="text-primary" scope="col">forenames</th>
-          <th class="text-primary" scope="col">surname</th>
-          <th class="text-primary" scope="col">email</th>
-          <th class="text-primary" scope="col">password</th>
-          <th class="text-primary" scope="col">phone</th>
-          <th class="text-primary" scope="col">isAdmin</th>
-          <th class="text-primary" scope="col">favouriteHouses</th>
+          <th class="text-primary" scope="col">Forenames</th>
+          <th class="text-primary" scope="col">Surname</th>
+          <th class="text-primary" scope="col">Email address</th>
+          <th class="text-primary" scope="col">Locked</th>
+          <th class="text-primary" scope="col">
+            <div
+              *ngIf="primaryMessage"
+              class="alert alert-primary"
+              role="alert">
+              {{primaryMessage}}
+            </div>
+            <div
+              *ngIf="dangerMessage"
+              class="alert alert-danger"
+              role="alert">
+              {{dangerMessage}}
+            </div>
+            <div
+              *ngIf="successMessage"
+              class="alert alert-success"
+              role="alert">
+              {{successMessage}}
+            </div>
+          </th>
+
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let user of filteredUsers">
+
           <td>{{user.forenames}}</td>
           <td>{{user.surname}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.password}}</td>
-          <td>{{user.phoneNumber}}</td>
-          <td>{{user.isAdmin}}</td>
-          <td>{{user.favouriteHouses}}</td>
+          <td>
+            {{user.email}}
+            <mat-icon *ngIf="!user.isEmailValidated" aria-label="Example home icon">report problem</mat-icon>
+          </td>
+
+          <td>
+            <mat-icon *ngIf="user.isLocked" aria-label="Example home icon">lock</mat-icon>
+          </td>
+          <td>
+
+            <div class="p-2 bd-highlight">
+              <button
+                class="btn btn-outline-primary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Actions
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+                <li *ngIf="user.isLocked">
+                  <button
+                    class="dropdown-item"
+                    (click)="unlockAccount(user)">
+                    Unlock account
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    class="dropdown-item"
+                    data-bs-toggle="modal"
+                    data-bs-target="#changeEmail"
+                    (click)="setSelectedUser(user)">
+                    Change email address
+                  </button>
+                </li>
+
+              </ul>
+            </div>
+
+          </td>
+
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>
+
+<!-- Page Details
+The page should consist of a list of all the user accounts in a table. The table should be searchable on
+‘Surname’. On search the table rows should filter to only display the relevant rows searched for. The
+following columns should be displayed:
+- Forenames: The user’s forenames
+- Surname: The user’s surname
+- Email Address: The user’s email address (username). If the email address is not validated,
+display an icon next to the email address to show the administrator that the user has not
+validated the email address.
+- Locked: Display a ‘lock’ icon if the account is locked. Display nothing of the account is not
+locked.
+- A dropdown list with the following actions:
+o Unlock account: (Only display of account is locked) Allows the administrator to
+unlock the user’s account if locked.
+o Change email address: Allows the administrator to change the user’s email address.
+When this is clicked, display an input box with the user’s email address and a ‘Save’
+button. When the Save button is clicked verify that there is text in the input box and
+that an ‘@’ sign is present.  -->

@@ -27,6 +27,9 @@ import { SearchComponent } from './shared/search/search.component';
 import { ContactSellerComponent } from './components/contact-seller/contact-seller.component';
 import { FeaturedHomesComponent } from './components/featured-homes/featured-homes.component';
 import { FavouriteHousesComponent } from './components/favourite-houses/favourite-houses.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './shared/modules/material/material.module';
+import { AdvertManagmentComponent } from './components/advert-managment/advert-managment.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { FavouriteHousesComponent } from './components/favourite-houses/favourit
     ContactSellerComponent,
     FeaturedHomesComponent,
     FavouriteHousesComponent,
+    AdvertManagmentComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -56,7 +60,9 @@ import { FavouriteHousesComponent } from './components/favourite-houses/favourit
     HttpClientModule,
     routes,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
-    NgHttpLoaderModule.forRoot()
+    NgHttpLoaderModule.forRoot(),
+    BrowserAnimationsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

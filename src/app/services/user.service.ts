@@ -18,6 +18,9 @@ export class UserService {
     })
   };
 
+  selectedUser: User;
+  returnPage: string;
+
   getLoggedInUser(): Observable<User> {
     const loggedInId = Number(localStorage.getItem('loggedInId'));
     if (loggedInId != null && !isNaN(loggedInId)) {

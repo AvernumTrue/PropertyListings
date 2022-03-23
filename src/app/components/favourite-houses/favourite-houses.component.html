@@ -1,1 +1,123 @@
-<p>favourite-houses works!</p>
+<h1 class="text-center">Favourite Houses</h1>
+<div class="order-spacing d-flex justify-content-end">
+
+  <div *ngIf="favouriteAdverts.length === 0"
+    class="alert message-spacing alert-danger">
+    No favourite adverts found
+  </div>
+
+  <button
+    *ngIf="favouriteAdverts.length === 0"
+    type="button"
+    class="btn btn-primary alert-button"
+    [routerLink]="['/sale-list']">
+    Go to Adverts
+  </button>
+
+  <div
+    *ngIf="successMessage"
+    class="alert message-spacing alert-primary">
+    {{successMessage}}
+  </div>
+
+  <div
+    *ngIf="dangerMessage"
+    class="alert message-spacing alert-danger">
+    {{dangerMessage}}
+  </div>
+
+  <div
+    *ngIf="orderMessage"
+    class="alert message-spacing alert-primary">
+    {{orderMessage}}
+  </div>
+
+  <div class="dropdown text-end">
+    <button
+      class="btn btn-outline-primary dropdown-toggle"
+      type="button"
+      id="dropdownBasic1"
+      data-bs-toggle="dropdown"
+      aria-expanded="false">
+      Order by
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+      <li>
+        <button
+          class="dropdown-item"
+          (click)="highToLow()">
+          Price High to Low
+        </button>
+      </li>
+
+      <li>
+        <button
+          class="dropdown-item"
+          (click)="lowToHigh()">
+          Price Low to High
+        </button>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+
+<div *ngIf="!loading">
+
+  <div *ngFor="let advert of favouriteAdverts">
+    <div class="card container jumbotron">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <img class="advert-image" src="assets\images\default-house.png" alt="house image">
+          </div>
+          <div class="col-sm">
+
+            <div>
+              <div *ngIf="advert.featured">
+                Featured
+              </div>
+              <h2 class="display-6 headline" [routerLink]="['/advert-details', advert.id]">
+                {{advert.headline}}
+              </h2>
+            </div>
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h3>
+                  Price: R{{advert.price | currency:' '}}
+                </h3>
+              </li>
+              <li class="list-group-item">Location: {{advert.city}}, {{advert.province}}</li>
+            </ul>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="unfavourite(advert)">
+              Unfavourite
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<ng-http-loader
+  *ngIf="loading"
+  [backdrop]="true"
+  [backgroundColor]="'#0275d8'"
+  [debounceDelay]="100"
+  [extraDuration]="10000"
+  [minDuration]="300"
+  [opacity]="'0.6'"
+  [spinner]="spinnerStyle.skCubeGrid">
+</ng-http-loader>

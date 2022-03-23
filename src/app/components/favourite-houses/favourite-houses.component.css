@@ -1,0 +1,44 @@
+
+.alert-button{
+  margin-right: 10px;
+  padding-bottom: 4px;
+  padding-top: 7px;
+  height: 37px;
+}
+
+.jumbotron{
+  margin-bottom: 20px;
+}
+
+h1{
+  margin: 20px;
+}
+
+.dropdown{
+  margin-bottom: 20px;
+}
+
+.message-spacing{
+  padding-bottom: 6px;
+  padding-top: 6px;
+}
+
+.headline {
+  cursor: pointer;
+}
+
+.headline:hover {
+  color: #084298;
+  background-color: #CFE2FF;
+} 
+
+.alert{
+  margin-right: 10px;
+  padding-bottom: 0px;
+  padding-top: 7px;
+  height: 37px;
+}
+
+.order-spacing{
+  margin-top: 20px;
+}

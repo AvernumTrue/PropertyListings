@@ -136,7 +136,9 @@ export class InMemoryDataService implements InMemoryDbService {
           password: 'password1',
           isAdmin: false,
           phoneNumber: '123 456 7890',
-          favouriteHouses: []
+          favouriteHouses: [1, 3, 4, 5, 6],
+          isLocked: false,
+          isEmailValidated: true,
         },
         {
           id: 2,
@@ -145,7 +147,9 @@ export class InMemoryDataService implements InMemoryDbService {
           email: '2@2.com',
           password: 'password2',
           isAdmin: false,
-          favouriteHouses: []
+          favouriteHouses: [2, 3],
+          isLocked: true,
+          isEmailValidated: false
         },
         {
           id: 3,
@@ -155,7 +159,9 @@ export class InMemoryDataService implements InMemoryDbService {
           password: 'password3',
           isAdmin: false,
           phoneNumber: '111 222 3333',
-          favouriteHouses: []
+          favouriteHouses: [5, 7],
+          isLocked: false,
+          isEmailValidated: true,
         },
         {
           id: 4,
@@ -165,7 +171,9 @@ export class InMemoryDataService implements InMemoryDbService {
           password: 'password4',
           isAdmin: false,
           phoneNumber: '3211231234',
-          favouriteHouses: []
+          favouriteHouses: [],
+          isLocked: true,
+          isEmailValidated: true,
         },
 
         {
@@ -177,6 +185,8 @@ export class InMemoryDataService implements InMemoryDbService {
           phoneNumber: '3211231234',
           favouriteHouses: [],
           isAdmin: true,
+          isLocked: false,
+          isEmailValidated: true,
         },
       ];
       const provinces: Province[] = [
