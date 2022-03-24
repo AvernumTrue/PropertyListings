@@ -125,6 +125,163 @@ export class InMemoryDataService implements InMemoryDbService {
         price: 10000,
         featured: false
       },
+      {
+        userId: 3,
+        advertStatus: AdvertStatus.Live,
+        id: 11,
+        headline: 'Windy Lodge',
+        province: 'Free State',
+        city: 'Clarens',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 10000,
+        featured: false
+      },
+      {
+        userId: 3,
+        advertStatus: AdvertStatus.Live,
+        id: 12,
+        headline: 'Meadow View',
+        province: 'Free State',
+        city: 'Clarens',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 20000,
+        featured: false
+      },
+      {
+        userId: 3,
+        advertStatus: AdvertStatus.Live,
+        id: 13,
+        headline: 'The Lodge',
+        province: 'Free State',
+        city: 'Clarens',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 30000,
+        featured: false
+      },
+      {
+        userId: 3,
+        advertStatus: AdvertStatus.Live,
+        id: 14,
+        headline: 'Orchard View',
+        province: 'Free State',
+        city: 'Clarens',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 40000,
+        featured: false
+      },
+      {
+        userId: 3,
+        advertStatus: AdvertStatus.Live,
+        id: 15,
+        headline: 'Meadowside',
+        province: 'Free State',
+        city: 'Clarens',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 50000,
+        featured: false
+      },
+      {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 16,
+        headline: 'Red End',
+        province: 'Eastern Cape',
+        city: 'Barkly East',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 1000000,
+        featured: false
+      }, {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 17,
+        headline: 'Honeysuckle Lodge',
+        province: 'Eastern Cape',
+        city: 'Barkly East',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 100000,
+        featured: true
+      }, {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 18,
+        headline: 'Knowle Lodge',
+        province: 'Eastern Cape',
+        city: 'Barkly East',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 60000000,
+        featured: false
+      }, {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 19,
+        headline: 'Seaside',
+        province: 'The Ivies',
+        city: 'Barkly East',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 100000,
+        featured: true
+      }, {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 20,
+        headline: 'Orchardways',
+        province: 'Eastern Cape',
+        city: 'Barkly East',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 400000,
+        featured: false
+      }, {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 21,
+        headline: 'Ivylands',
+        province: 'Eastern Cape',
+        city: 'Barkly East',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 100000,
+        featured: false
+      }, {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 22,
+        headline: 'Ivy End',
+        province: 'Eastern Cape',
+        city: 'Barkly East',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 6000000,
+        featured: false
+      }, {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 23,
+        headline: 'The House',
+        province: 'Eastern Cape',
+        city: 'Barkly East',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 10000000,
+        featured: false
+      }, {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 24,
+        headline: 'Icy End',
+        province: 'Eastern Cape',
+        city: 'Barkly East',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 100000,
+        featured: false
+      }, {
+        userId: 2,
+        advertStatus: AdvertStatus.Live,
+        id: 25,
+        headline: 'Orchard View',
+        province: 'Eastern Cape',
+        city: 'Barkly East',
+        details: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.',
+        price: 1000000,
+        featured: false
+      },
+
     ];
     {
       const users: User[] = [
