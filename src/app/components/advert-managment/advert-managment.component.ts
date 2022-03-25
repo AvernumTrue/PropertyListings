@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Spinkit } from 'ng-http-loader';
-import { AdvertFilter } from 'src/app/models/advert-filter.model';
 import { Advert } from 'src/app/models/advert.model';
 import { AdvertStatus } from 'src/app/models/advert.status.enum';
 import { User } from 'src/app/models/user.model';
@@ -27,8 +25,6 @@ export class AdvertManagmentComponent implements OnInit {
   selectedAdvertHeadline: string;
 
   statusToChange: string;
-
-  // selectedUser: User;
   selectedAdvert: Advert;
   disableAction = false;
 

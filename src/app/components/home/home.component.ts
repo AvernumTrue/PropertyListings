@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AdvertFilter } from 'src/app/models/advert-filter.model';
 import { Advert } from 'src/app/models/advert.model';
 
 @Component({
@@ -15,9 +14,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  // onApplyFiltersClicked(advertFilter: AdvertFilter) {
-  // }
   onApplyFiltersClicked(filteredAdverts: Advert[]) {
   }
 
