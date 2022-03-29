@@ -1,10 +1,10 @@
 .navbar-brand {
   padding: 1rem;
-  /* margin-right: 0rem; */
+  margin-right: 0rem;
 }
 /* bootstrap's .navbar-brand has margin-right: set to 1rem*/
-footer{
+/* footer{
   position:fixed;
   bottom:0px;
   width:100%;
-  }
+  } */

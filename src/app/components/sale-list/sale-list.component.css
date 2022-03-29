@@ -19,6 +19,17 @@ h1{
   cursor: pointer;
 }
 
+.pagination {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.pagination-spacing {
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+
 .headline:hover {
   color: #084298;
   background-color: #CFE2FF;

@@ -13,12 +13,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SaleListComponent implements OnInit {
 
+  paginatedAdverts: any[] = [[]];  //Todo: remove this any. Make a model?
   spinnerStyle = Spinkit;
   adverts: Advert[] = [];
   loading: boolean;
   orderMessage: string;
   headingId: number;
   filteredAdverts: Advert[] = [];
+  paginationPage: number;
+  selectedPage: number;
 
   get advertFilter(): AdvertFilter {
     return this.advertService.advertFilter;
@@ -39,6 +42,7 @@ export class SaleListComponent implements OnInit {
   ngOnInit(): void {
     this.returnPage = '/sale-list';
     this.getFilteredAdverts();
+    this.selectedPage = 0;
   }
 
   getFilteredAdverts() {
@@ -46,6 +50,7 @@ export class SaleListComponent implements OnInit {
     this.advertService.getFilteredAdverts(this.advertFilter).subscribe({
       next: filteredAdverts => {
         this.filteredAdverts = filteredAdverts;
+        this.paginateAdverts()
         this.loading = false;
       },
       error: err => {
@@ -55,6 +60,30 @@ export class SaleListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  paginateAdverts() {
+    console.log(this.filteredAdverts);
+    let index = 0;
+    this.paginationPage = 0;
+    for (let length = this.filteredAdverts.length; length > 0; length -= 10) {
+      this.paginatedAdverts[index] = this.filteredAdverts.slice(this.paginationPage, (this.paginationPage + 10));
+      index++;
+      this.paginationPage += 10;
+    }
+  }
+
+  setSelectedPage(pageNumb: number) {
+    this.selectedPage = pageNumb;
+  }
+
+  incrementSelectedPage(page: string) {
+    if (this.selectedPage > 0 && page === 'pageLeft') {
+      this.selectedPage--;
+    }
+    if (this.selectedPage < this.paginatedAdverts.length - 1 && page === 'pageRight') {
+      this.selectedPage++;
+    }
   }
 
   lowToHigh() {
