@@ -44,12 +44,13 @@ export class AdvertDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.getAdvert();
     if (localStorage.getItem('loggedInId')) {
       this.isLoggedIn = true;
       this.userService.getUser(Number(localStorage.getItem('loggedInId'))).subscribe({
         next: user => {
           this.user = user;
-          this.getAdvert();
+          this.checkFavouriteHouseIdExists();
         },
         error: () => {
           this.selectMessage("saveErrorMessage");
@@ -74,7 +75,6 @@ export class AdvertDetailsComponent implements OnInit {
 
   selectMessage(message: string) {
     switch (message) {
-
       case "saveErrorMessage":
         this.primaryMessage = "";
         this.dangerMessage = "There was an error adding the advert to favourites.";
@@ -110,7 +110,6 @@ export class AdvertDetailsComponent implements OnInit {
     this.advertService.getAdvert(this.advertId).subscribe({
       next: advert => {
         this.advert = advert;
-        this.checkFavouriteHouseIdExists();
         this.loading = false;
       }, error: err => {
         console.log(err);
@@ -162,7 +161,6 @@ export class AdvertDetailsComponent implements OnInit {
         this.disableButtons = false;
         this.selectMessage("saveErrorMessage");
       }
-
     });
   }
 }
