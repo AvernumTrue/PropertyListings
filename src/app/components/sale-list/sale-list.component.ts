@@ -63,7 +63,6 @@ export class SaleListComponent implements OnInit {
   }
 
   paginateAdverts() {
-    console.log(this.filteredAdverts);
     let index = 0;
     this.paginationPage = 0;
     for (let length = this.filteredAdverts.length; length > 0; length -= 10) {

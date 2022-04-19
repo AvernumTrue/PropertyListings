@@ -160,10 +160,10 @@ export class CreateAdvertComponent implements OnInit {
     advert.province = this.advertForm.get('province')?.value;
     advert.city = this.advertForm.get('city')?.value;
     advert.details = this.advertForm.get('details')?.value.trim();
-    advert.price = this.advertForm.get('price')?.value.trim();
+    advert.price = this.advertForm.get('price')?.value;
     advert.advertStatus = AdvertStatus.Live;
     advert.userId = Number(localStorage.getItem('loggedInId'));
-    this.advert.featured = false;
+    advert.featured = false;
     this.advert = advert;
   }
 
